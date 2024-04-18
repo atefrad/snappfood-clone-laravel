@@ -1,7 +1,11 @@
 <section class="py-5 overflow-hidden bg-primary" id="home">
     <div class="container">
         <div class="row flex-center">
-            <div class="col-md-5 col-lg-6 order-0 order-md-1 mt-8 mt-md-0"><a class="img-landing-banner" href="#!"><img class="img-fluid" src="assets/img/gallery/hero-header.png" alt="hero-header" /></a></div>
+            <div class="col-md-5 col-lg-6 order-0 order-md-1 mt-8 mt-md-0">
+                <a class="img-landing-banner" href="#!">
+                    <img class="img-fluid" src="{{ asset('assets/img/gallery/hero-header.png') }}" alt="hero-header" />
+                </a>
+            </div>
             <div class="col-md-7 col-lg-6 py-8 text-md-start text-center">
                 <h1 class="display-1 fs-md-5 fs-lg-6 fs-xl-8 text-light">گرسنه هستید؟</h1>
                 <h1 class="text-800 mb-5 fs-4 line-height-3rem">با چند کلیک ساده، غذایی لذیذ از رستوران های اطراف سفارش دهید.<br class="d-none d-xxl-block" /></h1>
