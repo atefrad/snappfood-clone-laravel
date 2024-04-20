@@ -6,13 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-    <!-- ===============================================-->
-    <!--    Document Title-->
-    <!-- ===============================================-->
-    <title>snappfood-clone</title>
-
-
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
@@ -29,5 +22,10 @@
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <link href="{{ asset('assets/css/theme-rtl.css') }}" rel="stylesheet" />
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    @yield('head-tag')
 
 </head>

@@ -1,6 +1,12 @@
 @extends('layouts.main')
 
+@section('head-tag')
+    <title>snappfood-clone</title>
+@endsection
+
 @section('content')
+
+@include('components.hero')
 
     <!-- ============================================-->
     <!-- <section> begin ============================-->

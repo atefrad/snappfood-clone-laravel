@@ -2,8 +2,13 @@
 
 @include('partials.navbar')
 
-@include('components.hero')
-
 @yield('content')
 
 @include('partials.footer')
+
+<section class="toast-wrapper flex-row-reverse">
+
+    @include('alerts.error')
+    @include('alerts.success')
+
+</section>

@@ -142,6 +142,7 @@
 <!-- ===============================================-->
 <!--    JavaScripts-->
 <!-- ===============================================-->
+<script src="{{ asset('assets/js/jquery-3.7.1.min.js') }}"></script>
 <script src="{{ asset('vendors/@popperjs/popper.min.js') }}"></script>
 <script src="{{ asset('vendors/bootstrap/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendors/is/is.min.js') }}"></script>
