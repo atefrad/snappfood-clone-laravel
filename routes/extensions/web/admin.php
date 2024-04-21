@@ -18,8 +18,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     //logout
     Route::delete('/logout', [AdminLoginController::class, 'destroy'])
         ->name('logout');
-});
 
-Route::get('/admin', function () {
-    return view('admin.index');
-})->name('admin.index');
+    //region authenticated
+    Route::middleware('auth:admin')->group(function () {
+
+        Route::get('/', function () {
+            return view('admin.index');
+        })->name('index');
+
+    });
+    //endregion
+});

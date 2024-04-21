@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('home.layouts.main')
 
 @section('content')
     <div class="col-md-7 offset-md-2 col-lg-6 offset-lg-3 py-8 text-md-start text-center">

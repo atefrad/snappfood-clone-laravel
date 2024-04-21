@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 
 @section('head-tag')
-    <title>Admin Panel</title>
+    <title>پنل ادمین</title>
 @endsection
 
 @section('content')

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('home.layouts.main')
 
 @section('head-tag')
     <title>New Orders</title>

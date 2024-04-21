@@ -19,10 +19,20 @@
         <div class="mb-3">
             <label for="email" class="form-label">ایمیل</label>
             <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+            @error('email')
+            <span class="text-danger">
+                {{ $message}}
+            </span>
+            @enderror
         </div>
         <div class="mb-4">
             <label for="password" class="form-label">رمز عبور</label>
             <input type="password" class="form-control" name="password" id="password">
+            @error('password')
+            <span class="text-danger">
+                {{ $message}}
+            </span>
+            @enderror
         </div>
         <div class="d-flex align-items-center justify-content-between mb-4">
             <div class="form-check">
