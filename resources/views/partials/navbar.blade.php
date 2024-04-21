@@ -19,14 +19,14 @@
                             <input class="form-control border-0 input-box bg-100" type="search" placeholder="جستجوی غذا" aria-label="Search" />
                         </div>
                     </div>
-                    <div class="ms-xl-8">
+                    <div>
                         @auth('seller')
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">سفارشات کنونی</a>
+                                    <a class="nav-link" href="#">سفارشات</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">غذا ها</a>
+                                    <a class="nav-link" href="#">غذاها</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">تنظیمات</a>
@@ -34,10 +34,20 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">پروفایل</a>
                                 </li>
+                                <li>
+                                    <form action="{{ route('seller.logout') }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-white shadow-warning text-warning mx-2"> <i class="fas fa-sign-out-alt me-2"></i>خروج</button>
+                                    </form>
+                                </li>
                             </ul>
+                        </div>
                         @else
-                            <a href="{{ route('seller.login.create') }}" class="btn btn-white shadow-warning text-warning mx-2"> <i class="fas fa-user me-2"></i>ورود</a>
-                            <a href="{{ route('seller.register.create') }}" class="btn btn-white shadow-warning text-warning mx-2"> <i class="fas fa-user me-2"></i>عضویت</a>
+                            <div class="ms-xl-8">
+                                <a href="{{ route('seller.login.create') }}" class="btn btn-white shadow-warning text-warning mx-2"> <i class="fas fa-user me-2"></i>ورود</a>
+                                <a href="{{ route('seller.register.create') }}" class="btn btn-white shadow-warning text-warning mx-2"> <i class="fas fa-user me-2"></i>عضویت</a>
+                            </div>
                         @endauth
 
                     </div>

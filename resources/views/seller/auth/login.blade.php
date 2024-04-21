@@ -7,7 +7,7 @@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <h3 class="mb-4 text-center">ورود</h3>
-                    <form action="{{ route('seller.login.create') }}" method="POST" class="row gx-2 gy-2 align-items-center">
+                    <form action="{{ route('seller.login.store') }}" method="POST" class="row gx-2 gy-2 align-items-center">
 
                         @csrf
 

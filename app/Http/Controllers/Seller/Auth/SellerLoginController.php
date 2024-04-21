@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Seller\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Models\Seller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,12 +14,12 @@ class SellerLoginController extends Controller
 {
     public function create(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        Auth::logout();
+        Auth::guard('seller')->logout();
 
         return view('seller.auth.login');
     }
 
-    public function store(LoginRequest $request)
+    public function store(LoginRequest $request): RedirectResponse
     {
         /** @var  Seller $seller */
         $validated = $request->validated();
@@ -37,5 +38,12 @@ class SellerLoginController extends Controller
         Auth::guard('seller')->login($seller);
 
         return redirect()->route('seller.dashboard.orders.new-orders');
+    }
+
+    public function logout(): RedirectResponse
+    {
+        Auth::guard('seller')->logout();
+
+        return redirect()->route('seller.login.create');
     }
 }
