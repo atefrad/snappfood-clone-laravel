@@ -1,5 +1,9 @@
 @extends('admin.layouts.main')
 
+@section('head-tag')
+    <title>Admin Panel</title>
+@endsection
+
 @section('content')
 
 <!--  Row 1 -->

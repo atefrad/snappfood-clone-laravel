@@ -40,7 +40,7 @@ class SellerLoginController extends Controller
         return redirect()->route('seller.dashboard.orders.new-orders');
     }
 
-    public function logout(): RedirectResponse
+    public function destroy(): RedirectResponse
     {
         Auth::guard('seller')->logout();
 

@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('seller')->name('seller.')->group(function () {
 
-    //logout
-    Route::delete('/logout', [SellerLoginController::class, 'logout'])
-        ->name('logout');
-
     //login
     Route::prefix('/login')
         ->controller(SellerLoginController::class)
@@ -21,6 +17,10 @@ Route::prefix('seller')->name('seller.')->group(function () {
             Route::get('/','create')->name('create');
             Route::post('/', 'store')->name('store');
         });
+
+    //logout
+    Route::delete('/logout', [SellerLoginController::class, 'destroy'])
+        ->name('logout');
 
     //register
     Route::prefix('/register')
