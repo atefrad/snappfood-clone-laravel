@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('home.index');
 })->name('home');
 
 require_once __DIR__ . '/extensions/base.php';
