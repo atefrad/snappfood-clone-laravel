@@ -34,7 +34,7 @@ class AdminLoginController extends Controller
 
         Auth::guard('admin')->login($user);
 
-        return redirect()->route('admin.index');
+        return redirect()->route('admin.home');
     }
 
     public function destroy(): RedirectResponse

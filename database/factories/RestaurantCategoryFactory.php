@@ -14,11 +14,12 @@ class RestaurantCategoryFactory extends Factory
      * Define the model's default state.
      *
      * @return array<string, mixed>
+     * @throws \Exception
      */
     public function definition(): array
     {
         return [
-            'name' => Faker::word(),
+            'name' => Faker::word() . '-' . random_int(1, 1000),
             'description' => Faker::sentence()
         ];
     }
