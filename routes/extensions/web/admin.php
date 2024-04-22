@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
+use App\Http\Controllers\Admin\RestaurantCategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -22,9 +23,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     //region authenticated
     Route::middleware('auth:admin')->group(function () {
 
+        //admin dashboard
         Route::get('/', function () {
             return view('admin.index');
         })->name('index');
+
+        //restaurant-category
+        Route::resource('restaurant-category', RestaurantCategoryController::class);
 
     });
     //endregion
