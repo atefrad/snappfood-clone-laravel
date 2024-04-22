@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property string $image
+ */
 class RestaurantCategory extends Model
 {
     use HasFactory,SoftDeletes;
@@ -15,4 +18,13 @@ class RestaurantCategory extends Model
         'description',
         'image'
     ];
+
+    public function getImageRealPath(): string
+    {
+        return substr(
+            $this->image,
+            strpos($this->image, '/storage')
+            + strlen('/storage/')
+        );
+    }
 }
