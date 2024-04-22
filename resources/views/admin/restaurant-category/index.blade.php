@@ -40,7 +40,7 @@
                                 <form class="d-inline" action="{{ route('admin.restaurant-category.destroy', $restaurantCategory->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm delete" type="submit"><i class="fa-solid fa-trash-can"></i> حذف</button>
+                                    <button class="btn btn-danger btn-sm delete" onclick="return confirm('آیا از حذف کردن این داده مطمئن هستید؟')" type="submit"><i class="fa-solid fa-trash-can"></i> حذف</button>
                                 </form>
                             </td>
                         </tr>

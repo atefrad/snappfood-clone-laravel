@@ -97,8 +97,11 @@ class RestaurantCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(RestaurantCategory $restaurantCategory): RedirectResponse
     {
-        //
+        $restaurantCategory->delete();
+
+        return redirect()->route('admin.restaurant-category.index')
+            ->with('toast-success', __('response.category_delete_success'));
     }
 }
