@@ -29,7 +29,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('home');
 
         //restaurant-category
-        Route::resource('restaurant-category', RestaurantCategoryController::class);
+        Route::resource('restaurant-category', RestaurantCategoryController::class)
+        ->except('show');
 
     });
     //endregion

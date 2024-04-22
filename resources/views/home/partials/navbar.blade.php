@@ -44,7 +44,7 @@
                             </ul>
                         </div>
                         @else
-                            <div class="ms-xl-8">
+                            <div class="ms-xl-7">
                                 <a href="{{ route('seller.login.create') }}" class="btn btn-white shadow-warning text-warning mx-2"> <i class="fas fa-user me-2"></i>ورود</a>
                                 <a href="{{ route('seller.register.create') }}" class="btn btn-white shadow-warning text-warning mx-2"> <i class="fas fa-user me-2"></i>عضویت</a>
                             </div>

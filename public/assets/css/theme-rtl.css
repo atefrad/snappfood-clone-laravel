@@ -18472,9 +18472,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 |   User Styles
 -----------------------------------------------*/
 
+@font-face {
+    font-family: IRANSans;
+    src: url('../../fonts/IRANSans/IRANSansWeb_Light.woff') format('woff');
+}
+
 * {
   direction: rtl !important;
   text-align: right !important;
+  font-family: IRANSans !important;
 }
 
 .line-height-3rem {
