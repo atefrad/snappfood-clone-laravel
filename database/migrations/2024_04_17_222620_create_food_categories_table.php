@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('food_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->text('description')->nullable();
             $table->text('image')->nullable();
-            $table->boolean('is_active')->default(1);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

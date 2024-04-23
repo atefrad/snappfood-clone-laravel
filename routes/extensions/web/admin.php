@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
+use App\Http\Controllers\Admin\FoodCategoryController;
 use App\Http\Controllers\Admin\RestaurantCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         //restaurant-category
         Route::resource('restaurant-category', RestaurantCategoryController::class)
         ->except('show');
+
+        //food-category
+        Route::resource('food-category', FoodCategoryController::class)
+            ->except('show');
 
     });
     //endregion
