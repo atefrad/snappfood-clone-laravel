@@ -18,13 +18,4 @@ class RestaurantCategory extends Model
         'description',
         'image'
     ];
-
-    public function getImageRealPath(): string
-    {
-        return substr(
-            $this->image,
-            strpos($this->image, '/storage')
-            + strlen('/storage/')
-        );
-    }
 }

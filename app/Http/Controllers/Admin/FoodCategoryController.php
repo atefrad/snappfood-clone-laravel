@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\FoodCategory\StoreFoodCategoryRequest;
 use App\Http\Requests\Admin\FoodCategory\UpdateFoodCategoryRequest;
 use App\Models\FoodCategory;
 use App\Models\RestaurantCategory;
+use App\Services\ImageRealPath;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -70,7 +71,7 @@ class FoodCategoryController extends Controller
 
         if ($request->hasFile('image'))
         {
-            $oldImagePath = $foodCategory->getImageRealPath();
+            $oldImagePath = ImageRealPath::getImageRealPath($foodCategory->image);
 
             Storage::disk('public')->delete($oldImagePath);
 
