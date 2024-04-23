@@ -19,9 +19,9 @@ class SellerFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => Faker::fullName(),
+            'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'phone' => Faker::mobile(),
+            'phone' => fake()->phoneNumber(),
             'password' => Hash::make('password')
         ];
     }

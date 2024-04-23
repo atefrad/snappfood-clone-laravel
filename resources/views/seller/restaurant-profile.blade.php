@@ -22,7 +22,12 @@
                             </div>
                             <div class="input-group-icon mb-2">
                                 <label class="visually-hidden" for="restaurant_category_id">Restaurant Category</label>
-                                <input class="form-control input-box form-foodwagon-control" name="restaurant_category_id" id="restaurant_category_id" type="number" placeholder="دسته بندی رستوران" value="{{ old('restaurant_category_id') }}" />
+                                <select class="form-control input-box form-foodwagon-control" name="restaurant_category_id" id="restaurant_category_id">
+                                    <option value="" selected disabled>لطفا دسته بندی رستوران را انتخاب نمایید.</option>
+                                    @foreach($restaurantCategories as $restaurantCategory)
+                                        <option value="{{ $restaurantCategory->id }}" @if($restaurantCategory->id == old('restaurant_category_id')) selected @endif>{{ $restaurantCategory->name }}</option>
+                                    @endforeach
+                                </select>
                                 @error('restaurant_category_id')
                                 <span class="text-red ms-2 fs--1">
                                 {{ $message }}
@@ -31,8 +36,26 @@
                             </div>
                             <div class="input-group-icon mb-2">
                                 <label class="visually-hidden" for="phone">Phone</label>
-                                <input class="form-control input-box form-foodwagon-control" name="phone" id="phone" type="text" placeholder="شماره همراه" value="{{ old('phone') }}" />
+                                <input class="form-control input-box form-foodwagon-control" name="phone" id="phone" type="text" placeholder="شماره تماس" value="{{ old('phone') }}" />
                                 @error('phone')
+                                <span class="text-red ms-2 fs--1">
+                                {{ $message }}
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="input-group-icon mb-2">
+                                <label class="visually-hidden" for="state">State</label>
+                                <input class="form-control input-box form-foodwagon-control" name="state" id="state" type="text" placeholder="استان" value="{{ old('state') }}"/>
+                                @error('state')
+                                <span class="text-red ms-2 fs--1">
+                                {{ $message }}
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="input-group-icon mb-2">
+                                <label class="visually-hidden" for="city">City</label>
+                                <input class="form-control input-box form-foodwagon-control" name="city" id="city" type="text" placeholder="شهر" value="{{ old('city') }}"/>
+                                @error('city')
                                 <span class="text-red ms-2 fs--1">
                                 {{ $message }}
                                 </span>

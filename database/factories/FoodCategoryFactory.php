@@ -20,8 +20,8 @@ class FoodCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => Faker::word() . '-' . random_int(1, 1000),
-            'description' => Faker::sentence()
+            'name' => 'دسته ' . rand(1, 100000),
+            'description' => fake()->realText()
         ];
     }
 }

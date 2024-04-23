@@ -156,6 +156,9 @@ return [
         "reference_id"              => "ارجاع",
         "priority_id"               => "اولویت",
         "category_id"               => "دسته بندی",
+        "restaurant_category_id"    => "دسته بندی رستوران",
+        "state"                     => "استان",
+        "bank_account_number"       => "شماره حساب",
 
     ],
 ];

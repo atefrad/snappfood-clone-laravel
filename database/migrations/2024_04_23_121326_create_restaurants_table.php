@@ -29,7 +29,7 @@ return new class extends Migration
             $table->boolean('is_open')->default(false);
             $table->unsignedInteger('delivery_price')->nullable();
             $table->json('working_time')->nullable();
-            $table->boolean('is_active')->default(true);
+//            $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

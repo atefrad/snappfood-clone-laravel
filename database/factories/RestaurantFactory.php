@@ -21,14 +21,14 @@ class RestaurantFactory extends Factory
     {
         return [
             'restaurant_category_id' => RestaurantCategory::query()->inRandomOrder()->take(1)->first(),
-            'seller_id' => Seller::query()->inRandomOrder()->take(1)->first(),
-            'name' => Faker::word(),
+            'seller_id' => Seller::factory()->create(),
+            'name' => fake()->company(),
             'address' => [
-                'state' => Faker::state(),
-                'city' => Faker::city(),
-                'address' => Faker::address()
+                'state' => fake()->city(),
+                'city' => fake()->city(),
+                'address' => fake()->streetAddress()
             ],
-            'phone' => Faker::mobile(),
+            'phone' => fake()->phoneNumber(),
             'bank_account_number' => fake()->numberBetween(100000000, 99999999999999)
         ];
     }
