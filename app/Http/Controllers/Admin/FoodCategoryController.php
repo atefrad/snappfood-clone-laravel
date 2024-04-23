@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FoodCategory\StoreFoodCategoryRequest;
+use App\Http\Requests\Admin\FoodCategory\UpdateFoodCategoryRequest;
 use App\Models\FoodCategory;
 use App\Models\RestaurantCategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FoodCategoryController extends Controller
 {
@@ -54,24 +56,45 @@ class FoodCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(FoodCategory $foodCategory): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        //
+        return view('admin.food-category.edit', compact('foodCategory'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateFoodCategoryRequest $request, FoodCategory $foodCategory): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        if ($request->hasFile('image'))
+        {
+            $oldImagePath = $foodCategory->getImageRealPath();
+
+            Storage::disk('public')->delete($oldImagePath);
+
+            $imagePath = $request
+                ->file('image')
+                ->store('/images/food-category', 'public');
+
+            $validated['image'] = "/storage/{$imagePath}";
+        }
+
+        $foodCategory->update($validated);
+
+        return redirect()->route('admin.food-category.index')
+            ->with('toast-success', __('response.category_update_success'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(FoodCategory $foodCategory): RedirectResponse
     {
-        //
+        $foodCategory->delete();
+
+        return redirect()->route('admin.food-category.index')
+            ->with('toast-success', __('response.category_delete_success'));
     }
 }
