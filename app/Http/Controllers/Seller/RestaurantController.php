@@ -36,4 +36,11 @@ class RestaurantController extends Controller
     {
 
     }
+
+    public function edit(Restaurant $restaurant): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        $restaurantCategories = RestaurantCategory::all();
+
+        return view('seller.setting.edit', compact('restaurantCategories', 'restaurant'));
+    }
 }
