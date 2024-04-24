@@ -42,7 +42,9 @@
                     </tr>
                     <tr>
                         <th class="text-center">تصویر</th>
-                        <td class="text-center">{{ $restaurant->image }}</td>
+                        <td class="text-center">
+                            <img src="{{ asset($restaurant->image) }}" alt="" width="100" height="70">
+                        </td>
                     </tr>
                     <tr>
                         <th class="text-center">وضعیت رستوران</th>
@@ -55,13 +57,15 @@
                             <form class="d-inline" action="{{ route('seller.restaurant.change-status', $restaurant) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
-                                <button class="btn btn-secondary mx-3">
                                     @if($restaurant->is_open)
+                                    <button class="btn btn-secondary mx-3">
                                         باز
+                                    </button>
                                     @else
+                                    <button class="btn btn-danger mx-3">
                                         بسته
+                                    </button>
                                     @endif
-                                </button>
                             </form>
                         </td>
                     </tr>
@@ -70,8 +74,24 @@
                         <td class="text-center">{{ $restaurant->delivery_price }}</td>
                     </tr>
                     <tr>
-                        <th class="text-center">ساعات کاری</th>
-                        <td class="text-center">{{ $restaurant->working_time }}</td>
+                        <th class="text-center">روزهای کاری</th>
+                        <td class="text-center">
+                            @foreach($restaurant->restaurantWorkingTime->working_days as $workingDay)
+                                @if($loop->last)
+                                    {{ $workingDay }}
+                                @else
+                                    {{ $workingDay . '-' }}
+                                @endif
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-center">ساعت آغاز کار</th>
+                        <td class="text-center">{{ $restaurant->restaurantWorkingTime->opening_time }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center">ساعت پایان کار</th>
+                        <td class="text-center">{{ $restaurant->restaurantWorkingTime->closing_time }}</td>
                     </tr>
                     <tr>
                         <th class="text-center">عملیات</th>

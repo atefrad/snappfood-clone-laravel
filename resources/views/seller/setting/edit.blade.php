@@ -14,7 +14,7 @@
             <div class="card-body">
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <form action="{{ route('seller.restaurant.update', $restaurant) }}" method="POST" class="row gx-2 gy-2 align-items-center">
+                        <form action="{{ route('seller.restaurant.update', $restaurant) }}" method="POST" enctype="multipart/form-data" class="row gx-2 gy-2 align-items-center">
 
                             @csrf
                             @method('PUT')
@@ -107,6 +107,9 @@
                                     <label class="col-sm-3 col-form-label" for="image">تصویر</label>
                                     <div class="col-sm-9">
                                         <input class="form-control input-box form-foodwagon-control" name="image" id="image" type="file" placeholder="تصویر" />
+                                        @if($restaurant->image !== null)
+                                            <img class="my-3" src="{{ asset($restaurant->image) }}" alt="" width="100" height="70">
+                                        @endif
                                         @error('image')
                                         <span class="text-red ms-2 fs--1">
                                         {{ $message }}
@@ -150,13 +153,13 @@
                                     <div class="col-sm-9">
                                         <select class="form-control input-box form-foodwagon-control" name="working_days[]" id="working_days" multiple>
 {{--                                            <option value="" selected disabled>لطفا روزهای کاری رستوران را انتخاب نمایید</option>--}}
-                                            <option value="saturday">شنبه</option>
-                                            <option value="sunday">یکشنبه</option>
-                                            <option value="monday">دوشنبه</option>
-                                            <option value="tuesday">سه شنبه</option>
-                                            <option value="wednesday">چهارشنبه</option>
-                                            <option value="thursday">پنجشنبه</option>
-                                            <option value="friday">جمعه</option>
+                                            <option value="شنبه" @if(in_array('شنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days))) selected @endif>شنبه</option>
+                                            <option value="یکشنبه" @if(in_array('یکشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days))) selected @endif>یکشنبه</option>
+                                            <option value="دوشنبه" @if(in_array('دوشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days))) selected @endif>دوشنبه</option>
+                                            <option value="سه شنبه" @if(in_array('سه شنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days))) selected @endif>سه شنبه</option>
+                                            <option value="چهارشنبه" @if(in_array('چهارشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days))) selected @endif>چهارشنبه</option>
+                                            <option value="پنجشنبه" @if(in_array('پنجشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days))) selected @endif>پنجشنبه</option>
+                                            <option value="جمعه" @if(in_array('جمعه', old('working_days', $restaurant->restaurantWorkingTime->working_days))) selected @endif>جمعه</option>
                                         </select>
                                         @error('working_days')
                                         <span class="text-red ms-2 fs--1">

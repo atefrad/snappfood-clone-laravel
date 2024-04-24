@@ -70,9 +70,12 @@ class RestaurantCategoryController extends Controller
 
         if ($request->hasFile('image'))
         {
-            $oldImagePath = ImageRealPath::getImageRealPath($restaurantCategory->image);
+            if($restaurantCategory->image)
+            {
+                $oldImagePath = ImageRealPath::getImageRealPath($restaurantCategory->image);
 
-            Storage::disk('public')->delete($oldImagePath);
+                Storage::disk('public')->delete($oldImagePath);
+            }
 
             $imagePath = $request
                 ->file('image')

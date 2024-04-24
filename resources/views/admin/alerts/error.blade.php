@@ -1,8 +1,8 @@
-@if(session('toast-success'))
+@if(session('toast-error'))
 
     <section class="toast" data-bs-delay="5000">
-        <section class="toast-body py-3 d-flex bg-success text-white">
-            <strong class="me-auto">{{ session('toast-success') }}</strong>
+        <section class="toast-body py-3 d-flex bg-red text-white">
+            <strong class="ms-auto">{{ session('toast-error') }}</strong>
 
             <button type="button" class="btn-close me-2" data-bs-dismiss="toast" aria-label="close">
 
@@ -19,4 +19,3 @@
     </script>
 
 @endif
-
