@@ -153,13 +153,13 @@
                                     <div class="col-sm-9">
                                         <select class="form-control input-box form-foodwagon-control" name="working_days[]" id="working_days" multiple>
 {{--                                            <option value="" selected disabled>لطفا روزهای کاری رستوران را انتخاب نمایید</option>--}}
-                                            <option value="شنبه" @if(in_array('شنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days))) selected @endif>شنبه</option>
-                                            <option value="یکشنبه" @if(in_array('یکشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days))) selected @endif>یکشنبه</option>
-                                            <option value="دوشنبه" @if(in_array('دوشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days))) selected @endif>دوشنبه</option>
-                                            <option value="سه شنبه" @if(in_array('سه شنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days))) selected @endif>سه شنبه</option>
-                                            <option value="چهارشنبه" @if(in_array('چهارشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days))) selected @endif>چهارشنبه</option>
-                                            <option value="پنجشنبه" @if(in_array('پنجشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days))) selected @endif>پنجشنبه</option>
-                                            <option value="جمعه" @if(in_array('جمعه', old('working_days', $restaurant->restaurantWorkingTime->working_days))) selected @endif>جمعه</option>
+                                            <option value="شنبه" @if(in_array('شنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) selected @endif>شنبه</option>
+                                            <option value="یکشنبه" @if(in_array('یکشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) selected @endif>یکشنبه</option>
+                                            <option value="دوشنبه" @if(in_array('دوشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) selected @endif>دوشنبه</option>
+                                            <option value="سه شنبه" @if(in_array('سه شنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) selected @endif>سه شنبه</option>
+                                            <option value="چهارشنبه" @if(in_array('چهارشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) selected @endif>چهارشنبه</option>
+                                            <option value="پنجشنبه" @if(in_array('پنجشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) selected @endif>پنجشنبه</option>
+                                            <option value="جمعه" @if(in_array('جمعه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) selected @endif>جمعه</option>
                                         </select>
                                         @error('working_days')
                                         <span class="text-red ms-2 fs--1">

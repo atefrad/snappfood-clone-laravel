@@ -76,22 +76,24 @@
                     <tr>
                         <th class="text-center">روزهای کاری</th>
                         <td class="text-center">
-                            @foreach($restaurant->restaurantWorkingTime->working_days as $workingDay)
-                                @if($loop->last)
-                                    {{ $workingDay }}
-                                @else
-                                    {{ $workingDay . '-' }}
-                                @endif
-                            @endforeach
+                            @if($restaurant->restaurantWorkingTime)
+                                @foreach($restaurant->restaurantWorkingTime->working_days as $workingDay)
+                                    @if($loop->last)
+                                        {{ $workingDay }}
+                                    @else
+                                        {{ $workingDay . '-' }}
+                                   @endif
+                              @endforeach
+                            @endif
                         </td>
                     </tr>
                     <tr>
                         <th class="text-center">ساعت آغاز کار</th>
-                        <td class="text-center">{{ $restaurant->restaurantWorkingTime->opening_time }}</td>
+                        <td class="text-center">{{ $restaurant->restaurantWorkingTime->opening_time ?? ''}}</td>
                     </tr>
                     <tr>
                         <th class="text-center">ساعت پایان کار</th>
-                        <td class="text-center">{{ $restaurant->restaurantWorkingTime->closing_time }}</td>
+                        <td class="text-center">{{ $restaurant->restaurantWorkingTime->closing_time ?? ''}}</td>
                     </tr>
                     <tr>
                         <th class="text-center">عملیات</th>

@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Seller\Auth\SellerLoginController;
 use App\Http\Controllers\Seller\Auth\SellerRegisterController;
+use App\Http\Controllers\Seller\FoodController;
 use App\Http\Controllers\Seller\OrderController;
 use App\Http\Controllers\Seller\RestaurantController;
+use App\Http\Middleware\Custom\CheckIsActive;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('seller')->name('seller.')->group(function () {
@@ -35,13 +37,22 @@ Route::prefix('seller')->name('seller.')->group(function () {
     //region authenticated
     Route::middleware('auth:seller')->group(function () {
 
-        Route::resource('restaurant', RestaurantController::class);
+        Route::resource('restaurant', RestaurantController::class)
+            ->except(['index', 'destroy']);
         Route::patch('restaurant/{restaurant}/change-status', [RestaurantController::class, 'changeStatus'])
             ->name('restaurant.change-status');
 
-        //order
-        Route::get('orders/new-orders', [OrderController::class, 'newOrders'])
-            ->name('orders.new-orders');
+        Route::middleware(CheckIsActive::class)
+            ->group(function () {
+
+                //food
+                Route::resource('food', FoodController::class);
+
+                //order
+                Route::get('orders/new-orders', [OrderController::class, 'newOrders'])
+                    ->name('orders.new-orders');
+
+            });
 
     });
 

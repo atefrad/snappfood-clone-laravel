@@ -23,7 +23,7 @@
                         @auth('seller')
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">سفارشات</a>
+                                    <a class="nav-link" href="{{ route('seller.orders.new-orders') }}">سفارشات</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">غذاها</a>

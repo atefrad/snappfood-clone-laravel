@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -43,4 +44,21 @@ class Restaurant extends Model
         return $this->hasOne(RestaurantWorkingTime::class);
     }
     //endregion
+
+    public function isActive(): Attribute
+    {
+        $requiredFields = [
+            'restaurant_category_id',
+            'name',
+            'address',
+            'phone',
+            'bank_account_number',
+        ];
+
+        $notCompleted = array_filter($this->only($requiredFields), fn($field) => empty($field));
+
+        return Attribute::make(
+            get: fn() => empty($notCompleted)
+        );
+    }
 }
