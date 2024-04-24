@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property mixed $image
+ * @property mixed $id
  */
 class Restaurant extends Model
 {

@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @property mixed $restaurant
+ */
 class Seller extends Authenticatable
 {
     use HasFactory, SoftDeletes;

@@ -9,6 +9,7 @@ use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
 use App\Models\RestaurantWorkingTime;
 use App\Services\ImageRealPath;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -32,8 +33,13 @@ class RestaurantController extends Controller
             ->with('toast-success', __('response.restaurant_store_success'));
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function show(Restaurant $restaurant): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $this->authorize('view', $restaurant);
+
         return view('seller.setting.show', compact('restaurant'));
     }
 
@@ -49,15 +55,25 @@ class RestaurantController extends Controller
             ->with('toast-success', __('response.restaurant_change_status_success'));
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function edit(Restaurant $restaurant): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $this->authorize('update', $restaurant);
+
         $restaurantCategories = RestaurantCategory::all();
 
         return view('seller.setting.edit', compact('restaurantCategories', 'restaurant'));
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant): RedirectResponse
     {
+        $this->authorize('update', $restaurant);
+
         /** @var Restaurant $restaurant */
 
         $validated = $request->validated();
