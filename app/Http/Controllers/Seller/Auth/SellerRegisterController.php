@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Seller\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Seller\RegisterRequest;
 use App\Models\Seller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +19,7 @@ class SellerRegisterController extends Controller
         return view('seller.auth.register');
     }
 
-    public function store(RegisterRequest $request)
+    public function store(RegisterRequest $request): RedirectResponse
     {
         /** @var Seller $seller */
 
@@ -33,7 +34,7 @@ class SellerRegisterController extends Controller
 
         Auth::guard('seller')->login($seller);
 
-        return redirect()->route('seller.restaurant-profile.create');
+        return redirect()->route('seller.restaurant.create');
 
     }
 }

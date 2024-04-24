@@ -37,7 +37,7 @@ class SellerLoginController extends Controller
 
         Auth::guard('seller')->login($seller);
 
-        return redirect()->route('seller.dashboard.orders.new-orders');
+        return redirect()->route('seller.orders.new-orders');
     }
 
     public function destroy(): RedirectResponse

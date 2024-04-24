@@ -3,7 +3,7 @@
 use App\Http\Controllers\Seller\Auth\SellerLoginController;
 use App\Http\Controllers\Seller\Auth\SellerRegisterController;
 use App\Http\Controllers\Seller\OrderController;
-use App\Http\Controllers\Seller\RestaurantProfileController;
+use App\Http\Controllers\Seller\RestaurantController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('seller')->name('seller.')->group(function () {
@@ -35,23 +35,14 @@ Route::prefix('seller')->name('seller.')->group(function () {
     //region authenticated
     Route::middleware('auth:seller')->group(function () {
 
-        Route::prefix('restaurant-profile')
-            ->controller(RestaurantProfileController::class)
-            ->name('restaurant-profile.')
-            ->group(function () {
+        Route::resource('restaurant', RestaurantController::class);
+        Route::patch('restaurant/{restaurant}/change-status', [RestaurantController::class, 'changeStatus'])
+            ->name('restaurant.change-status');
 
-                Route::get('/', 'create')->name('create');
-                Route::post('/', 'store')->name('store');
-            });
+        //order
+        Route::get('orders/new-orders', [OrderController::class, 'newOrders'])
+            ->name('orders.new-orders');
 
-        Route::prefix('/dashboard')
-            ->name('dashboard.')
-            ->group(function () {
-
-                //order
-                Route::get('orders/new-orders', [OrderController::class, 'newOrders'])
-                    ->name('orders.new-orders');
-            });
     });
 
     //endregion

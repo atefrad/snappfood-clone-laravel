@@ -1,5 +1,9 @@
 @extends('home.layouts.main')
 
+@section('head-tag')
+    <title>ایجاد رستوران</title>
+@endsection
+
 @section('content')
     <div class="col-md-7 offset-md-2 col-lg-6 offset-lg-3 py-8 text-md-start text-center">
         <div class="card w-xxl-75">
