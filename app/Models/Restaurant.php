@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Restaurant extends Model
@@ -21,16 +22,21 @@ class Restaurant extends Model
         'image',
         'is_open',
         'delivery_price',
-        'working_time',
         ];
 
     protected $casts = [
         'address' => 'array',
-        'working_time' => 'array'
     ];
 
+    //region relation
     public function restaurantCategory(): BelongsTo
     {
         return $this->belongsTo(RestaurantCategory::class);
     }
+
+    public function restaurantWorkingTime(): HasOne
+    {
+        return $this->hasOne(RestaurantWorkingTime::class);
+    }
+    //endregion
 }

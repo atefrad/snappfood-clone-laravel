@@ -17,6 +17,7 @@
                         <form action="{{ route('seller.restaurant.update', $restaurant) }}" method="POST" class="row gx-2 gy-2 align-items-center">
 
                             @csrf
+                            @method('PUT')
 
                             <div class="input-group-icon mb-2">
                                 <div class="row mb-3">
@@ -116,7 +117,7 @@
                             </div>
                             <div class="input-group-icon mb-2">
                                 <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label" for="is_open">شماره حساب</label>
+                                    <label class="col-sm-3 col-form-label" for="is_open">وضعیت</label>
                                     <div class="col-sm-9">
                                         <select class="form-control input-box form-foodwagon-control" name="is_open" id="is_open">
                                             <option value="0" @if(old('is_open', $restaurant->is_open) == 0 ) selected @endif>بسته</option>
@@ -145,10 +146,19 @@
                             </div>
                             <div class="input-group-icon mb-2">
                                 <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label" for="working_time">ساعات کاری</label>
+                                    <label class="col-sm-3 col-form-label" for="working_days">روزهای کاری</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control input-box form-foodwagon-control" name="working_time" id="working_time" type="text" placeholder="ساعات کاری" value="{{ old('working_time', $restaurant->working_time) }}" />
-                                        @error('working_time')
+                                        <select class="form-control input-box form-foodwagon-control" name="working_days[]" id="working_days" multiple>
+{{--                                            <option value="" selected disabled>لطفا روزهای کاری رستوران را انتخاب نمایید</option>--}}
+                                            <option value="saturday">شنبه</option>
+                                            <option value="sunday">یکشنبه</option>
+                                            <option value="monday">دوشنبه</option>
+                                            <option value="tuesday">سه شنبه</option>
+                                            <option value="wednesday">چهارشنبه</option>
+                                            <option value="thursday">پنجشنبه</option>
+                                            <option value="friday">جمعه</option>
+                                        </select>
+                                        @error('working_days')
                                         <span class="text-red ms-2 fs--1">
                                         {{ $message }}
                                         </span>
@@ -157,6 +167,32 @@
                                 </div>
                             </div>
                             <div class="input-group-icon mb-2">
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label" for="opening_time">ساعت آغاز کار</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control input-box form-foodwagon-control" name="opening_time" id="opening_time" type="time" placeholder="ساعات کاری" value="{{ old('opening_time', $restaurant->restaurantWorkingTime->opening_time ?? '') }}" />
+                                        @error('opening_time')
+                                        <span class="text-red ms-2 fs--1">
+                                        {{ $message }}
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group-icon mb-2">
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label" for="closing_time">ساعت پایان کار</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control input-box form-foodwagon-control" name="closing_time" id="closing_time" type="time" placeholder="ساعات کاری" value="{{ old('closing_time', $restaurant->restaurantWorkingTime->closing_time ?? '') }}" />
+                                        @error('closing_time')
+                                        <span class="text-red ms-2 fs--1">
+                                        {{ $message }}
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <dphpiv class="input-group-icon mb-2">
                                 <div class="row mb-3">
                                     <label class="col-sm-3 col-form-label" for="bank_account_number">شماره حساب</label>
                                     <div class="col-sm-9">
@@ -168,7 +204,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
+                            </dphpiv>
                             <div class="d-grid gap-3 w-25 mx-auto">
                                 <button class="btn btn-danger text-center" type="submit">ثبت</button>
                             </div>

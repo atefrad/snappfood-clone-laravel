@@ -29,11 +29,15 @@
                                     <a class="nav-link" href="#">غذاها</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">تنظیمات</a>
+                                    <a class="nav-link" href="@if(auth('seller')->user()->restaurant)
+                                        {{ route('seller.restaurant.show', auth('seller')->user()->restaurant ) }}
+                                        @else
+                                        {{ route('seller.restaurant.create') }}
+                                        @endif">تنظیمات</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">پروفایل</a>
-                                </li>
+{{--                                <li class="nav-item">--}}
+{{--                                    <a class="nav-link" href="#">پروفایل</a>--}}
+{{--                                </li>--}}
                                 <li>
                                     <form action="{{ route('seller.logout') }}" method="POST">
                                         @csrf

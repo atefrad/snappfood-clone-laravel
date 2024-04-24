@@ -22,9 +22,9 @@ class RestaurantController extends Controller
     {
         $validated = $request->validated();
 
-        Restaurant::query()->create($validated);
+        $restaurant = Restaurant::query()->create($validated);
 
-        return redirect()->route('seller.restaurant.show');
+        return redirect()->route('seller.restaurant.show', $restaurant);
     }
 
     public function show(Restaurant $restaurant): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
@@ -42,5 +42,10 @@ class RestaurantController extends Controller
         $restaurantCategories = RestaurantCategory::all();
 
         return view('seller.setting.edit', compact('restaurantCategories', 'restaurant'));
+    }
+
+    public function update(Request $request, Restaurant $restaurant)
+    {
+        dd($request->all());
     }
 }
