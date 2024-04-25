@@ -19,7 +19,8 @@ class FoodCategoryController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $foodCategories = FoodCategory::all();
+        $foodCategories = FoodCategory::query()
+            ->paginate(Controller::DEFAULT_PAGINATE);
 
         return view('admin.food-category.index', compact('foodCategories'));
     }

@@ -52,3 +52,11 @@
     max-width: 80%;
     padding: 2rem;
 }
+
+.max-width-20-rem {
+    max-width: 20rem !important;
+}
+
+.max-width-16-rem {
+    max-width: 16rem !important;
+}

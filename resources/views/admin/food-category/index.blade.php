@@ -31,7 +31,7 @@
                         <tr>
                             <th class="text-center">{{ $key += 1 }}</th>
                             <td class="text-center">{{ $foodCategory->name }}</td>
-                            <td class="text-center">{{ $foodCategory->description }}</td>
+                            <td class="text-center max-width-20-rem">{{ $foodCategory->description }}</td>
                             <td class="text-center">
                                 <img src="{{ asset($foodCategory->image) }}" alt="{{ $foodCategory->name }}" width="80" height="50">
                             </td>
@@ -56,6 +56,7 @@
                     </tbody>
                 </table>
             </div>
+            {{ $foodCategories->links() }}
         </div>
     </div>
 @endsection
