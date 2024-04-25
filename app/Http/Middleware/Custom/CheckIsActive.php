@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Custom;
 
+use App\Models\Seller;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,7 @@ class CheckIsActive
      */
     public function handle(Request $request, Closure $next): Response
     {
+        /** @var Seller $seller */
         $seller = auth('seller')->user();
 
         if(!$seller->restaurant)

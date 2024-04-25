@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Seller;
 
+use App\Events\RestaurantUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Seller\Restaurant\StoreRestaurantRequest;
 use App\Http\Requests\Seller\Restaurant\UpdateRestaurantRequest;
@@ -96,25 +97,8 @@ class RestaurantController extends Controller
 
         $restaurant->update($validated);
 
-        if($restaurant->restaurantWorkingTime)
-        {
-            $restaurant->restaurantWorkingTime()
-                ->update([
-                    'working_days' => $validated['working_days'],
-                    'opening_time' => $validated['opening_time'],
-                    'closing_time' => $validated['closing_time']
-                ]);
-        }
-        else
-        {
-            RestaurantWorkingTime::query()
-                ->create([
-                    'restaurant_id'=> $restaurant->id,
-                    'working_days' => $validated['working_days'],
-                    'opening_time' => $validated['opening_time'],
-                    'closing_time' => $validated['closing_time']
-                ]);
-        }
+        //event listener for creat or updating working_time table
+        RestaurantUpdated::dispatch($restaurant);
 
         return redirect()->route('seller.restaurant.show', $restaurant)
             ->with('toast-success', __('response.restaurant_update_success'));
