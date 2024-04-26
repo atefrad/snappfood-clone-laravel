@@ -26,7 +26,7 @@
                                     <a class="nav-link" href="{{ route('seller.orders.new-orders') }}">سفارشات</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">غذاها</a>
+                                    <a class="nav-link" href="{{ route('seller.food.index') }}">غذاها</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="@if(auth('seller')->user()->restaurant)

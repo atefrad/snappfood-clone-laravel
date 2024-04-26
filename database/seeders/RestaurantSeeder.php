@@ -13,6 +13,11 @@ class RestaurantSeeder extends Seeder
      */
     public function run(): void
     {
+        Restaurant::factory()->create([
+            'seller_id' => '1',
+            'name' => 'رستوران تستی'
+        ]);
+
         Restaurant::factory(10)->create();
     }
 }

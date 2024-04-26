@@ -20,10 +20,6 @@ Route::prefix('seller')->name('seller.')->group(function () {
             Route::post('/', 'store')->name('store');
         });
 
-    //logout
-    Route::delete('/logout', [SellerLoginController::class, 'destroy'])
-        ->name('logout');
-
     //register
     Route::prefix('/register')
         ->controller(SellerRegisterController::class)
@@ -37,6 +33,11 @@ Route::prefix('seller')->name('seller.')->group(function () {
     //region authenticated
     Route::middleware('auth:seller')->group(function () {
 
+        //logout
+        Route::delete('/logout', [SellerLoginController::class, 'destroy'])
+            ->name('logout');
+
+        //restaurant
         Route::resource('restaurant', RestaurantController::class)
             ->except(['index', 'destroy']);
         Route::patch('restaurant/{restaurant}/change-status', [RestaurantController::class, 'changeStatus'])

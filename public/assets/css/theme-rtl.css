@@ -18594,4 +18594,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-align: right !important;
 }
 
+.max-width-20-rem {
+    max-width: 20rem !important;
+}
+.max-width-16-rem {
+    max-width: 16rem !important;
+}
+
+.max-width-10-rem {
+    max-width: 10rem !important;
+}
+
+.table-padding {
+    padding-top: 4rem !important;
+}
 /*# sourceMappingURL=theme-rtl.css.map */
