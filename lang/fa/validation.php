@@ -159,6 +159,9 @@ return [
         "restaurant_category_id"    => "دسته بندی رستوران",
         "state"                     => "استان",
         "bank_account_number"       => "شماره حساب",
+        "food_category_id"          => "دسته بندی غذا",
+        "ingredient"                => "مواد اولیه",
+        "price"                     => "قیمت",
 
     ],
 ];

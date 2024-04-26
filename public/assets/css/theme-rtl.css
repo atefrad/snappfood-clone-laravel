@@ -18608,4 +18608,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .table-padding {
     padding-top: 4rem !important;
 }
+
+.section-padding {
+    padding-top: 4rem !important;
+}
 /*# sourceMappingURL=theme-rtl.css.map */

@@ -9,4 +9,5 @@ return [
     'restaurant_store_success' => 'تنظیمات رستوران با موفقیت ثبت شد.',
     'restaurant_change_status_success' => 'وضعیت رستوران با موفقیت تغییر یافت.',
     'restaurant_isActive_error' => 'لطفا برای استفاده از امکانات سایت ابتدا مشخصات رستوران خود را کامل فرمایید.',
+    'food_store_success' => 'غذای جدید با موفقیت ثبت شد.',
 ];

@@ -8,9 +8,9 @@
     <div class="container">
         <div class="row h-100">
             <div class="col-lg-12 mx-auto text-center mt-7">
-                <h5 class="fw-bold fs-s fs-lg-5 lh-sm text-center">تنظیمات رستوران</h5>
+                <h5 class="fw-bold fs-s fs-lg-5 lh-sm text-center">غذاها</h5>
             </div>
-            <section class="d-flex justify-content-between align-items-center pb-2 border-bottom">
+            <section class="d-flex justify-content-between align-items-center pb-2 border-bottom section-padding">
                 <a class="btn btn-secondary btn-sm text-white" href="{{ route('seller.food.create') }}">ایجاد غذای جدید</a>
                 <div>
                     <form action="{{ route('seller.food.index') }}" class="d-flex">
@@ -62,11 +62,11 @@
                                 <img src="{{ asset($food->image) }}" alt="" width="80" height="50">
                             </td>
                             <td class="width-16-rem text-start">
-                                <a class="btn btn-success btn-sm" href="{{ route('seller.food.edit', $food) }}"><i class="fa-solid fa-pen-to-square"></i> ویرایش</a>
+                                <a class="btn btn-success btn-sm" href="{{ route('seller.food.edit', $food) }}"><i class="fas fa-edit"></i> ویرایش</a>
                                 <form class="d-inline" action="{{ route('seller.food.destroy', $food) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm delete" type="submit"><i class="fa-solid fa-trash-can"></i> حذف</button>
+                                    <button class="btn btn-danger btn-sm delete" type="submit"><i class="fas fa-trash"></i> حذف</button>
                                 </form>
                             </td>
                         </tr>
