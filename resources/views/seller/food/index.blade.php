@@ -66,7 +66,7 @@
                                 <form class="d-inline" action="{{ route('seller.food.destroy', $food) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm delete" type="submit"><i class="fas fa-trash"></i> حذف</button>
+                                    <button class="btn btn-danger btn-sm delete" type="submit" onclick="return confirm('آیا از حذف داده مطمئن هستید؟')"><i class="fas fa-trash"></i> حذف</button>
                                 </form>
                             </td>
                         </tr>

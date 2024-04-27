@@ -66,7 +66,7 @@ class FoodController extends Controller
         return view('seller.food.edit', compact( 'food','foodCategories'));
     }
 
-    public function update(UpdateFoodRequest $request, Food $food)
+    public function update(UpdateFoodRequest $request, Food $food): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -97,5 +97,14 @@ class FoodController extends Controller
 
         return redirect()->route('seller.food.index')
             ->with('toast-success', __('response.food_update_success'));
+    }
+
+    public function destroy(Food $food)
+    {
+        $food->delete();
+
+        return redirect()->route('seller.food.index')
+            ->with('toast-success', __('response.food_delete_success'));
+
     }
 }
