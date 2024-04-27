@@ -99,7 +99,7 @@ class FoodController extends Controller
             ->with('toast-success', __('response.food_update_success'));
     }
 
-    public function destroy(Food $food)
+    public function destroy(Food $food): RedirectResponse
     {
         $food->delete();
 

@@ -29,7 +29,7 @@ class Food extends Model
     //region relation
     public function foodCategories(): BelongsToMany
     {
-        return $this->belongsToMany(FoodCategory::class, 'food_food_category');
+        return $this->belongsToMany(FoodCategory::class);
     }
     //endregion
 
