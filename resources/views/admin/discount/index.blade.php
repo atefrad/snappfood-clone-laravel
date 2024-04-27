@@ -1,3 +1,4 @@
+@php use Morilog\Jalali\Jalalian; @endphp
 @extends('admin.layouts.main')
 
 @section('head-tag')
@@ -9,7 +10,8 @@
         <div class="card-body">
             <h5 class="card-title fw-semibold mb-4">تخفیف ها</h5>
             <div class="d-flex justify-content-between align-items-center mt-4 mb-3 pb-2 border-bottom">
-                <a class="btn btn-info btn-sm text-white" href="{{ route('admin.discount.create') }}">ایجاد تخفیف جدید</a>
+                <a class="btn btn-info btn-sm text-white" href="{{ route('admin.discount.create') }}">ایجاد تخفیف
+                    جدید</a>
             </div>
 
             <div class="table-responsive">
@@ -31,14 +33,18 @@
                         <tr>
                             <th class="text-center">{{ $key += 1 }}</th>
                             <td class="text-center">{{ $discount->percentage }}</td>
-                            <td class="text-center started_at">{{ $discount->started_at }}</td>
-                            <td class="text-center">{{ $discount->expired_at }}</td>
+                            <td class="text-center started_at">{{ Jalalian::forge($discount->started_at)->format('Y-m-d') }}</td>
+                            <td class="text-center">{{ Jalalian::forge($discount->expired_at)->format('Y-m-d') }}</td>
                             <td class="width-16-rem text-center">
-{{--                                <a class="btn btn-primary btn-sm" href="{{ route('admin.discount.edit', $discount) }}"><i class="fa-solid fa-pen-to-square"></i> ویرایش</a>--}}
-                                <form class="d-inline" action="{{ route('admin.discount.destroy', $discount) }}" method="POST">
+                                {{--                                <a class="btn btn-primary btn-sm" href="{{ route('admin.discount.edit', $discount) }}"><i class="fa-solid fa-pen-to-square"></i> ویرایش</a>--}}
+                                <form class="d-inline" action="{{ route('admin.discount.destroy', $discount) }}"
+                                      method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm delete" onclick="return confirm('آیا از حذف کردن این داده مطمئن هستید؟')" type="submit"><i class="ti ti-trash"></i> حذف</button>
+                                    <button class="btn btn-danger btn-sm delete"
+                                            onclick="return confirm('آیا از حذف کردن این داده مطمئن هستید؟')"
+                                            type="submit"><i class="ti ti-trash"></i> حذف
+                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -60,9 +66,9 @@
 @endsection
 @section('script')
     <script src="{{ asset('admin-assets/libs/jalalidatepicker/persian-date.min.js') }}"></script>
-{{--    <script>--}}
-        {{--const startedAt = new persianDate("{{ $discount->started_at }}").format('L');--}}
+    {{--    <script>--}}
+    {{--const startedAt = new persianDate("{{ $discount->started_at }}").format('L');--}}
 
-        {{--$('.started_at').text(startedAt);--}}
-{{--    </script>--}}
+    {{--$('.started_at').text(startedAt);--}}
+    {{--    </script>--}}
 @endsection

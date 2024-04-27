@@ -31,10 +31,10 @@ class StoreDiscountRequest extends FormRequest
     public function validated($key = null, $default = null)
     {
         $realStartedAtTimeStamp = substr(request('started_at'), 0, 10);
-        $startedAt = date('Y-m-d H:i:s', (int)$realStartedAtTimeStamp);
+        $startedAt = date('Y-m-d', (int)$realStartedAtTimeStamp) . ' 00:00:00';
 
         $realExpiredAtTimeStamp = substr(request('expired_at'), 0, 10);
-        $expiredAt = date('Y-m-d H:i:s', (int)$realExpiredAtTimeStamp);
+        $expiredAt = date('Y-m-d', (int)$realExpiredAtTimeStamp) . ' 23:59:59';
 
         return array_merge(
             parent::validated($key, $default),
