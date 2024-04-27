@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('percentage');
-            $table->timestamp('started_at')->useCurrent();
+            $table->timestamp('started_at');
             $table->timestamp('expired_at');
             $table->boolean('is_active')->default(true);
             $table->timestamps();

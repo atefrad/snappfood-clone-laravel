@@ -15,4 +15,7 @@ return [
     'food_store_success' => 'غذای جدید با موفقیت ثبت شد.',
     'food_update_success' => 'غذا با موفقیت ویرایش شد.',
     'food_delete_success' => 'غذا با موفقیت حذف شد.',
+
+    'discount_store_success' => 'تخفیف جدید با موفقیت ثبت شد.',
+    'discount_delete_success' => 'تخفیف با موفقیت حذف شد.',
 ];

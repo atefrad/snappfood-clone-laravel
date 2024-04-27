@@ -162,6 +162,9 @@ return [
         "food_category_id"          => "دسته بندی غذا",
         "ingredient"                => "مواد اولیه",
         "price"                     => "قیمت",
+        "percentage"                => "درصد",
+        "started_at"                => "تاریخ شروع",
+        "expired_at"                => "تاریخ انقضا",
 
     ],
 ];

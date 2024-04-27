@@ -36,11 +36,11 @@
                                 <img src="{{ asset($foodCategory->image) }}" alt="{{ $foodCategory->name }}" width="80" height="50">
                             </td>
                             <td class="width-16-rem text-start">
-                                <a class="btn btn-primary btn-sm" href="{{ route('admin.food-category.edit', $foodCategory) }}"><i class="fa-solid fa-pen-to-square"></i> ویرایش</a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('admin.food-category.edit', $foodCategory) }}"><i class="ti ti-edit"></i> ویرایش</a>
                                 <form class="d-inline" action="{{ route('admin.food-category.destroy', $foodCategory) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm delete" onclick="return confirm('آیا از حذف کردن این داده مطمئن هستید؟')" type="submit"><i class="fa-solid fa-trash-can"></i> حذف</button>
+                                    <button class="btn btn-danger btn-sm delete" onclick="return confirm('آیا از حذف کردن این داده مطمئن هستید؟')" type="submit"><i class="ti ti-trash"></i> حذف</button>
                                 </form>
                             </td>
                         </tr>

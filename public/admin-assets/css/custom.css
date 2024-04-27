@@ -3,9 +3,9 @@
     src: url('../../fonts/IRANSans/IRANSansWeb_Light.woff') format('woff');
 }
 
-* {
-    direction: rtl !important;
-    text-align: right !important;
+*:not(.datepicker-container, .datepicker-persian, .plotId, .datepicker-navigator, .pwt-btn, .datepicker-grid-view, .table-days) {
+    direction: rtl;
+    text-align: right;
     font-family: IRANSans;
 }
 
