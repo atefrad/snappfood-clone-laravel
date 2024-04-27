@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property mixed $image
+ * @property mixed $foodCategories
+ */
 class Food extends Model
 {
     use HasFactory, SoftDeletes;
