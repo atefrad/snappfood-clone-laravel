@@ -16,6 +16,8 @@ return [
     'food_update_success' => 'غذا با موفقیت ویرایش شد.',
     'food_delete_success' => 'غذا با موفقیت حذف شد.',
 
+    'food_discount_error' => 'غذا تخفیف فعال دارد و نمی توان به آن تخفیف دیگری اضافه کرد.',
+
     'discount_store_success' => 'تخفیف جدید با موفقیت ثبت شد.',
     'discount_delete_success' => 'تخفیف با موفقیت حذف شد.',
 ];

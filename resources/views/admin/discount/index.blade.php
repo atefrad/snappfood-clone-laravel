@@ -64,11 +64,3 @@
         </div>
     </div>
 @endsection
-@section('script')
-    <script src="{{ asset('admin-assets/libs/jalalidatepicker/persian-date.min.js') }}"></script>
-    {{--    <script>--}}
-    {{--const startedAt = new persianDate("{{ $discount->started_at }}").format('L');--}}
-
-    {{--$('.started_at').text(startedAt);--}}
-    {{--    </script>--}}
-@endsection

@@ -28,9 +28,9 @@ class RestaurantPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(Seller $seller): bool
     {
-        //
+        return !$seller->restaurant;
     }
 
     /**

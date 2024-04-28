@@ -151,6 +151,7 @@
 <script src="{{ asset('assets/js/theme.js') }}"></script>
 
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&amp;display=swap" rel="stylesheet">
+@yield('script')
 </body>
 
 </html>

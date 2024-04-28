@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Seller;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Seller\Food\StoreFoodRequest;
 use App\Http\Requests\Seller\Food\UpdateFoodRequest;
+use App\Models\Discount;
 use App\Models\Food;
 use App\Models\FoodCategory;
 use App\Services\ImageRealPath;
@@ -63,12 +64,24 @@ class FoodController extends Controller
     {
         $foodCategories = FoodCategory::all();
 
-        return view('seller.food.edit', compact( 'food','foodCategories'));
+        $discounts = Discount::query()->active()->get();
+
+        return view('seller.food.edit', compact( 'food','foodCategories', 'discounts'));
     }
 
     public function update(UpdateFoodRequest $request, Food $food): RedirectResponse
     {
         $validated = $request->validated();
+
+        if(!empty($validated['discount']))
+        {
+            if($food->activeDiscount)
+            {
+                return back()->with('toast-error', __('response.food_discount_error'));
+            }
+
+            $food->discounts()->attach($validated['discount']);
+        }
 
         if ($request->hasFile('image'))
         {

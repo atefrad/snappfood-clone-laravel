@@ -17,8 +17,13 @@ use Illuminate\Support\Facades\Storage;
 
 class RestaurantController extends Controller
 {
+    /**
+     * @throws AuthorizationException
+     */
     public function create(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $this->authorize('create', Restaurant::class);
+
         $restaurantCategories = RestaurantCategory::all();
 
         return view('seller.setting.create', compact('restaurantCategories'));

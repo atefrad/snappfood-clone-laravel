@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property mixed $image
  * @property mixed $foodCategories
+ * @property mixed $activeDiscount
  */
 class Food extends Model
 {
@@ -31,6 +33,11 @@ class Food extends Model
     {
         return $this->belongsToMany(FoodCategory::class);
     }
+
+    public function discounts(): BelongsToMany
+    {
+        return $this->belongsToMany(Discount::class);
+    }
     //endregion
 
     public function scopeFilterName(Builder $query): void
@@ -48,5 +55,12 @@ class Food extends Model
             $query->whereHas('foodCategories',
                 fn(Builder $query) => $query->where('id', request('food_category')));
         });
+    }
+
+    public function activeDiscount(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->discounts()->active()->first()
+        );
     }
 }
