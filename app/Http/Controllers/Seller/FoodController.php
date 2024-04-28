@@ -9,6 +9,7 @@ use App\Models\Discount;
 use App\Models\Food;
 use App\Models\FoodCategory;
 use App\Services\ImageRealPath;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -60,8 +61,13 @@ class FoodController extends Controller
             ->with('toast-success', __('response.food_store_success'));
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function edit(Food $food): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $this->authorize('update', $food);
+
         $foodCategories = FoodCategory::all();
 
         $discounts = Discount::query()->active()->get();
@@ -69,8 +75,13 @@ class FoodController extends Controller
         return view('seller.food.edit', compact( 'food','foodCategories', 'discounts'));
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function update(UpdateFoodRequest $request, Food $food): RedirectResponse
     {
+        $this->authorize('update', $food);
+
         $validated = $request->validated();
 
         if(!empty($validated['discount']))
@@ -112,8 +123,13 @@ class FoodController extends Controller
             ->with('toast-success', __('response.food_update_success'));
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function destroy(Food $food): RedirectResponse
     {
+        $this->authorize('delete', $food);
+
         $food->delete();
 
         return redirect()->route('seller.food.index')
