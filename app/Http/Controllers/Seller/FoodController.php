@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Seller;
 
+use App\Events\FoodUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Seller\Food\StoreFoodRequest;
 use App\Http\Requests\Seller\Food\UpdateFoodRequest;
@@ -84,15 +85,8 @@ class FoodController extends Controller
 
         $validated = $request->validated();
 
-        if(!empty($validated['discount']))
-        {
-            if($food->activeDiscount)
-            {
-                return back()->with('toast-error', __('response.food_discount_error'));
-            }
-
-            $food->discounts()->attach($validated['discount']);
-        }
+        //dispatching the event
+        FoodUpdated::dispatch($food);
 
         if ($request->hasFile('image'))
         {
@@ -108,13 +102,6 @@ class FoodController extends Controller
                 ->store('/images/food', 'public');
 
             $validated['image'] =  "/storage/{$imagePath}";
-        }
-
-        if($food->foodCategories->pluck('id')->toArray() != $validated['food_category_id'])
-        {
-            $food->foodCategories()->detach();
-
-            $food->foodCategories()->attach($validated['food_category_id']);
         }
 
         $food->update($validated);

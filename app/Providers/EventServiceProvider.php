@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\FoodUpdated;
 use App\Events\RestaurantUpdated;
+use App\Listeners\AddDiscountToFood;
 use App\Listeners\CreateOrUpdateWorkingTime;
+use App\Listeners\UpdateFoodFoodCategories;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,6 +25,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         RestaurantUpdated::class => [
             CreateOrUpdateWorkingTime::class
+        ],
+        FoodUpdated::class => [
+            AddDiscountToFood::class,
+            UpdateFoodFoodCategories::class,
         ],
     ];
 
