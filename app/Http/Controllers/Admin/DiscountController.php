@@ -31,4 +31,12 @@ class DiscountController extends Controller
         return redirect()->route('admin.discount.index')
             ->with('toast-success', __('response.discount_store_success'));
     }
+
+    public function destroy(Discount $discount): RedirectResponse
+    {
+        $discount->delete();
+
+        return redirect()->route('admin.discount.index')
+            ->with('toast-success', __('response.discount_delete_success'));
+    }
 }
