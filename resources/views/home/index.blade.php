@@ -90,7 +90,25 @@
     <!-- <section> close ============================-->
     <!-- ============================================-->
 
+    @if($activeBanner)
+    <section class="py-4 overflow-hidden">
 
+        <div class="container">
+            <div class="row h-100">
+{{--                <div class="col-lg-12 mx-auto text-center mt-7 mb-5">--}}
+{{--                    <h5 class="fw-bold fs-3 fs-lg-5 lh-sm">دسته بندی ها</h5>--}}
+{{--                </div>--}}
+
+                <div class="text-center">
+                    <a href="{{ $activeBanner->url }}">
+                        <img src="{{ asset($activeBanner->image) }}" alt="">
+                    </a>
+                </div>
+            </div>
+        </div><!-- end of .container-->
+
+    </section>
+    @endif
 
     @include('home.partials.app-banner')
 
