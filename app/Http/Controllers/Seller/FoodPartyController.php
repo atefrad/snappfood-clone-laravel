@@ -10,25 +10,13 @@ use Illuminate\Http\RedirectResponse;
 
 class FoodPartyController extends Controller
 {
-    public function create(Food $food): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application|RedirectResponse
+    public function create(Food $food): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        if($food->activeFoodParty)
-        {
-            return redirect()->route('seller.food.index')
-                ->with('toast-error', __('response.food_party_exists'));
-        }
-
         return view('seller.food-party.create', compact('food'));
     }
 
     public function store(StoreFoodPartyRequest $request, Food $food): RedirectResponse
     {
-        if($food->activeFoodParty)
-        {
-            return redirect()->route('seller.food.index')
-            ->with('toast-error', __('response.food_party_exists'));
-        }
-
         $validated = $request->validated();
 
         FoodParty::query()->create($validated);
@@ -36,5 +24,4 @@ class FoodPartyController extends Controller
         return redirect()->route('seller.food.index')
             ->with('toast-success', __('response.food_party_create_success'));
     }
-
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Seller\FoodController;
 use App\Http\Controllers\Seller\FoodPartyController;
 use App\Http\Controllers\Seller\OrderController;
 use App\Http\Controllers\Seller\RestaurantController;
+use App\Http\Middleware\Custom\CheckActiveFoodParty;
 use App\Http\Middleware\Custom\CheckIsActive;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,7 @@ Route::prefix('seller')->name('seller.')->group(function () {
                 Route::prefix('food-party')
                     ->controller(FoodPartyController::class)
                     ->name('food-party.')
+                    ->middleware(CheckActiveFoodParty::class)
                     ->group(function () {
 
                         Route::get('/create/{food}',  'create')->name('create');

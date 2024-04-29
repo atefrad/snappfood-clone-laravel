@@ -61,8 +61,10 @@
                             <td class="text-center">
                                 <img src="{{ asset($food->image) }}" alt="" width="80" height="50">
                             </td>
-                            <td class="width-21-rem text-start">
-                                <a class="btn btn-warning btn-sm" href="{{ route('seller.food-party.create', $food) }}"><i class="fas fa-edit"></i> فودپارتی</a>
+                            <td class="width-21-rem text-end">
+                                @if(!$food->activeFoodParty)
+                                    <a class="btn btn-warning btn-sm" href="{{ route('seller.food-party.create', $food) }}"><i class="fas fa-edit"></i> فودپارتی</a>
+                                @endif
                                 <a class="btn btn-success btn-sm" href="{{ route('seller.food.edit', $food) }}"><i class="fas fa-edit"></i> ویرایش</a>
                                 <form class="d-inline" action="{{ route('seller.food.destroy', $food) }}" method="POST">
                                     @csrf
