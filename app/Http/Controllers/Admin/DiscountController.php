@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreDiscountRequest;
+use App\Http\Requests\Admin\Discount\StoreDiscountRequest;
 use App\Models\Discount;
 use Illuminate\Http\RedirectResponse;
 

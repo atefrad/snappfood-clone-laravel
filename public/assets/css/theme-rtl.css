@@ -18477,10 +18477,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     src: url('../../fonts/IRANSans/IRANSansWeb_Light.woff') format('woff');
 }
 
-* {
-  direction: rtl !important;
-  text-align: right !important;
-  font-family: IRANSans !important;
+*:not(.datepicker-container, .datepicker-persian, .plotId, .datepicker-navigator, .pwt-btn, .datepicker-grid-view, .table-days) {
+    direction: rtl;
+    text-align: right;
+    font-family: IRANSans;
 }
 
 .line-height-3rem {
@@ -18611,5 +18611,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .section-padding {
     padding-top: 4rem !important;
+}
+
+.width-16-rem {
+    width: 16rem !important;
+}
+
+.width-21-rem {
+    width: 21rem !important;
 }
 /*# sourceMappingURL=theme-rtl.css.map */

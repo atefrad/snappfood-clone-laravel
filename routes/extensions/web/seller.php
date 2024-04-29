@@ -3,6 +3,7 @@
 use App\Http\Controllers\Seller\Auth\SellerLoginController;
 use App\Http\Controllers\Seller\Auth\SellerRegisterController;
 use App\Http\Controllers\Seller\FoodController;
+use App\Http\Controllers\Seller\FoodPartyController;
 use App\Http\Controllers\Seller\OrderController;
 use App\Http\Controllers\Seller\RestaurantController;
 use App\Http\Middleware\Custom\CheckIsActive;
@@ -48,6 +49,19 @@ Route::prefix('seller')->name('seller.')->group(function () {
 
                 //food
                 Route::resource('food', FoodController::class);
+
+                //food party
+                Route::prefix('food-party')
+                    ->controller(FoodPartyController::class)
+                    ->name('food-party.')
+                    ->group(function () {
+
+                        Route::get('/create/{food}',  'create')->name('create');
+                        Route::post('/{food}',  'store')->name('store');
+                    });
+
+
+
 
                 //order
                 Route::get('orders/new-orders', [OrderController::class, 'newOrders'])

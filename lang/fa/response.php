@@ -20,4 +20,7 @@ return [
 
     'discount_store_success' => 'تخفیف جدید با موفقیت ثبت شد.',
     'discount_delete_success' => 'تخفیف با موفقیت حذف شد.',
+
+    'food_party_create_success' => 'غذا با موفقیت به فودپارتی اضافه شد.',
+    'food_party_exists' => 'غذا در لیست فودپارتی های فعال وجود دارد.'
 ];

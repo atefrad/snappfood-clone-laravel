@@ -76,6 +76,12 @@ return [
     "unique"           => ":attribute قبلا انتخاب شده است.",
     'uploaded'             => 'آپلود :attribute با شکست مواجه شد.',
     "url"              => "فرمت آدرس :attribute اشتباه است.",
+    'gt' => [
+        'array' => ':attribute باید بیش از :value باشد.',
+        'file' => ':attribute باید بیش از :value کیلوبایتس باشد.',
+        'numeric' => ':attribute باید بیش از :value باشد.',
+        'string' => ':attribute باید بیش از :value کاراکتر باشد.',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -165,6 +171,8 @@ return [
         "percentage"                => "درصد",
         "started_at"                => "تاریخ شروع",
         "expired_at"                => "تاریخ انقضا",
+        "start_date"                => "تاریخ شروع",
+        "end_date"                  => "تاریخ پایان",
 
     ],
 ];
