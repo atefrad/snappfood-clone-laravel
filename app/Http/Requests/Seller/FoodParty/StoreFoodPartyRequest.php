@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Seller\FoodParty;
 
+use App\Services\RealTimestamp;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -33,11 +34,9 @@ class StoreFoodPartyRequest extends FormRequest
 
     public function validated($key = null, $default = null)
     {
-        $realStartDateTimeStamp = substr(request('start_date'), 0, 10);
-        $startDate = date('Y-m-d', (int)$realStartDateTimeStamp) . ' 00:00:00';
+        $startDate = RealTimestamp::getRealTimestamp(request('start_date'), '00:00:00');
 
-        $realEndDateTimeStamp = substr(request('end_date'), 0, 10);
-        $endDate = date('Y-m-d', (int)$realEndDateTimeStamp) . ' 23:59:59';
+        $endDate = RealTimestamp::getRealTimestamp(request('end_date'), '23:59:59');
 
         return array_merge(
             parent::validated($key, $default),

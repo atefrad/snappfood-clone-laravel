@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Discount;
 
+use App\Services\RealTimestamp;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreDiscountRequest extends FormRequest
@@ -30,11 +31,9 @@ class StoreDiscountRequest extends FormRequest
 
     public function validated($key = null, $default = null)
     {
-        $realStartedAtTimeStamp = substr(request('started_at'), 0, 10);
-        $startedAt = date('Y-m-d', (int)$realStartedAtTimeStamp) . ' 00:00:00';
+        $startedAt = RealTimestamp::getRealTimestamp(request('started_at'), '00:00:00');
 
-        $realExpiredAtTimeStamp = substr(request('expired_at'), 0, 10);
-        $expiredAt = date('Y-m-d', (int)$realExpiredAtTimeStamp) . ' 23:59:59';
+        $expiredAt = RealTimestamp::getRealTimestamp(request('expired_at'), '23:59:59');
 
         return array_merge(
             parent::validated($key, $default),
