@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\FoodCategoryController;
 use App\Http\Controllers\Admin\FoodPartyController as AdminFoodPartyController;
@@ -46,6 +47,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         //food party
         Route::resource('food-party', AdminFoodPartyController::class)
             ->except(['create', 'store', 'show']);
+
+        //banner
+        Route::resource('banner', BannerController::class)
+            ->except(['edit', 'update', 'show']);
     });
     //endregion
 });

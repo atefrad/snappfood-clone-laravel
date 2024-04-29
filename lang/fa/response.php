@@ -25,4 +25,7 @@ return [
     'food_party_exists' => 'غذا در لیست فودپارتی های فعال وجود دارد.',
     'food_party_update_success' => 'فودپارتی با موفقیت ویرایش شد.',
     'food_party_delete_success' => 'فودپارتی با موفقیت حذف شد.',
+
+    'banner_store_success' => 'بنر جدید با موفقیت ثبت شد.',
+    'banner_delete_success' => 'بنر با موفقیت حذف شد.',
 ];

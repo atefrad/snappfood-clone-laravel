@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->text('image');
             $table->string('url');
-            $table->timestamp('expired_date');
+            $table->timestamp('expired_at');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

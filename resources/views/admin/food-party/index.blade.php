@@ -54,7 +54,7 @@
                     @empty
 
                         <tr>
-                            <td colspan="8" class="text-center">تخفیفی برای نمایش وجود ندارد.</td>
+                            <td colspan="8" class="text-center">فودپارتی برای نمایش وجود ندارد.</td>
                         </tr>
 
                     @endforelse
