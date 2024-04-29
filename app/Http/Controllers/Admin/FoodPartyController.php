@@ -32,4 +32,12 @@ class FoodPartyController extends Controller
         return redirect()->route('admin.food-party.index')
             ->with('toast-success', __('response.food_party_update_success'));
     }
+
+    public function destroy(FoodParty $foodParty): RedirectResponse
+    {
+        $foodParty->delete();
+
+        return redirect()->route('admin.food-party.index')
+            ->with('toast-success', __('response.food_party_delete_success'));
+    }
 }
