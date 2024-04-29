@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FoodParty extends Model
@@ -22,4 +23,11 @@ class FoodParty extends Model
     {
         $query->where('end_date', '>', now());
     }
+
+    //region relation
+    public function Food(): BelongsTo
+    {
+        return $this->belongsTo(Food::class);
+    }
+    //endregion
 }

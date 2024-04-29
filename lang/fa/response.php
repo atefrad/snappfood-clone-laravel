@@ -22,5 +22,7 @@ return [
     'discount_delete_success' => 'تخفیف با موفقیت حذف شد.',
 
     'food_party_create_success' => 'غذا با موفقیت به فودپارتی اضافه شد.',
-    'food_party_exists' => 'غذا در لیست فودپارتی های فعال وجود دارد.'
+    'food_party_exists' => 'غذا در لیست فودپارتی های فعال وجود دارد.',
+    'food_party_update_success' => 'فودپارتی با موفقیت ویرایش شد.',
+    'food_party_delete_success' => 'فودپارتی با موفقیت حذف شد.',
 ];
