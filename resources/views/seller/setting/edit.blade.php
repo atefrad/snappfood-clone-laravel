@@ -52,6 +52,24 @@
                             </div>
                             <div class="input-group-icon mb-2">
                                 <div class="row mb-3">
+                                    <label for="food_category_id" class="col-sm-3 col-form-label">دسته بندی های غذا</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control input-box form-foodwagon-control" name="food_category_id[]" id="food_category_id" multiple>
+{{--                                            <option value="" selected disabled>لطفا دسته بندی های غذای رستوران را انتخاب نمایید.</option>--}}
+                                            @foreach($foodCategories as $foodCategory)
+                                                <option value="{{ $foodCategory->id }}" @if(in_array($foodCategory->id,  old('food_category_id', $foodCategoryIds))) selected @endif>{{ $foodCategory->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('food_category_id')
+                                        <span class="text-red ms-2 fs--1">
+                                        {{ $message }}
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group-icon mb-2">
+                                <div class="row mb-3">
                                     <label class="col-sm-3 col-form-label" for="phone">شماره تماس</label>
                                     <div class="col-sm-9">
                                         <input class="form-control input-box form-foodwagon-control" name="phone" id="phone" type="text" placeholder="شماره تماس" value="{{ old('phone', $restaurant->phone) }}" />

@@ -173,6 +173,10 @@ return [
         "expired_at"                => "تاریخ انقضا",
         "start_date"                => "تاریخ شروع",
         "end_date"                  => "تاریخ پایان",
+        "delivery_price"            => "هزینه ی ارسال",
+        "working_days"              => "روزهای کاری",
+        "opening_time"              => "ساعت آغاز کار",
+        "closing_time"              => "ساعت پایان کار",
 
     ],
 ];

@@ -24,6 +24,8 @@ class UpdateRestaurantRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:2', 'max:255'],
             'restaurant_category_id' => ['required', 'integer', 'exists:restaurant_categories,id'],
+            'food_category_id' => ['required', 'array', 'min:1'],
+            'food_category_id.*' => ['required', 'integer', 'exists:food_categories,id'],
             'state' => ['required', 'string'],
             'city' => ['required', 'string'],
             'address' => ['required', 'string', 'min:5'],

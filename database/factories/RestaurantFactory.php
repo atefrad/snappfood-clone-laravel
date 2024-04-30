@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Models\RestaurantCategory;
 use App\Models\Seller;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Ybazli\Faker\Facades\Faker;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Restaurant>

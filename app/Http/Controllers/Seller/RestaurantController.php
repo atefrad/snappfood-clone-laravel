@@ -6,6 +6,7 @@ use App\Events\RestaurantUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Seller\Restaurant\StoreRestaurantRequest;
 use App\Http\Requests\Seller\Restaurant\UpdateRestaurantRequest;
+use App\Models\FoodCategory;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
 use App\Models\RestaurantWorkingTime;
@@ -70,7 +71,13 @@ class RestaurantController extends Controller
 
         $restaurantCategories = RestaurantCategory::all();
 
-        return view('seller.setting.edit', compact('restaurantCategories', 'restaurant'));
+        $foodCategories = FoodCategory::all();
+
+        $foodCategoryIds = $restaurant->foodCategories
+            ? $restaurant->foodCategories->pluck('id')->toArray()
+            : [];
+
+        return view('seller.setting.edit', compact('restaurantCategories', 'restaurant', 'foodCategories', 'foodCategoryIds'));
     }
 
     /**

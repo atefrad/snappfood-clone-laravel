@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property mixed $image
  * @property mixed $id
+ * @property mixed $foodCategories
  */
 class Restaurant extends Model
 {
@@ -42,6 +44,11 @@ class Restaurant extends Model
     public function restaurantWorkingTime(): HasOne
     {
         return $this->hasOne(RestaurantWorkingTime::class);
+    }
+
+    public function foodCategories(): BelongsToMany
+    {
+        return $this->belongsToMany(FoodCategory::class);
     }
     //endregion
 
