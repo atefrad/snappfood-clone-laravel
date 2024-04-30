@@ -21,6 +21,20 @@
                         <td class="text-center">{{ $restaurant->restaurantCategory->name }}</td>
                     </tr>
                     <tr>
+                        <th class="text-center">دسته بندی های غذا</th>
+                        <td class="text-center">
+                            @if($restaurant->foodCategories)
+                                @foreach($restaurant->foodCategories as $foodCategory)
+                                    @if($loop->last)
+                                        {{ $foodCategory->name }}
+                                    @else
+                                        {{ $foodCategory->name . '-' }}
+                                    @endif
+                                @endforeach
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
                         <th class="text-center">شماره تماس</th>
                         <td class="text-center">{{ $restaurant->phone }}</td>
                     </tr>
