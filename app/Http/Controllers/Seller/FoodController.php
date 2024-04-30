@@ -9,10 +9,12 @@ use App\Http\Requests\Seller\Food\UpdateFoodRequest;
 use App\Models\Discount;
 use App\Models\Food;
 use App\Models\FoodCategory;
+use App\Models\Seller;
 use App\Services\ImageRealPath;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class FoodController extends Controller
@@ -34,7 +36,11 @@ class FoodController extends Controller
 
     public function create(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $foodCategories = FoodCategory::all();
+        /** @var Seller $seller */
+
+        $seller = Auth::guard('seller')->user();
+
+        $foodCategories = $seller->restaurant->foodCategories;
 
         return view('seller.food.create', compact( 'foodCategories'));
     }
@@ -69,7 +75,11 @@ class FoodController extends Controller
     {
         $this->authorize('update', $food);
 
-        $foodCategories = FoodCategory::all();
+        /** @var Seller $seller */
+
+        $seller = Auth::guard('seller')->user();
+
+        $foodCategories = $seller->restaurant->foodCategories;
 
         $discounts = Discount::query()->active()->get();
 

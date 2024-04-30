@@ -40,7 +40,7 @@
                                     <select class="form-control input-box form-foodwagon-control" name="food_category_id[]" id="food_category_id" multiple>
 {{--                                        <option value="" selected disabled>لطفا دسته بندی غذا را انتخاب نمایید.</option>--}}
                                         @foreach($foodCategories as $foodCategory)
-                                            <option value="{{ $foodCategory->id }}" @if($foodCategory->id == old('food_category_id')) selected @endif>{{ $foodCategory->name }}</option>
+                                            <option value="{{ $foodCategory->id }}" @if(in_array($foodCategory->id, old('food_category_id') ?? [])) selected @endif>{{ $foodCategory->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('food_category_id')
