@@ -33,7 +33,11 @@
                             <td class="text-center">{{ $foodCategory->name }}</td>
                             <td class="text-center max-width-20-rem">{{ $foodCategory->description }}</td>
                             <td class="text-center">
-                                <img src="{{ asset($foodCategory->image) }}" alt="{{ $foodCategory->name }}" width="80" height="50">
+                                @if(!is_null($foodCategory->image))
+                                    <img src="{{ asset($foodCategory->image) }}" alt="{{ $foodCategory->name }}" width="80" height="50">
+                                @else
+                                    <img src="{{ asset('images/no-image.png') }}" alt="" width="100" height="70">
+                                @endif
                             </td>
                             <td class="width-16-rem text-start">
                                 <a class="btn btn-primary btn-sm" href="{{ route('admin.food-category.edit', $foodCategory) }}"><i class="ti ti-edit"></i> ویرایش</a>

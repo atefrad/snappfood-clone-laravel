@@ -59,7 +59,11 @@
                             <td class="text-center max-width-20-rem">{{ $food->ingredient }}</td>
                             <td class="text-center">{{ $food->price }}</td>
                             <td class="text-center">
-                                <img src="{{ asset($food->image) }}" alt="" width="80" height="50">
+                                @if(!is_null($food->image))
+                                    <img src="{{ asset($food->image) }}" alt="" width="80" height="50">
+                                @else
+                                    <img src="{{ asset('images/no-image.png') }}" alt="" width="100" height="80">
+                                @endif
                             </td>
                             <td class="width-21-rem text-end">
                                 @if(!$food->activeFoodParty)
@@ -84,8 +88,8 @@
 
                     </tbody>
                 </table>
+                {{ $foods->links() }}
             </section>
-            {{ $foods->links() }}
         </div>
     </div>
 @endsection

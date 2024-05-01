@@ -57,7 +57,11 @@
                     <tr>
                         <th class="text-center">تصویر</th>
                         <td class="text-center">
-                            <img src="{{ asset($restaurant->image) }}" alt="" width="100" height="70">
+                            @if(!is_null($restaurant->image))
+                                <img src="{{ asset($restaurant->image) }}" alt="" width="100" height="70">
+                            @else
+                                <img src="{{ asset('images/no-image.png') }}" alt="" width="150" height="100">
+                            @endif
                         </td>
                     </tr>
                     <tr>
