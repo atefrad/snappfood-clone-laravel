@@ -33,7 +33,7 @@ class UpdateRestaurantRequest extends FormRequest
             'bank_account_number' => ['required', 'numeric'],
             'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif'],
             'is_open' => ['required', 'integer', 'in:0,1'],
-            'delivery_price' => ['required', 'integer', 'max:100000'],
+            'delivery_price' => ['required', 'integer'],
             'working_days' => ['required', 'array', 'min:1', 'max:7'],
             'working_days.*' => ['required', 'string', 'in:شنبه,یکشنبه,دوشنبه,سه شنبه,چهارشنبه,پنجشنبه,جمعه'],
             'opening_time' => ['required', 'regex:/^([01][0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/u'],

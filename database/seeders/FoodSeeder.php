@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Food;
 use App\Models\FoodCategory;
+use App\Models\Restaurant;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,17 +15,26 @@ class FoodSeeder extends Seeder
      */
     public function run(): void
     {
-        $foods = Food::factory(10)->create();
+        $restaurants = Restaurant::all();
 
-        foreach ($foods as $food)
+        foreach ($restaurants as $restaurant)
         {
-            $foodCategories = FoodCategory::query()
-                ->inRandomOrder()
-                ->take(rand(1,3))
-                ->get();
+            /** @var Restaurant $restaurant */
 
-            /** @var Food $food */
-            $food->foodCategories()->attach($foodCategories);
+            $foods = Food::factory(10)->create([
+                'restaurant_id' => $restaurant->id
+            ]);
+
+            foreach ($foods as $food)
+            {
+                $foodCategories = FoodCategory::query()
+                    ->inRandomOrder()
+                    ->take(rand(1,3))
+                    ->get();
+
+                /** @var Food $food */
+                $food->foodCategories()->attach($foodCategories);
+            }
         }
 
     }

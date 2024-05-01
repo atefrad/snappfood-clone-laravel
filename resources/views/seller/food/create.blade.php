@@ -39,9 +39,11 @@
                                 <div class="col-sm-9">
                                     <select class="form-control input-box form-foodwagon-control" name="food_category_id[]" id="food_category_id" multiple>
 {{--                                        <option value="" selected disabled>لطفا دسته بندی غذا را انتخاب نمایید.</option>--}}
-                                        @foreach($foodCategories as $foodCategory)
+                                        @forelse($foodCategories as $foodCategory)
                                             <option value="{{ $foodCategory->id }}" @if(in_array($foodCategory->id, old('food_category_id') ?? [])) selected @endif>{{ $foodCategory->name }}</option>
-                                        @endforeach
+                                        @empty
+                                            <option class="text-red" value="">لطفا ابتدا دسته بندی های غذای رستوران را انتخاب نمایید.</option>
+                                        @endforelse
                                     </select>
                                     @error('food_category_id')
                                     <span class="text-red ms-2 fs--1">
