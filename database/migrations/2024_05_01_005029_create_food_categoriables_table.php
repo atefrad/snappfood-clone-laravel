@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('food_category_restaurant', function (Blueprint $table) {
-            $table->foreignId('restaurant_id')->constrained('restaurants');
+        Schema::create('food_categoriables', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('food_category_id')->constrained('food_categories');
-
-            $table->primary(['restaurant_id', 'food_category_id']);
+            $table->morphs('food_categoriable', 'food_categoriable_type_food_categoriable_id_
+            index');
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('food_category_restaurant');
+        Schema::dropIfExists('food_categoriables');
     }
 };

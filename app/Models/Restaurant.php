@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -46,9 +47,9 @@ class Restaurant extends Model
         return $this->hasOne(RestaurantWorkingTime::class);
     }
 
-    public function foodCategories(): BelongsToMany
+    public function foodCategories(): MorphToMany
     {
-        return $this->belongsToMany(FoodCategory::class);
+        return $this->morphToMany(FoodCategory::class, 'food_categoriable');
     }
     //endregion
 
