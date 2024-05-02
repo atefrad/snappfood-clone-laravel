@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\RestaurantCategory;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,6 +12,8 @@ class HomeController extends Controller
     {
         $activeBanner = Banner::query()->active()->first();
 
-        return view('home.index', compact('activeBanner'));
+        $restaurantCategories = RestaurantCategory::all();
+
+        return view('home.index', compact('activeBanner', 'restaurantCategories'));
     }
 }
