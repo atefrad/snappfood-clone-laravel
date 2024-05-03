@@ -34,7 +34,8 @@ class SellerRegisterController extends Controller
 
         Auth::guard('seller')->login($seller);
 
-        return redirect()->route('seller.restaurant.create');
+        return redirect()->route('seller.restaurant.create')
+            ->with('toast-success', __('response.register.success'));
 
     }
 }
