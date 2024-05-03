@@ -54,12 +54,16 @@
                                 <div class="row mb-3">
                                     <label for="food_category_id" class="col-sm-3 col-form-label">دسته بندی های غذا</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control input-box form-foodwagon-control" name="food_category_id[]" id="food_category_id" multiple>
-{{--                                            <option value="" selected disabled>لطفا دسته بندی های غذای رستوران را انتخاب نمایید.</option>--}}
+                                        <div class="form-control input-box form-foodwagon-control overflow-scroll">
+                                            <div class="row">
                                             @foreach($foodCategories as $foodCategory)
-                                                <option value="{{ $foodCategory->id }}" @if(in_array($foodCategory->id,  old('food_category_id', $foodCategoryIds))) selected @endif>{{ $foodCategory->name }}</option>
+                                                <div class="col-6">
+                                                    <input type="checkbox" name="food_category_id[]" id="food_category_{{ $foodCategory->id }}" value="{{ $foodCategory->id }}" @if(in_array($foodCategory->id,  old('food_category_id', $foodCategoryIds))) checked @endif>
+                                                    <label for="food_category_{{ $foodCategory->id }}">{{ $foodCategory->name }}</label>
+                                                </div>
                                             @endforeach
-                                        </select>
+                                            </div>
+                                        </div>
                                         @error('food_category_id')
                                         <span class="text-red ms-2 fs--1">
                                         {{ $message }}
@@ -169,16 +173,38 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-3 col-form-label" for="working_days">روزهای کاری</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control input-box form-foodwagon-control" name="working_days[]" id="working_days" multiple>
-{{--                                            <option value="" selected disabled>لطفا روزهای کاری رستوران را انتخاب نمایید</option>--}}
-                                            <option value="شنبه" @if(in_array('شنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) selected @endif>شنبه</option>
-                                            <option value="یکشنبه" @if(in_array('یکشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) selected @endif>یکشنبه</option>
-                                            <option value="دوشنبه" @if(in_array('دوشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) selected @endif>دوشنبه</option>
-                                            <option value="سه شنبه" @if(in_array('سه شنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) selected @endif>سه شنبه</option>
-                                            <option value="چهارشنبه" @if(in_array('چهارشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) selected @endif>چهارشنبه</option>
-                                            <option value="پنجشنبه" @if(in_array('پنجشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) selected @endif>پنجشنبه</option>
-                                            <option value="جمعه" @if(in_array('جمعه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) selected @endif>جمعه</option>
-                                        </select>
+                                        <div class="form-control input-box form-foodwagon-control overflow-scroll">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <input type="checkbox" name="working_days[]" id="saturday" value="شنبه"  @if(in_array('شنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <label for="saturday">شنبه</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="checkbox" name="working_days[]" id="sunday" value="یکشنبه"  @if(in_array('یکشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <label for="sunday">یکشنبه</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="checkbox" name="working_days[]" id="monday" value="دوشنبه"  @if(in_array('دوشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <label for="monday">دوشنبه</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="checkbox" name="working_days[]" id="tuesday" value="سه شنبه"  @if(in_array('سه شنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <label for="tuesday">سه شنبه</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="checkbox" name="working_days[]" id="wednesday" value="چهارشنبه"  @if(in_array('چهارشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <label for="wednesday">چهارشنبه</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="checkbox" name="working_days[]" id="thursday" value="پنجشنبه"  @if(in_array('پنجشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <label for="thursday">پنجشنبه</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="checkbox" name="working_days[]" id="friday" value="جمعه"  @if(in_array('جمعه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <label for="friday">جمعه</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                         @error('working_days')
                                         <span class="text-red ms-2 fs--1">
                                         {{ $message }}

@@ -37,14 +37,18 @@
                             <div class="row mb-3">
                                 <label for="food_category_id" class="col-sm-3 col-form-label">دسته بندی غذا<span class="text-red"> *</span></label>
                                 <div class="col-sm-9">
-                                    <select class="form-control input-box form-foodwagon-control" name="food_category_id[]" id="food_category_id" multiple>
-{{--                                        <option value="" selected disabled>لطفا دسته بندی غذا را انتخاب نمایید.</option>--}}
-                                        @forelse($foodCategories as $foodCategory)
-                                            <option value="{{ $foodCategory->id }}" @if(in_array($foodCategory->id, old('food_category_id') ?? [])) selected @endif>{{ $foodCategory->name }}</option>
-                                        @empty
-                                            <option class="text-red" value="">لطفا ابتدا دسته بندی های غذای رستوران را انتخاب نمایید.</option>
-                                        @endforelse
-                                    </select>
+                                    <div class="form-control input-box form-foodwagon-control overflow-scroll">
+                                        <div class="row">
+                                            @forelse($foodCategories as $foodCategory)
+                                                <div class="col-6">
+                                                    <input type="checkbox" name="food_category_id[]" id="food_category_{{ $foodCategory->id }}" value="{{ $foodCategory->id }}" @if(in_array($foodCategory->id,  old('food_category_id') ?? [])) checked @endif>
+                                                    <label for="food_category_{{ $foodCategory->id }}">{{ $foodCategory->name }}</label>
+                                                </div>
+                                            @empty
+                                                <p class="text-red">لطفا ابتدا دسته بندی های غذای رستوران را در تنظیمات انتخاب نمایید.</p>
+                                            @endforelse
+                                        </div>
+                                    </div>
                                     @error('food_category_id')
                                     <span class="text-red ms-2 fs--1">
                                     {{ $message }}

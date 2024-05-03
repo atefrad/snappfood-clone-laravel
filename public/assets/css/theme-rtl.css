@@ -18507,7 +18507,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .toast-wrapper {
     position: fixed;
     z-index: 9999;
-    top: 3rem;
+    top: -5rem;
     left: 0;
     width: 26rem;
     max-width: 80%;
@@ -18619,5 +18619,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .width-21-rem {
     width: 21rem !important;
+}
+
+.overflow-scroll {
+    max-height: 50vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    scrollbar-width: none !important;
+}
+
+.overflow-scroll::-webkit-scrollbar {
+    display: none;
 }
 /*# sourceMappingURL=theme-rtl.css.map */

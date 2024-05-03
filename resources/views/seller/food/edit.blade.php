@@ -41,18 +41,20 @@
                                 <div class="row mb-3">
                                     <label for="food_category_id" class="col-sm-3 col-form-label">دسته بندی غذا</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control input-box form-foodwagon-control"
-                                                name="food_category_id[]" id="food_category_id" multiple>
-                                            {{--                                        <option value="" selected disabled>لطفا دسته بندی غذا را انتخاب نمایید.</option>--}}
-                                            @foreach($foodCategories as $foodCategory)
-                                                <option value="{{ $foodCategory->id }}"
-                                                        @if(in_array($foodCategory->id, old('food_category_id', $food->foodCategories->pluck('id')->toArray()))) selected @endif>{{ $foodCategory->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        <div class="form-control input-box form-foodwagon-control overflow-scroll">
+                                            <div class="row">
+                                                @foreach($foodCategories as $foodCategory)
+                                                    <div class="col-6">
+                                                        <input type="checkbox" name="food_category_id[]" id="food_category_{{ $foodCategory->id }}" value="{{ $foodCategory->id }}" @if(in_array($foodCategory->id,  old('food_category_id', $food->foodCategories->pluck('id')->toArray()))) checked @endif>
+                                                        <label for="food_category_{{ $foodCategory->id }}">{{ $foodCategory->name }}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
                                         @error('food_category_id')
                                         <span class="text-red ms-2 fs--1">
-                                    {{ $message }}
-                                    </span>
+                                           {{ $message }}
+                                        </span>
                                         @enderror
                                     </div>
                                 </div>
