@@ -21,12 +21,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/', 'store')->name('store');
         });
 
-    //logout
-    Route::delete('/logout', [AdminLoginController::class, 'destroy'])
-        ->name('logout');
-
     //region authenticated
     Route::middleware('auth:admin')->group(function () {
+
+        //logout
+        Route::delete('/logout', [AdminLoginController::class, 'destroy'])
+            ->name('logout');
 
         //admin dashboard
         Route::get('/', [AdminDashboardController::class, 'index'])

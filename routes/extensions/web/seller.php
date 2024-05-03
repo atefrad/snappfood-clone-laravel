@@ -63,8 +63,6 @@ Route::prefix('seller')->name('seller.')->group(function () {
                     });
 
 
-
-
                 //order
                 Route::get('orders/new-orders', [OrderController::class, 'newOrders'])
                     ->name('orders.new-orders');
