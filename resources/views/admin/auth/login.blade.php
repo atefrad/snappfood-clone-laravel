@@ -43,7 +43,7 @@
 {{--            </div>--}}
 {{--            <a class="text-primary fw-bold" href="#">فراموشی رمز عبور؟</a>--}}
 {{--        </div>--}}
-        <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">ورود</button>
+        <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2 text-center">ورود</button>
 {{--        <div class="d-flex align-items-center justify-content-center">--}}
 {{--            <p class="fs-4 mb-0 fw-bold">New to Modernize?</p>--}}
 {{--            <a class="text-primary fw-bold ms-2" href="./authentication-register.html">Create an account</a>--}}

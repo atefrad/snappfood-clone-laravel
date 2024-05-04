@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\FoodCategoryController;
 use App\Http\Controllers\Admin\FoodPartyController as AdminFoodPartyController;
 use App\Http\Controllers\Admin\RestaurantCategoryController;
+use App\Http\Controllers\Admin\RestaurantController as AdminRestaurantController;
+use App\Http\Controllers\Admin\FoodController as AdminFoodController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -43,6 +45,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         //food-category
         Route::resource('food-category', FoodCategoryController::class)
             ->except('show');
+
+        //restaurant
+        Route::get('restaurant', [AdminRestaurantController::class, 'index'])
+            ->name('restaurant.index');
+
+        //food
+        Route::get('food', [AdminFoodController::class, 'index'])
+            ->name('food.index');
 
         //discount
         Route::resource('discount', DiscountController::class)

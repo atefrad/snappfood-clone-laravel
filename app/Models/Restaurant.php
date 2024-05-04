@@ -51,6 +51,11 @@ class Restaurant extends Model
     {
         return $this->morphToMany(FoodCategory::class, 'food_categoriable');
     }
+
+    public function seller(): BelongsTo
+    {
+        return $this->belongsTo(Seller::class);
+    }
     //endregion
 
     public function isActive(): Attribute
