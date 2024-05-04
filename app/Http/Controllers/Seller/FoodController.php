@@ -83,8 +83,6 @@ class FoodController extends Controller
 
         $discounts = Discount::query()->active()->get();
 
-        dd($discounts);
-
         return view('seller.food.edit', compact( 'food','foodCategories', 'discounts'));
     }
 

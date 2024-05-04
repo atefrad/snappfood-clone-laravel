@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property mixed $activeDiscount
  * @property mixed $restaurant_id
  * @property mixed $activeFoodParty
+ * @property mixed $price
  */
 class Food extends Model
 {
@@ -77,6 +78,17 @@ class Food extends Model
     {
         return Attribute::make(
             get: fn() => $this->foodParties()->active()->first()
+        );
+    }
+
+    public function priceAfterDiscount(): Attribute
+    {
+        $discount = $this->activeDiscount;
+
+        $discountPercentage = $discount ? $discount->percentage : 0;
+
+        return Attribute::make(
+            get: fn() => ((int)(100 - $discountPercentage) * (int)$this->price) / 100
         );
     }
 }

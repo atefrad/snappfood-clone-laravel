@@ -57,7 +57,15 @@
                                 @endforeach
                             </td>
                             <td class="text-center max-width-20-rem">{{ $food->ingredient }}</td>
-                            <td class="text-center">{{ $food->price }}</td>
+                            <td class="text-center">
+                                @if($food->price === $food->priceAfterDiscount)
+                                    {{ $food->price }}
+                                @else
+                                    <s>{{ $food->price }}</s>
+                                    <br>
+                                    {{ $food->priceAfterDiscount }}
+                                @endif
+                            </td>
                             <td class="text-center">
                                 @if(!is_null($food->image))
                                     <img src="{{ asset($food->image) }}" alt="" width="80" height="50">
