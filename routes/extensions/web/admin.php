@@ -11,15 +11,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
-    //login
-    Route::prefix('login')
-        ->controller(AdminLoginController::class)
-        ->name('login.')
-        ->group(function () {
+    Route::middleware('guest:seller,admin')->group(function () {
 
-            Route::get('/', 'create')->name('create');
-            Route::post('/', 'store')->name('store');
-        });
+        //login
+        Route::prefix('login')
+            ->controller(AdminLoginController::class)
+            ->name('login.')
+            ->group(function () {
+
+                Route::get('/', 'create')->name('create');
+                Route::post('/', 'store')->name('store');
+            });
+
+    });
 
     //region authenticated
     Route::middleware('auth:admin')->group(function () {

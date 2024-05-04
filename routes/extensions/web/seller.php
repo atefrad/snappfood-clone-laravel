@@ -12,25 +12,30 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('seller')->name('seller.')->group(function () {
 
-    //login
-    Route::prefix('/login')
-        ->controller(SellerLoginController::class)
-        ->name('login.')
-        ->group(function () {
+    Route::middleware('guest:admin,seller')->group(function () {
 
-            Route::get('/','create')->name('create');
-            Route::post('/', 'store')->name('store');
-        });
+        //login
+        Route::prefix('/login')
+            ->controller(SellerLoginController::class)
+            ->name('login.')
+            ->group(function () {
 
-    //register
-    Route::prefix('/register')
-        ->controller(SellerRegisterController::class)
-        ->name('register.')
-        ->group(function () {
+                Route::get('/','create')->name('create');
+                Route::post('/', 'store')->name('store');
+            });
 
-            Route::get('/','create')->name('create');
-            Route::post('/', 'store')->name('store');
-        });
+        //register
+        Route::prefix('/register')
+            ->controller(SellerRegisterController::class)
+            ->name('register.')
+            ->group(function () {
+
+                Route::get('/','create')->name('create');
+                Route::post('/', 'store')->name('store');
+            });
+
+    });
+
 
     //region authenticated
     Route::middleware('auth:seller')->group(function () {

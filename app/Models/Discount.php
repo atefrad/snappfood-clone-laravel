@@ -27,6 +27,7 @@ class Discount extends Model
 
     public function scopeActive(Builder $query): void
     {
-        $query->where('expired_at', '>', now());
+        $query->where('expired_at', '>', now())
+            ->where('started_at', '<', now());
     }
 }
