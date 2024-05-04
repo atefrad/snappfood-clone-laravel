@@ -42,7 +42,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         //discount
         Route::resource('discount', DiscountController::class)
-            ->except(['show', 'edit' , 'update']);
+            ->except('show');
 
         //food party
         Route::resource('food-party', AdminFoodPartyController::class)

@@ -20,6 +20,7 @@ return [
     'food_discount_error' => 'غذا تخفیف فعال دارد و نمی توان به آن تخفیف دیگری اضافه کرد.',
 
     'discount_store_success' => 'تخفیف جدید با موفقیت ثبت شد.',
+    'discount_update_success' => 'تخفیف با موفقیت ویرایش شد.',
     'discount_delete_success' => 'تخفیف با موفقیت حذف شد.',
 
     'food_party_create_success' => 'غذا با موفقیت به فودپارتی اضافه شد.',

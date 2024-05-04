@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin\Discount;
 use App\Services\RealTimestamp;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreDiscountRequest extends FormRequest
+class DiscountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

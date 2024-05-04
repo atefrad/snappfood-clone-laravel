@@ -36,7 +36,7 @@
                             <td class="text-center started_at">{{ Jalalian::forge($discount->started_at)->format('Y-m-d') }}</td>
                             <td class="text-center">{{ Jalalian::forge($discount->expired_at)->format('Y-m-d') }}</td>
                             <td class="width-16-rem text-center">
-                                {{--                                <a class="btn btn-primary btn-sm" href="{{ route('admin.discount.edit', $discount) }}"><i class="fa-solid fa-pen-to-square"></i> ویرایش</a>--}}
+                                <a class="btn btn-primary btn-sm" href="{{ route('admin.discount.edit', $discount) }}"><i class="ti ti-edit"></i> ویرایش</a>
                                 <form class="d-inline" action="{{ route('admin.discount.destroy', $discount) }}"
                                       method="POST">
                                     @csrf
