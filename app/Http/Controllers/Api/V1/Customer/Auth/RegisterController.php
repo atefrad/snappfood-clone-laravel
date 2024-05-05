@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Api\V1\Customer\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Customer\Auth\RegisterRequest;
 use App\Models\Customer;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
 class RegisterController extends Controller
 {
-    public function store(RegisterRequest $request)
+    public function store(RegisterRequest $request): JsonResponse
     {
         /** @var Customer $customer */
 
@@ -24,10 +24,8 @@ class RegisterController extends Controller
             'password' => Hash::make($validated['password'])
         ]);
 
-        $token = $customer->createToken('auth')->plainTextToken;
-
         return response()->json([
-            'token' => $token
+            'token' => $customer->generateToken()
         ], Response::HTTP_OK);
     }
 }
