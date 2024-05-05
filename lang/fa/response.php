@@ -30,4 +30,6 @@ return [
 
     'banner_store_success' => 'بنر جدید با موفقیت ثبت شد.',
     'banner_delete_success' => 'بنر با موفقیت حذف شد.',
+
+    'address_store_success' => 'آدرس جدید با موفقیت ثبت شد.',
 ];

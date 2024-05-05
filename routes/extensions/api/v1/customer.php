@@ -21,7 +21,7 @@ Route::prefix('v1/customer')->name('customer.')->group(function () {
 
     Route::middleware('auth:customer')->group(function () {
 
-        Route::resource('addresses', AddressController::class)
+        Route::resource('address', AddressController::class)
             ->only(['index', 'store', 'update']);
 
     });

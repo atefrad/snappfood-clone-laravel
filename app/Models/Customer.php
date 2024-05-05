@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Jenssegers\Agent\Agent;
@@ -33,5 +34,10 @@ class Customer extends Authenticatable
         $this->tokens()->where('name', $tokenName)->delete();
 
         return $this->createToken($tokenName)->plainTextToken;
+    }
+
+    public function addresses(): BelongsToMany
+    {
+        return $this->belongsToMany(Address::class);
     }
 }
