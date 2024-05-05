@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
-use App\Http\Controllers\Admin\Auth\AdminLoginController;
+use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\FoodCategoryController;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
-    Route::middleware('guest:seller,admin')->group(function () {
+    Route::middleware('guest:seller,admin,customer')->group(function () {
 
         //login
         Route::prefix('login')

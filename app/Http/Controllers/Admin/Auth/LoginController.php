@@ -1,49 +1,46 @@
 <?php
 
-namespace App\Http\Controllers\Seller\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
-use App\Models\Seller;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-
-class SellerLoginController extends Controller
+class LoginController extends Controller
 {
     public function create(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        Auth::guard('seller')->logout();
-
-        return view('seller.auth.login');
+        return view('admin.auth.login');
     }
 
     public function store(LoginRequest $request): RedirectResponse
     {
-        /** @var  Seller $seller */
+        /** @var User $user */
         $validated = $request->validated();
 
-        $seller = Seller::query()
+        $user = User::query()
             ->where('email', $validated['email'])
             ->first();
 
-        if(!$seller || !Hash::check($validated['password'], $seller->password))
+        if(!$user || !Hash::check($validated['password'], $user->password))
         {
             return back()->withErrors([
                 'email' => __('response.login_error')
             ])->onlyInput('email');
         }
 
-        Auth::guard('seller')->login($seller);
+        Auth::guard('admin')->login($user);
 
-        return redirect()->route('seller.orders.new-orders');
+        return redirect()->route('admin.home');
     }
 
     public function destroy(): RedirectResponse
     {
-        Auth::guard('seller')->logout();
+        Auth::guard('admin')->logout();
 
-        return redirect()->route('seller.login.create');
+        return redirect()->route('admin.login.create');
     }
 }

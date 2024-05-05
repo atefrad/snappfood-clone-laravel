@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Seller\Auth\SellerLoginController;
-use App\Http\Controllers\Seller\Auth\SellerRegisterController;
+use App\Http\Controllers\Seller\Auth\LoginController as SellerLoginController;
+use App\Http\Controllers\Seller\Auth\RegisterController as SellerRegisterController;
 use App\Http\Controllers\Seller\FoodController;
 use App\Http\Controllers\Seller\FoodPartyController;
 use App\Http\Controllers\Seller\OrderController;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('seller')->name('seller.')->group(function () {
 
-    Route::middleware('guest:admin,seller')->group(function () {
+    Route::middleware('guest:admin,seller,customer')->group(function () {
 
         //login
         Route::prefix('/login')
@@ -33,9 +33,7 @@ Route::prefix('seller')->name('seller.')->group(function () {
                 Route::get('/','create')->name('create');
                 Route::post('/', 'store')->name('store');
             });
-
     });
-
 
     //region authenticated
     Route::middleware('auth:seller')->group(function () {
