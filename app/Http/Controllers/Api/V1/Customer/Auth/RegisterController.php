@@ -25,6 +25,7 @@ class RegisterController extends Controller
         ]);
 
         return response()->json([
+            'message' => __('response.register_success'),
             'token' => $customer->generateToken()
         ], Response::HTTP_OK);
     }
