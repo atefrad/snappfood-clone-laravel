@@ -37,4 +37,15 @@ class AddressController extends Controller
             'message' => __('response.address_store_success')
         ], Response::HTTP_OK);
     }
+
+    public function setCurrent(Address $address): JsonResponse
+    {
+        $customerId = Auth::guard('customer')->id();
+
+        $address->customers()->updateExistingPivot($customerId, ['current_address' => true]);
+
+        return response()->json([
+            'message' => __('response.address_setCurrent_success')
+        ], Response::HTTP_OK);
+    }
 }

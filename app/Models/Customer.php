@@ -36,8 +36,10 @@ class Customer extends Authenticatable
         return $this->createToken($tokenName)->plainTextToken;
     }
 
+    //region relation
     public function addresses(): BelongsToMany
     {
-        return $this->belongsToMany(Address::class);
+        return $this->belongsToMany(Address::class)->withPivot('current_address');
     }
+    //endregion
 }

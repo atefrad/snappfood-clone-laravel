@@ -23,7 +23,7 @@ class Address extends Model
     //region relation
     public function customers(): BelongsToMany
     {
-        return $this->belongsToMany(Customer::class);
+        return $this->belongsToMany(Customer::class)->withPivot('current_address');
     }
     //endregion
 

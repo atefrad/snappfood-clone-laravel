@@ -21,9 +21,16 @@ Route::prefix('v1/customer')->name('customer.')->group(function () {
 
     Route::middleware('auth:customer')->group(function () {
 
-        Route::resource('address', AddressController::class)
-            ->only(['index', 'store', 'update']);
+        //address
+        Route::prefix('address')
+            ->controller(AddressController::class)
+            ->name('address.')
+            ->group(function () {
 
+                Route::get('/', 'index')->name('index');
+                Route::post('/', 'store')->name('store');
+                Route::post('/{address}', 'setCurrent')->name('set-current');
+            });
     });
 
     //endregion
