@@ -18631,4 +18631,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .overflow-scroll::-webkit-scrollbar {
     display: none;
 }
+
+.ltr {
+    direction: ltr !important;
+}
 /*# sourceMappingURL=theme-rtl.css.map */

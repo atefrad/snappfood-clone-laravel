@@ -87,23 +87,10 @@
                             </div>
                             <div class="input-group-icon mb-2">
                                 <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label" for="state">استان</label>
+                                    <label class="col-sm-3 col-form-label" for="address">آدرس</label>
                                     <div class="col-sm-9">
-                                    <input class="form-control input-box form-foodwagon-control" name="state" id="state" type="text" placeholder="استان" value="{{ old('state', $restaurant->address['state']) }}"/>
-                                    @error('state')
-                                    <span class="text-red ms-2 fs--1">
-                                    {{ $message }}
-                                    </span>
-                                    @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group-icon mb-2">
-                                <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label" for="city">شهر</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control input-box form-foodwagon-control" name="city" id="city" type="text" placeholder="شهر" value="{{ old('city', $restaurant->address['city']) }}"/>
-                                        @error('city')
+                                        <input class="form-control input-box form-foodwagon-control" name="address" id="address" type="text" placeholder="آدرس" value="{{ old('address', $restaurant->address['address']) }}"/>
+                                        @error('address')
                                         <span class="text-red ms-2 fs--1">
                                         {{ $message }}
                                         </span>
@@ -113,10 +100,23 @@
                             </div>
                             <div class="input-group-icon mb-2">
                                 <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label" for="address">آدرس</label>
+                                    <label class="col-sm-3 col-form-label" for="latitude">عرض جغرافیایی</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control input-box form-foodwagon-control" name="address" id="address" type="text" placeholder="آدرس" value="{{ old('address', $restaurant->address['address']) }}"/>
-                                        @error('address')
+                                    <input class="form-control input-box form-foodwagon-control ltr" name="latitude" id="latitude" type="text" placeholder="عرض جغرافیایی" value="{{ old('latitude', $restaurant->address['latitude']) }}"/>
+                                    @error('latitude')
+                                    <span class="text-red ms-2 fs--1">
+                                    {{ $message }}
+                                    </span>
+                                    @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group-icon mb-2">
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label" for="longitude">طول جغرافیایی</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control input-box form-foodwagon-control ltr" name="longitude" id="longitude" type="text" placeholder="طول جغرافیایی" value="{{ old('longitude', $restaurant->address['longitude']) }}"/>
+                                        @error('longitude')
                                         <span class="text-red ms-2 fs--1">
                                         {{ $message }}
                                         </span>

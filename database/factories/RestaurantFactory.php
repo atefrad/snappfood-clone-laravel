@@ -23,9 +23,12 @@ class RestaurantFactory extends Factory
             'seller_id' => Seller::factory()->create(),
             'name' => fake()->company(),
             'address' => [
-                'state' => fake()->city(),
-                'city' => fake()->city(),
-                'address' => fake()->streetAddress()
+//                'state' => fake()->city(),
+//                'city' => fake()->city(),
+//                'address' => fake()->streetAddress()
+                'address' => fake()->address(),
+                'latitude' => fake()->latitude(),
+                'longitude' => fake()->longitude()
             ],
             'phone' => fake()->phoneNumber(),
             'bank_account_number' => fake()->numberBetween(100000000, 99999999999999)

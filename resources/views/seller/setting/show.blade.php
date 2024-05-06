@@ -39,12 +39,12 @@
                         <td class="text-center">{{ $restaurant->phone }}</td>
                     </tr>
                     <tr>
-                        <th class="text-center">استان</th>
-                        <td class="text-center">{{ $restaurant->address['state'] }}</td>
+                        <th class="text-center">عرض جغرافیایی</th>
+                        <td class="text-center ltr">{{ $restaurant->address['latitude'] }}</td>
                     </tr>
                     <tr>
-                        <th class="text-center">شهر</th>
-                        <td class="text-center">{{ $restaurant->address['city'] }}</td>
+                        <th class="text-center">طول جغرافیایی</th>
+                        <td class="text-center ltr">{{ $restaurant->address['longitude'] }}</td>
                     </tr>
                     <tr>
                         <th class="text-center">آدرس</th>

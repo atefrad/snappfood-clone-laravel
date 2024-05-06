@@ -26,8 +26,8 @@ class UpdateRestaurantRequest extends FormRequest
             'restaurant_category_id' => ['required', 'integer', 'exists:restaurant_categories,id'],
             'food_category_id' => ['required', 'array', 'min:1'],
             'food_category_id.*' => ['required', 'integer', 'exists:food_categories,id'],
-            'state' => ['required', 'string'],
-            'city' => ['required', 'string'],
+            'latitude' => ['required', 'numeric'],
+            'longitude' => ['required', 'numeric'],
             'address' => ['required', 'string', 'min:5'],
             'phone' => ['required', 'string'],
             'bank_account_number' => ['required', 'numeric'],
@@ -46,9 +46,9 @@ class UpdateRestaurantRequest extends FormRequest
         return array_merge(
             parent::validated($key, $default),
             ['address' => [
-                'state' => request('state'),
-                'city' => request('city'),
-                'address' => request('address')
+                'address' => request('address'),
+                'latitude' => request('latitude'),
+                'longitude' => request('longitude')
             ]]
         );
     }

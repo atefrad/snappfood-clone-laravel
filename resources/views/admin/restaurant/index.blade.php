@@ -36,7 +36,7 @@
                             <td class="text-center">{{ $restaurant->name }}</td>
                             <td class="text-center">{{ $restaurant->seller->name }}</td>
                             <td class="text-center">{{ $restaurant->restaurantCategory->name }}</td>
-                            <td class="text-center">{{ $restaurant->address['state'] }}</td>
+                            <td class="text-center">{{ $restaurant->address['address'] }}</td>
                             <td class="text-center">{{ $restaurant->phone }}</td>
                             <td class="text-center">{{ $restaurant->delivery_price }}</td>
                         </tr>

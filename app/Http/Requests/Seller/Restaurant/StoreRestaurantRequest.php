@@ -25,8 +25,8 @@ class StoreRestaurantRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:2', 'max:255'],
             'restaurant_category_id' => ['required', 'integer', 'exists:restaurant_categories,id'],
-            'state' => ['required', 'string'],
-            'city' => ['required', 'string'],
+            'latitude' => ['required', 'numeric'],
+            'longitude' => ['required', 'numeric'],
             'address' => ['required', 'string', 'min:5'],
             'phone' => ['required', 'string'],
             'bank_account_number' => ['required', 'numeric']
@@ -39,9 +39,9 @@ class StoreRestaurantRequest extends FormRequest
             parent::validated($key, $default),
             ['seller_id' => Auth::guard('seller')->id()],
             ['address' => [
-                'state' => request('state'),
-                'city' => request('city'),
-                'address' => request('address')
+                'address' => request('address'),
+                'latitude' => request('latitude'),
+                'longitude' => request('longitude')
             ]]
         );
     }
