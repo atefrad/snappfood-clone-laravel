@@ -32,5 +32,7 @@ return [
     'banner_delete_success' => 'بنر با موفقیت حذف شد.',
 
     'address_store_success' => 'آدرس جدید با موفقیت ثبت شد',
-    'address_setCurrent_success' => 'آدرس فعلی با موفقیت تغییر یافت'
+    'address_setCurrent_success' => 'آدرس فعلی با موفقیت تغییر یافت',
+
+    'profile_update_success' => 'پروفایل شما با موفقیت ویرایش شد',
 ];

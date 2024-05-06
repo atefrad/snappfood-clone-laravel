@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\Customer\AddressController;
 use App\Http\Controllers\Api\V1\Customer\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Customer\Auth\RegisterController;
+use App\Http\Controllers\Api\V1\Customer\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1/customer')->name('customer.')->group(function () {
@@ -31,6 +32,10 @@ Route::prefix('v1/customer')->name('customer.')->group(function () {
                 Route::post('/', 'store')->name('store');
                 Route::post('/{address}', 'setCurrent')->name('set-current');
             });
+
+        //profile
+        Route::patch('profile', [CustomerController::class, 'update'])
+            ->name('profile.update');
     });
 
     //endregion
