@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Address extends Model
 {
@@ -24,4 +26,12 @@ class Address extends Model
         return $this->belongsToMany(Customer::class);
     }
     //endregion
+
+    public function scopeFilterCustomer(Builder $query): void
+    {
+        $customerId = Auth::guard('customer')->id();
+
+        $query->whereHas('customers',
+            fn(Builder $query) => $query->where('id', $customerId));
+    }
 }
