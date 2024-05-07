@@ -28,15 +28,15 @@ class RestaurantWorkingTime extends Model
         'working_days' => 'array'
     ];
 
-//    public function isWorking(): Attribute
-//    {
-//        $day = now()->dayOfWeek;
-//        $time = now()->format('H:i:s');
-//
-//        return Attribute::make(
-//            get: fn()=> in_array($day, $this->working_days) &&
-//                $time > $this->opening_time &&
-//                $time < $this->closing_time
-//        );
-//    }
+    public function isWorking(): Attribute
+    {
+        $day = now()->dayOfWeek;
+        $time = now()->format('H:i:s');
+
+        return Attribute::make(
+            get: fn()=> in_array($day, $this->working_days) &&
+                $time > $this->opening_time &&
+                $time < $this->closing_time
+        );
+    }
 }

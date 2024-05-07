@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property mixed $image
  * @property mixed $id
  * @property mixed $foodCategories
+ * @property mixed $is_open
+ * @property mixed $restaurantWorkingTime
  */
 class Restaurant extends Model
 {
@@ -76,6 +78,13 @@ class Restaurant extends Model
         );
     }
 
+    public function realIsOpen(): Attribute
+    {
+        return Attribute::make(
+            get: fn()=> $this->is_open && $this->restaurantWorkingTime->isWorking
+        );
+    }
+
     public function scopeFilterIsOpen(Builder $query): void
     {
         $isOpen = request('is_open') == 'true';
@@ -83,13 +92,27 @@ class Restaurant extends Model
         $day =  str(now()->dayOfWeek);
         $time = now()->format('H:i:s');
 
-        $query->when(request()->filled('is_open'), function (Builder $query) use ($day, $time, $isOpen) {
-            $query->where('is_open', $isOpen)
-                ->whereHas('restaurantWorkingTime',
-                    fn(Builder $query) => $query->whereJsonContains('working_days', $day)
-                        ->where('opening_time', '<' , $time)
-                        ->where('closing_time', '>', $time));
-        });
+        if($isOpen)
+        {
+            $query->when(request()->filled('is_open'), function (Builder $query) use ($day, $time, $isOpen) {
+                $query->where('is_open', $isOpen)
+                    ->whereHas('restaurantWorkingTime',
+                        fn(Builder $query) => $query->whereJsonContains('working_days', $day)
+                            ->where('opening_time', '<' , $time)
+                            ->where('closing_time', '>', $time));
+            });
+        }
+        else
+        {
+            $query->when(request()->filled('is_open'), function (Builder $query) use ($day, $time, $isOpen) {
+                $query->where('is_open', $isOpen)
+                    ->orWhereHas('restaurantWorkingTime',
+                        fn(Builder $query) => $query->whereJsonDoesntContain('working_days', $day)
+                            ->orWhere('opening_time', '>' , $time)
+                            ->orWhere('closing_time', '<', $time));
+            });
+        }
+
     }
 
     public function scopeFilterRestaurantCategory(Builder $query): void
