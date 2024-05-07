@@ -176,31 +176,31 @@
                                         <div class="form-control input-box form-foodwagon-control overflow-scroll">
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <input type="checkbox" name="working_days[]" id="saturday" value="شنبه"  @if(in_array('شنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <input type="checkbox" name="working_days[]" id="saturday" value="6"  @if(in_array('6', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
                                                     <label for="saturday">شنبه</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <input type="checkbox" name="working_days[]" id="sunday" value="یکشنبه"  @if(in_array('یکشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <input type="checkbox" name="working_days[]" id="sunday" value="7"  @if(in_array('7', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
                                                     <label for="sunday">یکشنبه</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <input type="checkbox" name="working_days[]" id="monday" value="دوشنبه"  @if(in_array('دوشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <input type="checkbox" name="working_days[]" id="monday" value="1"  @if(in_array('1', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
                                                     <label for="monday">دوشنبه</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <input type="checkbox" name="working_days[]" id="tuesday" value="سه شنبه"  @if(in_array('سه شنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <input type="checkbox" name="working_days[]" id="tuesday" value="2"  @if(in_array('2', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
                                                     <label for="tuesday">سه شنبه</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <input type="checkbox" name="working_days[]" id="wednesday" value="چهارشنبه"  @if(in_array('چهارشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <input type="checkbox" name="working_days[]" id="wednesday" value="3"  @if(in_array('3', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
                                                     <label for="wednesday">چهارشنبه</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <input type="checkbox" name="working_days[]" id="thursday" value="پنجشنبه"  @if(in_array('پنجشنبه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <input type="checkbox" name="working_days[]" id="thursday" value="4"  @if(in_array('4', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
                                                     <label for="thursday">پنجشنبه</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <input type="checkbox" name="working_days[]" id="friday" value="جمعه"  @if(in_array('جمعه', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <input type="checkbox" name="working_days[]" id="friday" value="5"  @if(in_array('5', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
                                                     <label for="friday">جمعه</label>
                                                 </div>
                                             </div>

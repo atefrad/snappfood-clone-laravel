@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -73,5 +74,29 @@ class Restaurant extends Model
         return Attribute::make(
             get: fn() => empty($notCompleted)
         );
+    }
+
+    public function scopeFilterIsOpen(Builder $query): void
+    {
+        $isOpen = request('is_open') == 'true';
+
+        $day =  str(now()->dayOfWeek);
+        $time = now()->format('H:i:s');
+
+        $query->when(request()->filled('is_open'), function (Builder $query) use ($day, $time, $isOpen) {
+            $query->where('is_open', $isOpen)
+                ->whereHas('restaurantWorkingTime',
+                    fn(Builder $query) => $query->whereJsonContains('working_days', $day)
+                        ->where('opening_time', '<' , $time)
+                        ->where('closing_time', '>', $time));
+        });
+    }
+
+    public function scopeFilterRestaurantCategory(Builder $query): void
+    {
+        $query->when(request()->filled('type'), function (Builder $query) {
+            $query->whereHas('restaurantCategory',
+                fn(Builder $query) => $query->where('name','like', ('%' . request('type') . '%')));
+        });
     }
 }

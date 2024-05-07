@@ -11,7 +11,10 @@ class RestaurantController extends Controller
 {
     public function index()
     {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::query()
+            ->filterRestaurantCategory()
+            ->filterIsOpen()
+            ->paginate(Controller::DEFAULT_PAGINATE);
 
         return RestaurantResource::collection($restaurants);
     }

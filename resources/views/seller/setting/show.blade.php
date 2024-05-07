@@ -96,11 +96,32 @@
                         <td class="text-center">
                             @if($restaurant->restaurantWorkingTime)
                                 @foreach($restaurant->restaurantWorkingTime->working_days as $workingDay)
-                                    @if($loop->last)
-                                        {{ $workingDay }}
-                                    @else
-                                        {{ $workingDay . '-' }}
-                                   @endif
+                                    @switch($workingDay)
+                                        @case(1)
+                                            دوشنبه
+                                            @break
+                                        @case(2)
+                                            سه شنبه
+                                            @break
+                                        @case(3)
+                                            چهارشنبه
+                                            @break
+                                        @case(4)
+                                            پنجشنبه
+                                            @break
+                                        @case(5)
+                                            جمعه
+                                            @break
+                                        @case(6)
+                                            شنبه
+                                            @break
+                                        @case(7)
+                                            یکشنبه
+                                            @break
+                                    @endswitch
+                                    @if(!$loop->last)
+                                        -
+                                    @endif
                               @endforeach
                             @endif
                         </td>
