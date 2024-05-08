@@ -24,7 +24,7 @@ class FoodCategory extends Model
 
     public function foods(): MorphToMany
     {
-        return $this->morphedByMany(Food::class, 'foodCategoriable');
+        return $this->morphedByMany(Food::class, 'food_categoriable');
     }
 
     public function restaurants(): MorphToMany

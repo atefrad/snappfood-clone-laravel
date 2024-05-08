@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\Customer\AddressController;
 use App\Http\Controllers\Api\V1\Customer\Auth\LoginController as CustomerLoginController;
 use App\Http\Controllers\Api\V1\Customer\Auth\RegisterController as CustomerRegisterController;
 use App\Http\Controllers\Api\V1\Customer\CustomerController;
+use App\Http\Controllers\Api\V1\Customer\FoodController as CustomerFoodController;
 use App\Http\Controllers\Api\V1\Customer\RestaurantController as CustomerRestaurantController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,10 @@ Route::prefix('v1/customer')->name('customer.')->group(function () {
         //restaurant
         Route::resource('restaurant', CustomerRestaurantController::class)
             ->only(['index', 'show']);
+
+        //food
+        Route::get('restaurant/{restaurant}/food', [CustomerFoodController::class, 'index'])
+            ->name('food.index');
     });
 
     //endregion
