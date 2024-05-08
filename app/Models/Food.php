@@ -69,7 +69,7 @@ class Food extends Model
         $query->when(request()->filled('food_category'), function (Builder $query) {
 
             $query->whereHas('foodCategories',
-                fn(Builder $query) => $query->where('id', request('food_category')));
+                fn(Builder $query) => $query->where('food_categories.id', request('food_category')));
         });
     }
 

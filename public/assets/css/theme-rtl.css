@@ -18621,6 +18621,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 21rem !important;
 }
 
+.width-22-rem {
+    width: 22rem !important;
+}
+
 .overflow-scroll {
     max-height: 50vh !important;
     overflow-y: auto !important;

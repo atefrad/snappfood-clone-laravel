@@ -21,15 +21,19 @@ class FoodController extends Controller
 {
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $restaurantId = auth('seller')->user()->restaurant->id;
+        /** @var Seller $seller */
+
+        $seller = auth('seller')->user();
 
         $foods = Food::query()
-            ->where('restaurant_id', $restaurantId)
+            ->where('restaurant_id', $seller->restaurant->id)
             ->filterName()
             ->filterCategory()
             ->paginate(Controller::DEFAULT_PAGINATE);
 
-        $foodCategories = FoodCategory::all();
+//        $foodCategories = FoodCategory::all();
+
+        $foodCategories = $seller->restaurant->foodCategories;
 
         return view('seller.food.index', compact('foods', 'foodCategories'));
     }

@@ -73,7 +73,7 @@
                                     <img src="{{ asset('images/no-image.png') }}" alt="" width="100" height="80">
                                 @endif
                             </td>
-                            <td class="width-21-rem text-end">
+                            <td class="width-22-rem text-end">
                                 @if(!$food->activeFoodParty)
                                     <a class="btn btn-warning btn-sm" href="{{ route('seller.food-party.create', $food) }}"><i class="fas fa-edit"></i> فودپارتی</a>
                                 @endif
