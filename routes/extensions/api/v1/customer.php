@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\Customer\AddressController;
 use App\Http\Controllers\Api\V1\Customer\Auth\LoginController as CustomerLoginController;
 use App\Http\Controllers\Api\V1\Customer\Auth\RegisterController as CustomerRegisterController;
+use App\Http\Controllers\Api\V1\Customer\CartController;
 use App\Http\Controllers\Api\V1\Customer\CustomerController;
 use App\Http\Controllers\Api\V1\Customer\FoodController as CustomerFoodController;
 use App\Http\Controllers\Api\V1\Customer\RestaurantController as CustomerRestaurantController;
@@ -46,6 +47,10 @@ Route::prefix('v1/customer')->name('customer.')->group(function () {
         //food
         Route::get('restaurant/{restaurant}/food', [CustomerFoodController::class, 'index'])
             ->name('food.index');
+
+        //cart
+        Route::resource('cart', CartController::class)
+            ->except(['create', 'edit', 'destroy']);
     });
 
     //endregion
