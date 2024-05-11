@@ -35,4 +35,6 @@ return [
     'address_setCurrent_success' => 'آدرس فعلی با موفقیت تغییر یافت',
 
     'profile_update_success' => 'پروفایل شما با موفقیت ویرایش شد',
+
+    'cart_store_success' => '.غذا با موفقیت به سبد خرید شما اضافه شد',
 ];
