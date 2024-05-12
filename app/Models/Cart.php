@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -18,4 +19,18 @@ class Cart extends Model
         'customer_id',
         'restaurant_id'
     ];
+
+    //region relation
+
+    public function restaurant(): BelongsTo
+    {
+        return $this->belongsTo(Restaurant::class);
+    }
+
+//    public function foods(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+//    {
+//        return $this->hasManyThrough(Food::class, CartItem::class,);
+//    }
+
+    //endregion
 }
