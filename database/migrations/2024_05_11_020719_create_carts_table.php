@@ -21,6 +21,7 @@ return new class extends Migration
                 ->constrained('restaurants')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->timestamp('finished_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

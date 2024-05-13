@@ -24,10 +24,24 @@ class StoreCartRequest extends FormRequest
         /** @var Food $food */
         $food = Food::query()->find(request('food_id'));
 
-        $this->merge([
-            'customer_id' => Auth::guard('customer')->id(),
-            'restaurant_id' => $food->restaurant_id
-        ]);
+        /** @var Cart $cart */
+        $cart = Cart::query()->whereNull('finished_at')->orderBy('created_at', 'desc')->first();
+
+        if($cart)
+        {
+            $this->merge([
+                'customer_id' => Auth::guard('customer')->id(),
+                'restaurant_id' => $food->restaurant_id,
+                'cart_id' => $cart->id
+            ]);
+        }
+        else
+        {
+            $this->merge([
+                'customer_id' => Auth::guard('customer')->id(),
+                'restaurant_id' => $food->restaurant_id
+            ]);
+        }
     }
 
     /**
@@ -40,8 +54,8 @@ class StoreCartRequest extends FormRequest
         return [
             'food_id' => ['required', 'integer', 'exists:foods,id'],
             'count' => ['required', 'integer', 'min:1'],
-            'cart_id' => ['nullable', 'integer', 'exists:carts,id', new ValidRestaurant],
-            'customer_id' => ['required', 'integer', 'exists:customers,id'],
+            'cart_id' => ['nullable', 'integer', new ValidRestaurant],
+            'customer_id' => ['required', 'integer'],
             'restaurant_id' => ['required', 'integer', 'exists:restaurants,id']
         ];
     }
