@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property mixed $id
  * @property mixed $restaurant_id
  * @property mixed $foods
+ * @property mixed $totalFoodPrice
  */
 class Cart extends Model
 {
@@ -40,5 +42,26 @@ class Cart extends Model
     {
         $query->whereNull('finished_at')
             ->orderBy('created_at', 'desc');
+    }
+
+    public function totalFoodPrice(): Attribute
+    {
+        $totalPrice = 0;
+
+        foreach($this->foods as $food)
+        {
+            $totalPrice += $food->priceAfterDiscount * $food->pivot->count;
+        }
+
+        return Attribute::make(
+            get: fn()=> $totalPrice
+        );
+    }
+
+    public function totalPrice():Attribute
+    {
+        return Attribute::make(
+            get: fn()=> $this->totalFoodPrice + ($this->restaurant->delivery_price ?? 0)
+        );
     }
 }
