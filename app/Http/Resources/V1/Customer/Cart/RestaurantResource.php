@@ -18,7 +18,7 @@ class RestaurantResource extends JsonResource
 
         return [
             'name' => $restaurant->name,
-            'image' => $restaurant->image
+            'image' => asset($restaurant->image)
         ];
     }
 }

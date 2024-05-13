@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -27,10 +28,11 @@ class Cart extends Model
         return $this->belongsTo(Restaurant::class);
     }
 
-//    public function foods(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
-//    {
-//        return $this->hasManyThrough(Food::class, CartItem::class,);
-//    }
+    public function foods(): BelongsToMany
+    {
+        return $this->belongsToMany(Food::class, 'cart_items')
+            ->withPivot('count');
+    }
 
     //endregion
 }

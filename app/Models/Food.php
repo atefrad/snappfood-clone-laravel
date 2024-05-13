@@ -54,6 +54,11 @@ class Food extends Model
     {
         return $this->belongsTo(Restaurant::class);
     }
+
+    public function carts(): BelongsToMany
+    {
+        return $this->belongsToMany(Cart::class, 'cart_items')->withPivot('count');
+    }
     //endregion
 
     public function scopeFilterName(Builder $query): void
@@ -91,10 +96,14 @@ class Food extends Model
     {
         $discount = $this->activeDiscount;
 
-        $discountPercentage = $discount ? $discount->percentage : 0;
+        $discountPercentage = $discount ? (int)$discount->percentage : 0;
+
+        $foodParty = $this->activeFoodParty;
+
+        $foodPartyPercentage = $foodParty ? (int)$foodParty->percentage : 0;
 
         return Attribute::make(
-            get: fn() => ((int)(100 - $discountPercentage) * (int)$this->price) / 100
+            get: fn() => ((100 - ($discountPercentage + $foodPartyPercentage)) * (int)$this->price) / 100
         );
     }
 }

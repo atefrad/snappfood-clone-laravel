@@ -21,10 +21,9 @@ class CartController extends Controller
 
         $carts = Cart::query()->where('customer_id', $customerId)->get();
 
-        dd($carts[0]->foods);
-//        return response()->json([
-//            'carts' => CartResource::collection($carts)
-//        ], Response::HTTP_OK);
+        return response()->json([
+            'carts' => CartResource::collection($carts)
+        ], Response::HTTP_OK);
     }
 
     public function store(StoreCartRequest $request): JsonResponse

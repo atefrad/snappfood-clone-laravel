@@ -18,7 +18,8 @@ class CartResource extends JsonResource
 
         return [
             'id' => $cart->id,
-            'restaurant' => RestaurantResource::make($cart->restaurant)
+            'restaurant' => RestaurantResource::make($cart->restaurant),
+            'foods' => FoodResource::collection($cart->foods)
         ];
     }
 }

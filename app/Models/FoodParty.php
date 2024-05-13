@@ -21,7 +21,8 @@ class FoodParty extends Model
 
     public function scopeActive(Builder $query): void
     {
-        $query->where('end_date', '>', now());
+        $query->where('end_date', '>', now())
+            ->where('start_date', '<', now());
     }
 
     //region relation
