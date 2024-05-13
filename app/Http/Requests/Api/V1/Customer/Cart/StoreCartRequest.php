@@ -25,7 +25,7 @@ class StoreCartRequest extends FormRequest
         $food = Food::query()->find(request('food_id'));
 
         /** @var Cart $cart */
-        $cart = Cart::query()->whereNull('finished_at')->orderBy('created_at', 'desc')->first();
+        $cart = Cart::query()->activeCart()->first();
 
         if($cart)
         {

@@ -37,4 +37,8 @@ return [
     'profile_update_success' => 'پروفایل شما با موفقیت ویرایش شد',
 
     'cart_store_success' => '.غذا با موفقیت به سبد خرید شما اضافه شد',
+    'cart_update_error' => '.غذای مورد نظر در سبد خرید شما موجود نیست',
+    'cart_update_success' => '.سبد خرید شما با موفقیت ویرایش شد',
+
+    'cartItem_delete_success' => '.غذا با موفقیت از سبد خرید شما حذف شد',
 ];

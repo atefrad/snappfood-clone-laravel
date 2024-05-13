@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property mixed $id
  * @property mixed $restaurant_id
+ * @property mixed $foods
  */
 class Cart extends Model
 {
@@ -22,7 +24,6 @@ class Cart extends Model
     ];
 
     //region relation
-
     public function restaurant(): BelongsTo
     {
         return $this->belongsTo(Restaurant::class);
@@ -33,6 +34,11 @@ class Cart extends Model
         return $this->belongsToMany(Food::class, 'cart_items')
             ->withPivot('count');
     }
-
     //endregion
+
+    public function scopeActiveCart(Builder $query): void
+    {
+        $query->whereNull('finished_at')
+            ->orderBy('created_at', 'desc');
+    }
 }

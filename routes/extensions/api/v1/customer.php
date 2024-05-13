@@ -50,7 +50,9 @@ Route::prefix('v1/customer')->name('customer.')->group(function () {
 
         //cart
         Route::resource('cart', CartController::class)
-            ->except(['create', 'edit', 'destroy']);
+            ->only(['index', 'store', 'show']);
+
+        Route::patch('cart', [CartController::class, 'update'])->name('cart.update');
     });
 
     //endregion
