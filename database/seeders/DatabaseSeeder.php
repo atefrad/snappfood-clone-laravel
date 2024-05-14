@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
              FoodSeeder::class,
              DiscountSeeder::class,
              FoodPartySeeder::class,
+             OrderStatusSeeder::class,
          ]);
     }
 }

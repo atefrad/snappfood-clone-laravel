@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Customer\Address\StoreAddressRequest;
 use App\Http\Resources\V1\Customer\AddressResource;
 use App\Models\Address;
+use App\Models\Customer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -40,9 +41,23 @@ class AddressController extends Controller
 
     public function setCurrent(Address $address): JsonResponse
     {
-        $customerId = Auth::guard('customer')->id();
+        /** @var Customer $customer */
+        $customer =  Auth::guard('customer')->user();
 
-        $address->customers()->updateExistingPivot($customerId, ['current_address' => true]);
+        $oldCurrentAddressId = $customer
+            ->addresses()
+            ->wherePivot('current_address', true)
+            ->first()
+            ->id;
+
+        if($oldCurrentAddressId != $address->id)
+        {
+            $customer->addresses()
+                ->updateExistingPivot($oldCurrentAddressId, ['current_address' => false]);
+
+            $customer->addresses()
+                ->updateExistingPivot($address->id, ['current_address' => true]);
+        }
 
         return response()->json([
             'message' => __('response.address_setCurrent_success')
