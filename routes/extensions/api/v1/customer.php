@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\Customer\Auth\RegisterController as CustomerRegi
 use App\Http\Controllers\Api\V1\Customer\CartController;
 use App\Http\Controllers\Api\V1\Customer\CustomerController;
 use App\Http\Controllers\Api\V1\Customer\FoodController as CustomerFoodController;
+use App\Http\Controllers\Api\V1\Customer\PaymentController;
 use App\Http\Controllers\Api\V1\Customer\RestaurantController as CustomerRestaurantController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,9 @@ Route::prefix('v1/customer')->name('customer.')->group(function () {
             ->only(['index', 'store', 'show']);
 
         Route::patch('cart', [CartController::class, 'update'])->name('cart.update');
+
+        //payment
+        Route::post('cart/{cart}/pay', [PaymentController::class, 'store'])->name('cart.payment.store');
     });
 
     //endregion

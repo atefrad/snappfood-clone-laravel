@@ -84,7 +84,7 @@ class CartController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function show(Cart $cart)
+    public function show(Cart $cart): CartResource
     {
         return CartResource::make($cart);
     }
