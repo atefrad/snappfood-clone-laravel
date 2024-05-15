@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrderItem extends Model
@@ -21,4 +22,11 @@ class OrderItem extends Model
         'final_food_price',
         'final_total_price',
     ];
+
+    //region relation
+    public function food(): BelongsTo
+    {
+        return $this->belongsTo(Food::class);
+    }
+    //endregion
 }

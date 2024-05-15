@@ -3,12 +3,29 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\OrderStatus;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function newOrders(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('seller.order.new-orders');
+        $seller = Auth::guard('seller')->user();
+        $restaurantId = $seller->restaurant->id;
+
+        $newOrders = Order::query()
+            ->where('restaurant_id', $restaurantId)
+            ->whereNot('order_status_id', OrderStatus::DELIVERED)
+            ->paginate(Controller::DEFAULT_PAGINATE);
+
+        $orderStatuses = OrderStatus::all();
+
+        return view('seller.order.index', compact('newOrders', 'orderStatuses'));
+    }
+
+    public function destroy()
+    {
+
     }
 }

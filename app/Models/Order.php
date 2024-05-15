@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property mixed $id
+ * @property mixed $orderItems
  */
 class Order extends Model
 {
@@ -21,4 +25,36 @@ class Order extends Model
         'order_status_id',
         'delivery_date'
     ];
+
+    //region relation
+    public function orderItems(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function orderStatus(): BelongsTo
+    {
+        return $this->belongsTo(OrderStatus::class);
+    }
+    //endregion
+
+    public function totalFoodPrice(): Attribute
+    {
+        $totalFoodPrice = 0;
+
+        foreach ($this->orderItems as $orderItem)
+        {
+            $totalFoodPrice += $orderItem->final_total_price;
+        }
+
+        return Attribute::make(
+            get: fn()=> $totalFoodPrice
+        );
+
+    }
 }

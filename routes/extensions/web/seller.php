@@ -67,9 +67,10 @@ Route::prefix('seller')->name('seller.')->group(function () {
 
 
                 //order
-                Route::get('orders/new-orders', [OrderController::class, 'newOrders'])
-                    ->name('orders.new-orders');
-
+                Route::get('order', [OrderController::class, 'index'])
+                    ->name('order.index');
+                Route::delete('order/{order}', [OrderController::class, 'destroy'])
+                    ->name('order.destroy');
             });
 
     });
