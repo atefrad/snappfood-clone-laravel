@@ -32,6 +32,10 @@ class EventServiceProvider extends ServiceProvider
             AddDiscountToFood::class,
             UpdateFoodFoodCategories::class,
         ],
+        CartPayed::class => [
+            UpdateCartFinishedAt::class,
+            StoreOrder::class
+        ]
     ];
 
     /**

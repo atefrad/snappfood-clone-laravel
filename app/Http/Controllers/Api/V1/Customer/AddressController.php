@@ -44,11 +44,7 @@ class AddressController extends Controller
         /** @var Customer $customer */
         $customer =  Auth::guard('customer')->user();
 
-        $oldCurrentAddressId = $customer
-            ->addresses()
-            ->wherePivot('current_address', true)
-            ->first()
-            ->id;
+        $oldCurrentAddressId = $customer->currentAddress->id;
 
         if($oldCurrentAddressId != $address->id)
         {

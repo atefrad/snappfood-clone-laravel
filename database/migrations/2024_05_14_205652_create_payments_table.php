@@ -17,10 +17,10 @@ return new class extends Migration
                 ->constrained('customers')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-//            $table->foreignId('restaurant_id')
-//                ->constrained('restaurants')
-//                ->cascadeOnDelete()
-//                ->cascadeOnUpdate();
+            $table->foreignId('cart_id')
+                ->constrained('carts')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->decimal('amount', 20, 3);
             $table->timestamp('pay_date');
             $table->boolean('is_active')->default(true);

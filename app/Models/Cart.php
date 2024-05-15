@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -15,6 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property mixed $restaurant_id
  * @property mixed $foods
  * @property mixed $totalFoodPrice
+ * @property mixed $totalPrice
+ * @property mixed $cartItems
+ * @property mixed $finished_at
  */
 class Cart extends Model
 {
@@ -22,7 +26,8 @@ class Cart extends Model
 
     protected $fillable = [
         'customer_id',
-        'restaurant_id'
+        'restaurant_id',
+        'finished_at'
     ];
 
     //region relation
@@ -35,6 +40,11 @@ class Cart extends Model
     {
         return $this->belongsToMany(Food::class, 'cart_items')
             ->withPivot('count');
+    }
+
+    public function cartItems(): HasMany
+    {
+        return $this->hasMany(CartItem::class);
     }
     //endregion
 

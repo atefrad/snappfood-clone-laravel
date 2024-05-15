@@ -13,4 +13,9 @@ class OrderStatus extends Model
     protected $fillable = [
         'name'
     ];
+
+    public const UNDER_REVIEW = 1;
+    public const PREPARING = 2;
+    public const SHIPPING = 3;
+    public const DELIVERED = 4;
 }

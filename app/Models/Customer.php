@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @property mixed $id
+ * @property mixed $currentAddress
  */
 class Customer extends Authenticatable
 {
@@ -42,4 +44,13 @@ class Customer extends Authenticatable
         return $this->belongsToMany(Address::class)->withPivot('current_address');
     }
     //endregion
+
+    public function currentAddress(): Attribute
+    {
+        return Attribute::make(
+            get: fn()=> $this->addresses()
+                ->wherePivot('current_address', true)
+                ->first()
+        );
+    }
 }

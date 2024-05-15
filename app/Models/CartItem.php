@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -20,4 +21,11 @@ class CartItem extends Model
         'food_id',
         'count'
     ];
+
+    //region relation
+    public function food(): BelongsTo
+    {
+        return $this->belongsTo(Food::class);
+    }
+    //endregion
 }
