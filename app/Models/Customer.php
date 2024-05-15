@@ -13,6 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 /**
  * @property mixed $id
  * @property mixed $currentAddress
+ * @property mixed $email
  */
 class Customer extends Authenticatable
 {
