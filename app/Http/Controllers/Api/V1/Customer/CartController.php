@@ -30,13 +30,21 @@ class CartController extends Controller
     {
         $validated = $request->validated();
 
-        if(!isset($validated['cart_id']))
+        $carts = Cart::query()->activeCart()->get();
+
+        if(in_array($validated['restaurant_id'], $carts->pluck('restaurant_id')->toArray()))
+        {
+            $cart = $carts->filter(function($cart) use ($validated){
+                return $cart->restaurant_id == $validated['restaurant_id'];
+            })[0];
+        }
+        else
         {
             /** @var Cart $cart */
             $cart = Cart::query()->create($validated);
-
-            $validated['cart_id'] = $cart->id;
         }
+
+        $validated['cart_id'] = $cart->id;
 
         /** @var CartItem $cartItem */
         $cartItem = CartItem::query()->create($validated);
