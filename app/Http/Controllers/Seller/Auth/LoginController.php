@@ -37,7 +37,7 @@ class LoginController extends Controller
 
         Auth::guard('seller')->login($seller);
 
-        return redirect()->route('seller.orders.new-orders');
+        return redirect()->route('seller.order.index');
     }
 
     public function destroy(): RedirectResponse

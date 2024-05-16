@@ -3,15 +3,21 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderStatusChanged;
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderStatus;
+use App\Models\Seller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
+        /** @var Seller $seller */
         $seller = Auth::guard('seller')->user();
+
         $restaurantId = $seller->restaurant->id;
 
         $newOrders = Order::query()
@@ -36,10 +42,17 @@ class OrderController extends Controller
 
         if($result)
         {
+            /** @var Customer $customer */
+            $customer = Customer::query()->find($order->customer_id);
+
+            $orderStatusName = $order->orderStatus->name;
+
+            Mail::to($customer->email)->send(new OrderStatusChanged($orderStatusName));
+
             return response()->json([
                 'result' => true,
                 'order_status' => $orderStatus,
-                'order_status_name' => $order->orderStatus->name
+                'order_status_name' => $orderStatusName
             ]);
         }
         else
