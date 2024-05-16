@@ -24,6 +24,33 @@ class OrderController extends Controller
         return view('seller.order.index', compact('newOrders', 'orderStatuses'));
     }
 
+    public function changeStatus(Order $order): \Illuminate\Http\JsonResponse
+    {
+        $orderStatus = request('order_status');
+
+        $oldOrderStatus = $order->order_status_id;
+
+        $result = $order->update([
+            'order_status_id' => $orderStatus
+        ]);
+
+        if($result)
+        {
+            return response()->json([
+                'result' => true,
+                'order_status' => $orderStatus,
+                'order_status_name' => $order->orderStatus->name
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'result' => false,
+                'order_status' => $oldOrderStatus
+            ]);
+        }
+    }
+
     public function destroy()
     {
 

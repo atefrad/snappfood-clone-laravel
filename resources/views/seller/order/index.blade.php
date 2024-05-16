@@ -1,3 +1,4 @@
+@php use Morilog\Jalali\Jalalian; @endphp
 @extends('home.layouts.main')
 
 @section('head-tag')
@@ -28,7 +29,7 @@
 
                     @forelse($newOrders as $key => $newOrder)
 
-                        <tr>
+                        <tr id="tr-{{ $newOrder->id }}">
                             <th class="text-center">{{ $key += 1 }}</th>
                             <td class="text-center">{{ $newOrder->customer->name }}</td>
                             <td class="text-center">
@@ -41,18 +42,33 @@
                                     @endforeach
                                 </table>
                             </td>
-                            <td class="text-center">{{ $newOrder->orderStatus->name }}</td>
-                            <td class="text-center">{{ \Morilog\Jalali\Jalalian::forge($newOrder->created_at)->format('H:i Y-m-d') }}</td>
+                            <td class="text-center">
+                                {{--                                {{ $newOrder->orderStatus->name }}--}}
+                                <select name="order_status" id="status-{{ $newOrder->id }}" class="form-control"
+                                        onchange="changeStatus({{ $newOrder->id }})" data-url="{{ route('seller.order.change-status', $newOrder) }}">
+                                    @foreach($orderStatuses as $orderStatus)
+                                        <option value="{{ $orderStatus->id }}"
+                                                @if( $orderStatus->id == $newOrder->order_status_id) selected @endif>
+                                            {{ $orderStatus->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td class="text-center">{{ Jalalian::forge($newOrder->created_at)->format('H:i Y-m-d') }}</td>
                             <td class="text-center">{{ $newOrder->totalFoodPrice }}</td>
                             <td class="text-center">
-{{--                                @if(!$newOrder->activeFoodParty)--}}
-{{--                                    <a class="btn btn-warning btn-sm" href="{{ route('seller.food-party.create', $newOrder) }}"><i class="fas fa-edit"></i> فودپارتی</a>--}}
-{{--                                @endif--}}
-{{--                                <a class="btn btn-success btn-sm" href="{{ route('seller.order.edit', $newOrder) }}"><i class="fas fa-edit"></i> ویرایش</a>--}}
-                                <form class="d-inline" action="{{ route('seller.order.destroy', $newOrder) }}" method="POST">
+                                {{--                                @if(!$newOrder->activeFoodParty)--}}
+                                {{--                                    <a class="btn btn-warning btn-sm" href="{{ route('seller.food-party.create', $newOrder) }}"><i class="fas fa-edit"></i> فودپارتی</a>--}}
+                                {{--                                @endif--}}
+                                {{--                                <a class="btn btn-success btn-sm" href="{{ route('seller.order.edit', $newOrder) }}"><i class="fas fa-edit"></i> ویرایش</a>--}}
+                                <form class="d-inline" action="{{ route('seller.order.destroy', $newOrder) }}"
+                                      method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm delete" type="submit" onclick="return confirm('آیا از حذف داده مطمئن هستید؟')"><i class="fas fa-trash"></i> حذف</button>
+                                    <button class="btn btn-danger btn-sm delete" type="submit"
+                                            onclick="return confirm('آیا از حذف داده مطمئن هستید؟')"><i
+                                            class="fas fa-trash"></i> حذف
+                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -71,4 +87,86 @@
             </section>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        function changeStatus(id)
+        {
+
+            const element = $('#status-' + id);
+            const orderStatus = element.children('option:selected').val();
+            let url = element.attr('data-url');
+            url = url + '?order_status=' + orderStatus
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function(response)
+                {
+                    if(response.result)
+                    {
+                        const message = "وضعیت سفارش به " + response.order_status_name + " تغییر یافت";
+
+                        successToast(message);
+
+                        if(response.order_status === 4)
+                        {
+                            $('#tr-' + id).remove();
+                        }
+                    }
+                    else
+                    {
+                        element.children('option:selected').prop('selected', false);
+
+                        element.children('option[value="'+ response.order_status +'"]').prop('selected', true);
+
+                        errorToast('هنگام ویرایش مشکلی بوجود آمده است.');
+                    }
+                },
+                error: function ()
+                {
+                    element.children('option:selected').prop('selected', false);
+
+                    element.children('option[value="'+ response.order_status +'"]').prop('selected', true);
+
+                    errorToast('ارتباط برقرار نشد.');
+                }
+            });
+        }
+
+        function successToast(message)
+        {
+            const successToastTag = '<section class="toast" data-bs-delay="5000">\n' +
+                '<section class="toast-body py-3 d-flex bg-success text-white">\n' +
+                '<strong class="me-auto">' + message + '</strong>\n' +
+                '<button type="button" class="btn-close me-2" data-bs-dismiss="toast" aria-label="close">\n' +
+                '</button>\n' +
+                '</section>\n' +
+                '</section>';
+
+            $('.toast-wrapper').append(successToastTag);
+
+            $('.toast').toast('show').delay('5500').queue(function () {
+                $(this).remove();
+            });
+        }
+
+        function errorToast(message)
+        {
+            const successToastTag = '<section class="toast" data-bs-delay="5000">\n' +
+                '<section class="toast-body py-3 d-flex bg-danger text-white">\n' +
+                '<strong class="me-auto">' + message + '</strong>\n' +
+                '<button type="button" class="btn-close me-2" data-bs-dismiss="toast" aria-label="close">\n' +
+                '</button>\n' +
+                '</section>\n' +
+                '</section>';
+
+            $('.toast-wrapper').append(successToastTag);
+
+            $('.toast').toast('show').delay('5500').queue(function () {
+                $(this).remove();
+            });
+        }
+    </script>
 @endsection

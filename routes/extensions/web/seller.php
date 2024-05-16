@@ -65,12 +65,16 @@ Route::prefix('seller')->name('seller.')->group(function () {
                         Route::post('/{food}',  'store')->name('store');
                     });
 
-
                 //order
-                Route::get('order', [OrderController::class, 'index'])
-                    ->name('order.index');
-                Route::delete('order/{order}', [OrderController::class, 'destroy'])
-                    ->name('order.destroy');
+                Route::prefix('order')
+                    ->controller(OrderController::class)
+                    ->name('order.')
+                    ->group(function () {
+
+                        Route::get('/', 'index')->name('index');
+                        Route::delete('/{order}',  'destroy')->name('destroy');
+                        Route::get('/change-status/{order}', 'changeStatus')->name('change-status');
+                    });
             });
 
     });

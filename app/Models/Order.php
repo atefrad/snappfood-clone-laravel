@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property mixed $id
  * @property mixed $orderItems
+ * @property mixed $order_status_id
+ * @property mixed $orderStatus
  */
 class Order extends Model
 {
