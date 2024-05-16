@@ -110,7 +110,7 @@
 
                         successToast(message);
 
-                        if(response.order_status === 4)
+                        if(response.order_status == 4)
                         {
                             $('#tr-' + id).remove();
                         }

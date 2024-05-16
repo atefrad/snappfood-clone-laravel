@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderDeleted;
 use App\Mail\OrderStatusChanged;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderStatus;
 use App\Models\Seller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -36,18 +38,25 @@ class OrderController extends Controller
 
         $oldOrderStatus = $order->order_status_id;
 
-        $result = $order->update([
-            'order_status_id' => $orderStatus
-        ]);
+        if($orderStatus == OrderStatus::DELIVERED)
+        {
+            $result = $order->update([
+                'order_status_id' => $orderStatus,
+                'delivery_date' => now()
+            ]);
+        }
+        else
+        {
+            $result = $order->update([
+                'order_status_id' => $orderStatus
+            ]);
+        }
 
         if($result)
         {
-            /** @var Customer $customer */
-            $customer = Customer::query()->find($order->customer_id);
-
             $orderStatusName = $order->orderStatus->name;
 
-            Mail::to($customer->email)->send(new OrderStatusChanged($orderStatusName));
+            Mail::to($order->customer->email)->send(new OrderStatusChanged($orderStatusName));
 
             return response()->json([
                 'result' => true,
@@ -64,8 +73,13 @@ class OrderController extends Controller
         }
     }
 
-    public function destroy()
+    public function destroy(Order $order): RedirectResponse
     {
+        $order->delete();
 
+        Mail::to($order->customer->email)->send(new OrderDeleted());
+
+        return redirect()->route('seller.order.index')
+            ->with('toast-success', __('response.order_delete_success'));
     }
 }
