@@ -30,13 +30,13 @@ class CartController extends Controller
     {
         $validated = $request->validated();
 
-        $carts = Cart::query()->activeCart()->get();
+        $carts = Cart::query()->customerActiveCart()->get();
 
         if(in_array($validated['restaurant_id'], $carts->pluck('restaurant_id')->toArray()))
         {
             $cart = $carts->filter(function($cart) use ($validated){
                 return $cart->restaurant_id == $validated['restaurant_id'];
-            })[0];
+            })->values()[0];
         }
         else
         {
@@ -55,19 +55,24 @@ class CartController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function update(UpdateCartRequest $request): JsonResponse
+    public function update(UpdateCartRequest $request)
     {
         $validated = $request->validated();
 
-        /** @var Cart $cart */
-       $cart = Cart::query()->activeCart()->first();
+        $carts = Cart::query()->customerActiveCart()->get();
 
-       if(!in_array($validated['food_id'], $cart->foods->pluck('id')->toArray()))
-       {
-           return response()->json([
-               'message' => __('response.cart_update_error')
-           ], Response::HTTP_OK);
-       }
+        $cart = $carts->filter(function($cart) use ($validated){
+            return $cart->restaurant_id == $validated['restaurant_id'];
+        })->values();
+
+        if($cart->count() == 0 || !in_array($validated['food_id'], $cart[0]->foods->pluck('id')->toArray()))
+        {
+            return response()->json([
+                'message' => __('response.cart_update_error')
+            ], Response::HTTP_OK);
+        }
+
+        $cart = $cart[0];
 
         $cartItem = CartItem::query()
             ->where('cart_id', $cart->id)

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property mixed $id
@@ -48,9 +49,12 @@ class Cart extends Model
     }
     //endregion
 
-    public function scopeActiveCart(Builder $query): void
+    public function scopeCustomerActiveCart(Builder $query): void
     {
-        $query->whereNull('finished_at')
+        $customerId = Auth::guard('customer')->id();
+
+        $query->where('customer_id', $customerId)
+            ->whereNull('finished_at')
             ->orderBy('created_at', 'desc');
     }
 

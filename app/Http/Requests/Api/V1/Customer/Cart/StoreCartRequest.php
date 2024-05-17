@@ -19,31 +19,6 @@ class StoreCartRequest extends FormRequest
         return true;
     }
 
-    public function prepareForValidation(): void
-    {
-        /** @var Food $food */
-        $food = Food::query()->find(request('food_id'));
-
-//        /** @var Cart $cart */
-//        $cart = Cart::query()->activeCart()->first();
-//
-//        if($cart)
-//        {
-//            $this->merge([
-//                'customer_id' => Auth::guard('customer')->id(),
-//                'restaurant_id' => $food->restaurant_id,
-//                'cart_id' => $cart->id
-//            ]);
-//        }
-//        else
-//        {
-            $this->merge([
-                'customer_id' => Auth::guard('customer')->id(),
-                'restaurant_id' => $food->restaurant_id
-            ]);
-//        }
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -54,9 +29,20 @@ class StoreCartRequest extends FormRequest
         return [
             'food_id' => ['required', 'integer', 'exists:foods,id'],
             'count' => ['required', 'integer', 'min:1'],
-//            'cart_id' => ['nullable', 'integer', new ValidRestaurant],
-            'customer_id' => ['required', 'integer'],
-            'restaurant_id' => ['required', 'integer', 'exists:restaurants,id']
         ];
+    }
+
+    public function validated($key = null, $default = null)
+    {
+        /** @var Food $food */
+        $food = Food::query()->find(request('food_id'));
+
+        return array_merge(
+            [
+                'restaurant_id' => $food->restaurant_id,
+                'customer_id' => Auth::guard('customer')->id()
+            ],
+            parent::validated($key, $default)
+        );
     }
 }
