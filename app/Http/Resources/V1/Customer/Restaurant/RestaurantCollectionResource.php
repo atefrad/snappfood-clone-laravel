@@ -26,7 +26,7 @@ class RestaurantCollectionResource extends JsonResource
                 'longitude' => $restaurant->address['longitude'],
             ],
             'is_open' => (bool)$restaurant->realIsOpen,
-            'image' => asset($restaurant->image)
+            'image' => $restaurant->image ? asset($restaurant->image): null
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\Customer\Address\SetCurrentAddressRequest;
 use App\Http\Requests\Api\V1\Customer\Address\StoreAddressRequest;
 use App\Http\Resources\V1\Customer\AddressResource;
 use App\Models\Address;
@@ -39,24 +40,23 @@ class AddressController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function setCurrent(Address $address): JsonResponse
+    public function setCurrent(SetCurrentAddressRequest $request,Address $address): JsonResponse
     {
-        /** @var Customer $customer */
-        $customer =  Auth::guard('customer')->user();
+        $validated = $request->validated();
 
-        $oldCurrentAddressId = $customer->currentAddress->id;
-
-        if($oldCurrentAddressId != $address->id)
+        if($validated['old_current_address_id'])
         {
-            $customer->addresses()
-                ->updateExistingPivot($oldCurrentAddressId, ['current_address' => false]);
-
-            $customer->addresses()
-                ->updateExistingPivot($address->id, ['current_address' => true]);
+            $validated['customer']->addresses()
+                ->updateExistingPivot($validated['old_current_address_id'], ['current_address' => false]);
         }
 
+        $validated['customer']->addresses()
+            ->updateExistingPivot($address->id, ['current_address' => true]);
+
+
         return response()->json([
-            'message' => __('response.address_setCurrent_success')
+            'message' => __('response.address_setCurrent_success'),
+            'data' => AddressResource::make($address)
         ], Response::HTTP_OK);
     }
 }

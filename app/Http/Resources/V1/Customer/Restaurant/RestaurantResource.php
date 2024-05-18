@@ -26,7 +26,7 @@ class RestaurantResource extends JsonResource
                 'longitude' => $restaurant->address['longitude'],
             ],
             'is_open' => (bool)$restaurant->realIsOpen,
-            'image' => asset($restaurant->image),
+            'image' => $restaurant->image ? asset($restaurant->image): null,
             'schedule' => [
                 'saturday' => $this->checkSchedule(6),
                 'sunday' => $this->checkSchedule(7),
