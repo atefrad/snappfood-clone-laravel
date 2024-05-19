@@ -10,20 +10,21 @@ use App\Http\Resources\V1\Customer\Cart\CartResource;
 use App\Models\Cart;
 use App\Models\CartItem;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class CartController extends Controller
 {
-    public function index(): JsonResponse
+    public function index(): AnonymousResourceCollection
     {
         $customerId = Auth::guard('customer')->id();
 
-        $carts = Cart::query()->where('customer_id', $customerId)->get();
+        $carts = Cart::query()
+            ->where('customer_id', $customerId)
+            ->paginate(1);
 
-        return response()->json([
-            'carts' => CartCollectionResource::collection($carts)
-        ], Response::HTTP_OK);
+        return CartCollectionResource::collection($carts);
     }
 
     public function store(StoreCartRequest $request): JsonResponse
@@ -51,11 +52,11 @@ class CartController extends Controller
 
         return response()->json([
             'message' => __('response.cart_store_success'),
-            'cart_id' => $cartItem->cart_id
+            'cart' => CartResource::make($cart)
         ], Response::HTTP_OK);
     }
 
-    public function update(UpdateCartRequest $request)
+    public function update(UpdateCartRequest $request): JsonResponse
     {
         $validated = $request->validated();
 
@@ -65,7 +66,7 @@ class CartController extends Controller
             return $cart->restaurant_id == $validated['restaurant_id'];
         })->values();
 
-        if($cart->count() == 0 || !in_array($validated['food_id'], $cart[0]->foods->pluck('id')->toArray()))
+        if($cart->count() == 0 || !in_array($validated['food_id'], $cart[0]->foods()->wherePivotNull('deleted_at')->pluck('foods.id')->toArray()))
         {
             return response()->json([
                 'message' => __('response.cart_update_error')
@@ -84,7 +85,8 @@ class CartController extends Controller
            $cartItem->delete();
 
            return response()->json([
-               'message' => __('response.cartItem_delete_success')
+               'message' => __('response.cartItem_delete_success'),
+               'cart' => CartResource::make($cart)
            ], Response::HTTP_OK);
        }
 
@@ -93,7 +95,8 @@ class CartController extends Controller
        ]);
 
         return response()->json([
-            'message' => __('response.cart_update_success')
+            'message' => __('response.cart_update_success'),
+            'cart' => CartResource::make($cart)
         ], Response::HTTP_OK);
     }
 

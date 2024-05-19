@@ -16,11 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AddressController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        $customerId = Auth::guard('customer')->id();
-
-        $addresses = Address::query()->filterCustomer()->get();
+        $addresses = Address::query()->filterCustomer()->paginate(Controller::DEFAULT_PAGINATE);
 
         return AddressResource::collection($addresses);
     }
@@ -36,7 +34,8 @@ class AddressController extends Controller
         $address->customers()->attach($validated['customer_id']);
 
         return response()->json([
-            'message' => __('response.address_store_success')
+            'message' => __('response.address_store_success'),
+            'data' => AddressResource::make($address)
         ], Response::HTTP_OK);
     }
 

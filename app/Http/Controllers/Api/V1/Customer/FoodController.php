@@ -14,10 +14,18 @@ class FoodController extends Controller
 {
     public function index(Restaurant $restaurant): JsonResponse
     {
-        $foodCategories = $restaurant->foodCategories;
+        $foodCategories = $restaurant->foodCategories()->paginate(1);
 
         return response()->json([
-            'categories' => FoodCategoryResource::collection($foodCategories)
+            'categories' => FoodCategoryResource::collection($foodCategories),
+            'meta' => [
+                'currentPage' => $foodCategories->currentPage(),
+                'perPage' => $foodCategories->perPage(),
+                'path' => $foodCategories->path(),
+                'nextPage' => $foodCategories->nextPageUrl(),
+                'lastPage' => $foodCategories->lastPage(),
+                'total' => $foodCategories->total()
+            ]
         ], Response::HTTP_OK);
     }
 }

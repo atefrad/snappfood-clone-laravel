@@ -16,7 +16,10 @@ class FoodCategoryResource extends JsonResource
     {
         $foodCategory = $this->resource;
 
-        $foods = $foodCategory->foods()->where('restaurant_id', $request->route('restaurant')->id)->get();
+        $foods = $foodCategory
+            ->foods()
+            ->where('restaurant_id', $request->route('restaurant')->id)
+            ->get();
 
         return [
             'id' => $foodCategory->id,

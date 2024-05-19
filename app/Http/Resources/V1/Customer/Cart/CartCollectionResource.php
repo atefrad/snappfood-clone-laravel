@@ -16,10 +16,14 @@ class CartCollectionResource extends JsonResource
     {
         $cart = $this->resource;
 
+        $foods = $cart->foods()
+            ->wherePivotNull('deleted_at')
+            ->get();
+
         return [
             'id' => $cart->id,
             'restaurant' => RestaurantResource::make($cart->restaurant),
-            'foods' => FoodResource::collection($cart->foods)
+            'foods' => FoodResource::collection($foods)
         ];
     }
 }

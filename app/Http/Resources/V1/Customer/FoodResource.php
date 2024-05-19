@@ -24,7 +24,7 @@ class FoodResource extends JsonResource
             'priceAfterDiscount' => $food->priceAfterDiscount,
             'activeDiscount' => $this->checkActiveDiscount($food),
             'ingredient' => $food->ingredient,
-            'image' => asset($food->image)
+            'image' => $food->image ? asset($food->image) : null
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\Customer\Cart\CartResource;
 use App\Mail\OrderSubmitted;
 use App\Models\Cart;
 use App\Models\Customer;
@@ -42,7 +43,8 @@ class PaymentController extends Controller
         Mail::to($customer->email)->send(new OrderSubmitted());
 
         return response()->json([
-            'message' => __('response.cart_pay_success')
+            'message' => __('response.cart_pay_success'),
+            'cart' => CartResource::make($cart)
         ], Response::HTTP_OK);
     }
 }
