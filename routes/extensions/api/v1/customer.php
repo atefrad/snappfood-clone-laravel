@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\Customer\AddressController;
 use App\Http\Controllers\Api\V1\Customer\Auth\LoginController as CustomerLoginController;
 use App\Http\Controllers\Api\V1\Customer\Auth\RegisterController as CustomerRegisterController;
 use App\Http\Controllers\Api\V1\Customer\CartController;
+use App\Http\Controllers\Api\V1\Customer\CommentController as CustomerCommentController;
 use App\Http\Controllers\Api\V1\Customer\CustomerController;
 use App\Http\Controllers\Api\V1\Customer\FoodController as CustomerFoodController;
 use App\Http\Controllers\Api\V1\Customer\PaymentController;
@@ -57,6 +58,10 @@ Route::prefix('v1/customer')->name('customer.')->group(function () {
 
         //payment
         Route::post('cart/{cart}/pay', [PaymentController::class, 'store'])->name('cart.payment.store');
+
+        //comment
+        Route::resource('comment', CustomerCommentController::class)
+            ->only(['index', 'show']);
     });
 
     //endregion
