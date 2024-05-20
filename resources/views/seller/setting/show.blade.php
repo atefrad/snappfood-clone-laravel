@@ -115,7 +115,7 @@
                                         @case(6)
                                             شنبه
                                             @break
-                                        @case(7)
+                                        @case(0)
                                             یکشنبه
                                             @break
                                     @endswitch

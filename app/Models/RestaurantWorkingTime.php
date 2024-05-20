@@ -35,7 +35,7 @@ class RestaurantWorkingTime extends Model
 
         return Attribute::make(
             get: fn()=> in_array($day, $this->working_days) &&
-                $time > $this->opening_time &&
+                $time >= $this->opening_time &&
                 $time < $this->closing_time
         );
     }

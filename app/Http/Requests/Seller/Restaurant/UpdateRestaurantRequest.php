@@ -35,7 +35,7 @@ class UpdateRestaurantRequest extends FormRequest
             'is_open' => ['required', 'integer', 'in:0,1'],
             'delivery_price' => ['required', 'integer'],
             'working_days' => ['required', 'array', 'min:1', 'max:7'],
-            'working_days.*' => ['required', 'integer', 'min:1', 'max:7'],
+            'working_days.*' => ['required', 'integer', 'min:0', 'max:6'],
             'opening_time' => ['required', 'regex:/^([01][0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/u'],
             'closing_time' => ['required', 'regex:/^([01][0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/u'],
         ];

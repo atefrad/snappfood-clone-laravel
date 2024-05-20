@@ -4,6 +4,7 @@ namespace App\Http\Requests\Api\V1\Customer\Cart;
 
 use App\Models\Cart;
 use App\Models\Food;
+use App\Rules\CheckRestaurantIsOpen;
 use App\Rules\ValidRestaurant;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,18 @@ use Symfony\Component\HttpFoundation\Response;
 
 class StoreCartRequest extends FormRequest
 {
+    protected Food $food;
+
+    public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
+    {
+        /** @var Food $food */
+        $food = Food::query()->find(request('food_id'));
+
+        $this->food = $food;
+
+        parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -27,19 +40,16 @@ class StoreCartRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'food_id' => ['required', 'integer', 'exists:foods,id'],
+            'food_id' => ['required', 'integer', 'exists:foods,id', new CheckRestaurantIsOpen($this->food)],
             'count' => ['required', 'integer', 'min:1'],
         ];
     }
 
     public function validated($key = null, $default = null)
     {
-        /** @var Food $food */
-        $food = Food::query()->find(request('food_id'));
-
         return array_merge(
             [
-                'restaurant_id' => $food->restaurant_id,
+                'restaurant_id' => $this->food->restaurant_id,
                 'customer_id' => Auth::guard('customer')->id()
             ],
             parent::validated($key, $default)

@@ -180,7 +180,7 @@
                                                     <label for="saturday">شنبه</label>
                                                 </div>
                                                 <div class="col-6">
-                                                    <input type="checkbox" name="working_days[]" id="sunday" value="7"  @if(in_array('7', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
+                                                    <input type="checkbox" name="working_days[]" id="sunday" value="0"  @if(in_array('0', old('working_days', $restaurant->restaurantWorkingTime->working_days ?? []))) checked @endif>
                                                     <label for="sunday">یکشنبه</label>
                                                 </div>
                                                 <div class="col-6">

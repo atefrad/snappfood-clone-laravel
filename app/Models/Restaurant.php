@@ -81,7 +81,7 @@ class Restaurant extends Model
     public function realIsOpen(): Attribute
     {
         return Attribute::make(
-            get: fn()=> $this->is_open && $this->restaurantWorkingTime->isWorking
+            get: fn()=> $this->is_open && (!$this->restaurantWorkingTime || $this->restaurantWorkingTime->isWorking)
         );
     }
 

@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property mixed $restaurant_id
  * @property mixed $activeFoodParty
  * @property mixed $price
+ * @property mixed $restaurant
  */
 class Food extends Model
 {
