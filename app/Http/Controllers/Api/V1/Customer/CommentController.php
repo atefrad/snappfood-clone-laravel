@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\Customer\Comment\IndexCommentRequest;
 use App\Http\Requests\Api\V1\Customer\Comment\StoreCommentRequest;
 use App\Http\Resources\V1\Customer\Comment\CommentResource;
 use App\Models\Comment;
@@ -12,9 +13,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CommentController extends Controller
 {
-    public function index()
+    public function index(IndexCommentRequest $request)
     {
+        $validated = $request->validated();
 
+        $comments = Comment::query()
+            ->filterRestaurant()
+            ->filterFood()
+            ->isConfirmed()
+            ->paginate(Controller::DEFAULT_PAGINATE);
+
+        return CommentResource::collection($comments);
     }
 
     public function store(StoreCommentRequest $request): JsonResponse

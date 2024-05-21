@@ -22,8 +22,9 @@ class CommentResource extends JsonResource
             'author' => CustomerResource::make($comment->customer),
             'foods' => $comment->order->foods->pluck('name'),
             'create_at' => Jalalian::forge($comment->created_at)->format('Y-m-d H:i'),
-            'score'=> $comment->score,
-            'content' => $comment->content
+            'score'=> (int)$comment->score,
+            'content' => $comment->content,
+            'answer' => $comment->answer
         ];
     }
 }

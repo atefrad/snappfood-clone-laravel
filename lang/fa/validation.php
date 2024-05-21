@@ -184,6 +184,7 @@ return [
         "closing_time"              => "ساعت پایان کار",
         "count"                     => "تعداد",
         "food_id"                   => "غذا",
+        "restaurant_id"             => "رستوران",
         "cart_id"                   => "سبد خرید",
         "score"                     => "امتیاز",
         "message"                   => "پیام نظر",
