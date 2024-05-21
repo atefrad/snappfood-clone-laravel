@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Providers;
+namespace App\Listeners;
 
+use App\Events\CartPayed;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderStatus;
-use App\Providers\CartPayed;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Auth;
 
 class StoreOrder
@@ -31,6 +29,7 @@ class StoreOrder
 
         /** @var Order $order */
         $order = Order::query()->create([
+            'cart_id' => $event->cart->id,
             'customer_id' => $customer->id,
             'restaurant_id' => $event->cart->restaurant_id,
             'address_id' => $customer->currentAddress->id,

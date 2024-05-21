@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
  * @property mixed $totalPrice
  * @property mixed $cartItems
  * @property mixed $finished_at
+ * @property mixed $customer_id
  */
 class Cart extends Model
 {

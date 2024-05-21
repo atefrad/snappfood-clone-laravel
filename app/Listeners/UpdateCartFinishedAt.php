@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Providers;
+namespace App\Listeners;
 
-use App\Providers\CartPayed;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Events\CartPayed;
 
 class UpdateCartFinishedAt
 {

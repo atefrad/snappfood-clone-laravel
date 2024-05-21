@@ -61,7 +61,7 @@ Route::prefix('v1/customer')->name('customer.')->group(function () {
 
         //comment
         Route::resource('comment', CustomerCommentController::class)
-            ->only(['index', 'show']);
+            ->only(['index', 'store']);
     });
 
     //endregion

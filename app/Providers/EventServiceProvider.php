@@ -2,16 +2,18 @@
 
 namespace App\Providers;
 
+use App\Events\CartPayed;
 use App\Events\FoodUpdated;
 use App\Events\RestaurantUpdated;
 use App\Listeners\AddDiscountToFood;
 use App\Listeners\AddOrUpdateRestaurantFoodCategories;
 use App\Listeners\CreateOrUpdateWorkingTime;
+use App\Listeners\StoreOrder;
+use App\Listeners\UpdateCartFinishedAt;
 use App\Listeners\UpdateFoodFoodCategories;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {

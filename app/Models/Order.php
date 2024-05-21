@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -22,6 +23,7 @@ class Order extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'cart_id',
         'customer_id',
         'restaurant_id',
         'address_id',
@@ -44,6 +46,11 @@ class Order extends Model
     public function orderStatus(): BelongsTo
     {
         return $this->belongsTo(OrderStatus::class);
+    }
+
+    public function foods(): BelongsToMany
+    {
+        return $this->belongsToMany(Food::class, 'order_items');
     }
     //endregion
 

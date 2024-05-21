@@ -44,7 +44,10 @@ return [
 
     'cart_pay_error' => '.پرداخت برای این سبد خرید قبلا انجام شده است',
     'cart_pay_success' => '.پرداخت با موفقیت انجام شد',
+    'cart_pay_transaction_error' => '.هنگام انجام عملیات مشکلی پیش آمده است',
 
     'order_delete_success' => 'سفارش با موفقیت حذف شد.',
+
+    'comment_store_success' => '.نظر شما با موفقیت ثبت شد',
 
 ];

@@ -86,6 +86,8 @@ return [
     "check_address_belongs_to" => ".آدرس وارد شده معتبر نیست",
     "check_address_is_current" => ".آدرس وارد شده، آدرس فعلی شما می باشد",
     "check_restaurant_is_open" => ".متاسفانه رستوران در حال حاضر باز نمی باشد",
+
+    "check_cart_belongs_to" => ".سبد خرید وارد شده معتبر نیست",
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -183,6 +185,7 @@ return [
         "count"                     => "تعداد",
         "food_id"                   => "غذا",
         "cart_id"                   => "سبد خرید",
-
+        "score"                     => "امتیاز",
+        "message"                   => "پیام نظر",
     ],
 ];

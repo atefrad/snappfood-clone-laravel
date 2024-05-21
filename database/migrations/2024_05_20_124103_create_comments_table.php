@@ -22,7 +22,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->text('content');
-            $table->unsignedTinyInteger('score');
+            $table->decimal('score', 3, 2);
             $table->text('answer')->nullable();
             $table->boolean('is_confirmed')->default(false);
             $table->timestamps();
