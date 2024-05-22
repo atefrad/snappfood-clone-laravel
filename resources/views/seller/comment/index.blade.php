@@ -56,9 +56,9 @@
                             <td class="text-center">{{ Jalalian::forge($comment->created_at)->format("H:i Y-m-d") }}</td>
                             <td class="width-22-rem text-end">
                                 @if($comment->is_confirmed)
-                                    <a class="btn btn-warning btn-sm" href=""><i class="fas fa-times-circle"></i> عدم تایید</a>
+                                    <a class="btn btn-warning btn-sm" href="{{ route('seller.comment.change-is-confirmed', $comment) }}"><i class="fas fa-times-circle"></i> عدم تایید</a>
                                 @else
-                                    <a class="btn btn-warning btn-sm" href=""><i class="fas fa-check-circle"></i> تایید</a>
+                                    <a class="btn btn-warning btn-sm" href="{{ route('seller.comment.change-is-confirmed', $comment) }}"><i class="fas fa-check-circle"></i> تایید</a>
                                 @endif
                                 <a class="btn btn-success btn-sm" href=""><i class="fas fa-edit"></i> پاسخ</a>
                                 <a class="btn btn-danger btn-sm" href=""><i class="fas fa-trash"></i> حذف</a>

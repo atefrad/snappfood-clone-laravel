@@ -84,6 +84,8 @@ Route::prefix('seller')->name('seller.')->group(function () {
                     ->group(function () {
 
                         Route::get('/', 'index')->name('index');
+                        Route::get('/change-is-confirmed/{comment}', 'changeIsConfirmed')
+                            ->name('change-is-confirmed');
                     });
             });
 

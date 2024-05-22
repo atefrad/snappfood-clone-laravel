@@ -25,4 +25,22 @@ class CommentController extends Controller
 
         return view('seller.comment.index', compact('comments'));
     }
+
+    public function changeIsConfirmed(Comment $comment): \Illuminate\Http\RedirectResponse
+    {
+        $isConfirmed = !$comment->is_confirmed;
+
+        $comment->update([
+            'is_confirmed' => $isConfirmed
+        ]);
+
+        if($comment->is_confirmed)
+        {
+            return redirect()->route('seller.comment.index')
+                ->with('toast-success', __('response.comment_IsConfirmed_success'));
+        }
+
+        return redirect()->route('seller.comment.index')
+            ->with('toast-success', __('response.comment_IsNotConfirmed_success'));
+    }
 }

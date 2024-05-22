@@ -49,5 +49,7 @@ return [
     'order_delete_success' => 'سفارش با موفقیت حذف شد.',
 
     'comment_store_success' => '.نظر شما با موفقیت ثبت شد',
+    'comment_IsConfirmed_success' => 'نظر با موفقیت تایید شد.',
+    'comment_IsNotConfirmed_success' => 'نظر با موفقیت از حالت تایید خارج شد.',
 
 ];
