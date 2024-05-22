@@ -9,17 +9,18 @@ use App\Http\Resources\V1\Customer\Comment\CommentResource;
 use App\Models\Comment;
 use App\Models\Order;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
 
 class CommentController extends Controller
 {
-    public function index(IndexCommentRequest $request)
+    public function index(IndexCommentRequest $request): AnonymousResourceCollection
     {
         $validated = $request->validated();
 
         $comments = Comment::query()
             ->filterRestaurant()
-            ->filterFood()
+            ->filterFoodById()
             ->isConfirmed()
             ->paginate(Controller::DEFAULT_PAGINATE);
 

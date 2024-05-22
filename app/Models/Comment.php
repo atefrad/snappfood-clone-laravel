@@ -33,20 +33,42 @@ class Comment extends Model
     }
     //endregion
 
-    public function scopeFilterRestaurant(Builder $query): void
+    public function scopeFilterRestaurant(Builder $query, int $restaurantId = null): void
     {
-        $query->when(request()->filled('restaurant_id'), function (Builder $query) {
+        if($restaurantId)
+        {
             $query->whereHas('order',
-                fn(Builder $query) => $query->where('restaurant_id', request('restaurant_id')));
-        });
+                fn(Builder $query) => $query->where('restaurant_id', $restaurantId));
+        }
+        else
+        {
+            $query->when(request()->filled('restaurant_id'), function (Builder $query) {
+                $query->whereHas('order',
+                    fn(Builder $query) => $query->where('restaurant_id', request('restaurant_id')));
+            });
+        }
     }
 
-    public function scopeFilterFood(Builder $query): void
+    public function scopeFilterFoodById(Builder $query): void
     {
         $query->when(request()->filled('food_id'), function (Builder $query) {
             $query->whereHas('order',
                 fn(Builder $query) => $query->whereHas('foods',
                 fn(Builder $query) => $query->where('foods.id', request('food_id'))
+                ));
+        });
+    }
+
+    public function scopeFilterFoodByName(Builder $query): void
+    {
+        $query->when(request()->filled('name'), function (Builder $query) {
+            $query->whereHas('order',
+                fn(Builder $query) => $query->whereHas('foods',
+                    fn(Builder $query) => $query->where(
+                        'name',
+                        'like',
+                        '%' . request('name') . '%'
+                    )
                 ));
         });
     }

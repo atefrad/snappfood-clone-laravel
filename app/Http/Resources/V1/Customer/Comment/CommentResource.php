@@ -19,6 +19,7 @@ class CommentResource extends JsonResource
         $comment = $this->resource;
 
         return [
+            'id' => $comment->id,
             'author' => CustomerResource::make($comment->customer),
             'foods' => $comment->order->foods->pluck('name'),
             'create_at' => Jalalian::forge($comment->created_at)->format('Y-m-d H:i'),

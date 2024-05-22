@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Seller\Auth\LoginController as SellerLoginController;
 use App\Http\Controllers\Seller\Auth\RegisterController as SellerRegisterController;
+use App\Http\Controllers\Seller\CommentController as SellerCommentController;
 use App\Http\Controllers\Seller\FoodController;
 use App\Http\Controllers\Seller\FoodPartyController;
 use App\Http\Controllers\Seller\OrderController;
@@ -74,6 +75,15 @@ Route::prefix('seller')->name('seller.')->group(function () {
                         Route::get('/', 'index')->name('index');
                         Route::delete('/{order}',  'destroy')->name('destroy');
                         Route::get('/change-status/{order}', 'changeStatus')->name('change-status');
+                    });
+
+                //comment
+                Route::prefix('comment')
+                    ->controller(SellerCommentController::class)
+                    ->name('comment.')
+                    ->group(function () {
+
+                        Route::get('/', 'index')->name('index');
                     });
             });
 
