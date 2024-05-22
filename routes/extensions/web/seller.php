@@ -86,6 +86,10 @@ Route::prefix('seller')->name('seller.')->group(function () {
                         Route::get('/', 'index')->name('index');
                         Route::get('/change-is-confirmed/{comment}', 'changeIsConfirmed')
                             ->name('change-is-confirmed');
+                        Route::get('/edit/{comment}', 'edit')
+                            ->name('edit');
+                        Route::put('/{comment}', 'update')
+                            ->name('update');
                     });
             });
 

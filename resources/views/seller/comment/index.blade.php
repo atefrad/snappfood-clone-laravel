@@ -60,7 +60,7 @@
                                 @else
                                     <a class="btn btn-warning btn-sm" href="{{ route('seller.comment.change-is-confirmed', $comment) }}"><i class="fas fa-check-circle"></i> تایید</a>
                                 @endif
-                                <a class="btn btn-success btn-sm" href=""><i class="fas fa-edit"></i> پاسخ</a>
+                                <a class="btn btn-success btn-sm" href="{{ route('seller.comment.edit', $comment) }}"><i class="fas fa-edit"></i> پاسخ</a>
                                 <a class="btn btn-danger btn-sm" href=""><i class="fas fa-trash"></i> حذف</a>
                             </td>
                         </tr>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Seller\Comment\UpdateCommentRequest;
 use App\Models\Comment;
 use App\Models\Seller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +28,7 @@ class CommentController extends Controller
         return view('seller.comment.index', compact('comments'));
     }
 
-    public function changeIsConfirmed(Comment $comment): \Illuminate\Http\RedirectResponse
+    public function changeIsConfirmed(Comment $comment): RedirectResponse
     {
         $isConfirmed = !$comment->is_confirmed;
 
@@ -42,5 +44,22 @@ class CommentController extends Controller
 
         return redirect()->route('seller.comment.index')
             ->with('toast-success', __('response.comment_IsNotConfirmed_success'));
+    }
+
+    public function edit(Comment $comment): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('seller.comment.edit', compact('comment'));
+    }
+
+    public function update(UpdateCommentRequest $request, Comment $comment): RedirectResponse
+    {
+        $validated = $request->validated();
+
+        $comment->update([
+            'answer' => $validated['answer']
+        ]);
+
+        return redirect()->route('seller.comment.index')
+            ->with('toast-success', __('response.comment_update_success'));
     }
 }
