@@ -53,4 +53,6 @@ return [
     'comment_IsNotConfirmed_success' => 'نظر با موفقیت از حالت تایید خارج شد.',
     'comment_update_success' => 'پاسخ نظر با موفقیت ثبت شد.',
 
+    'commentDeleteRequest_store_success' => 'درخواست حذف نظر با موفقیت ثبت شد.',
+
 ];

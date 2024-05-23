@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
              DiscountSeeder::class,
              FoodPartySeeder::class,
              OrderStatusSeeder::class,
+             DeleteRequestStatusSeeder::class,
          ]);
     }
 }

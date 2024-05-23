@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property mixed $is_confirmed
+ * @property mixed $id
+ * @property mixed $order
  */
 class Comment extends Model
 {
@@ -33,6 +36,11 @@ class Comment extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function commentDeleteRequest(): HasOne
+    {
+        return $this->hasOne(CommentDeleteRequest::class);
     }
     //endregion
 

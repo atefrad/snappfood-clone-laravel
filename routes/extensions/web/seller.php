@@ -3,6 +3,7 @@
 use App\Http\Controllers\Seller\Auth\LoginController as SellerLoginController;
 use App\Http\Controllers\Seller\Auth\RegisterController as SellerRegisterController;
 use App\Http\Controllers\Seller\CommentController as SellerCommentController;
+use App\Http\Controllers\Seller\CommentDeleteRequestController;
 use App\Http\Controllers\Seller\FoodController;
 use App\Http\Controllers\Seller\FoodPartyController;
 use App\Http\Controllers\Seller\OrderController;
@@ -90,6 +91,16 @@ Route::prefix('seller')->name('seller.')->group(function () {
                             ->name('edit');
                         Route::put('/{comment}', 'update')
                             ->name('update');
+                    });
+
+                //comment delete request
+                Route::prefix('comment-delete-request')
+                    ->controller(CommentDeleteRequestController::class)
+                    ->name('comment-delete-request.')
+                    ->group(function () {
+
+                        Route::get('/create/{comment}', 'create')->name('create');
+                        Route::post('/{comment}', 'store')->name('store');
                     });
             });
 

@@ -189,5 +189,6 @@ return [
         "score"                     => "امتیاز",
         "message"                   => "پیام نظر",
         "answer"                    => "پاسخ",
+        "comment_id"                => "نظر",
     ],
 ];

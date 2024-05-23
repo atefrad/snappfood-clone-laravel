@@ -31,6 +31,7 @@
                         <th class="text-center">متن نظر</th>
                         <th class="text-center">امتیاز</th>
                         <th class="text-center">تاریخ ارسال</th>
+                        <th class="text-center">وضعیت</th>
                         <th class="max-width-16-rem text-center"><i class="fa-solid fa-gears"></i> تنظیمات</th>
                     </tr>
                     </thead>
@@ -54,14 +55,25 @@
                             <td class="text-center max-width-20-rem">{{ $comment->content }}</td>
                             <td class="text-center">{{ $comment->score }}</td>
                             <td class="text-center">{{ Jalalian::forge($comment->created_at)->format("H:i Y-m-d") }}</td>
-                            <td class="width-22-rem text-end">
+                            <td class="text-center">
                                 @if($comment->is_confirmed)
-                                    <a class="btn btn-warning btn-sm" href="{{ route('seller.comment.change-is-confirmed', $comment) }}"><i class="fas fa-times-circle"></i> عدم تایید</a>
+                                    تایید شده
                                 @else
-                                    <a class="btn btn-warning btn-sm" href="{{ route('seller.comment.change-is-confirmed', $comment) }}"><i class="fas fa-check-circle"></i> تایید</a>
+                                    تایید نشده
                                 @endif
-                                <a class="btn btn-success btn-sm" href="{{ route('seller.comment.edit', $comment) }}"><i class="fas fa-edit"></i> پاسخ</a>
-                                <a class="btn btn-danger btn-sm" href=""><i class="fas fa-trash"></i> حذف</a>
+                                @if($comment->commentDeleteRequest)
+                                    <br>
+                                    درخواست حذف <i class="fas fa-arrow-left text-danger"></i> {{ $comment->commentDeleteRequest->deleteRequestStatus->name }}
+                                @endif
+                            </td>
+                            <td class="text-end">
+                                @if($comment->is_confirmed)
+                                    <a class="btn btn-warning btn-sm d-block mb-1" href="{{ route('seller.comment.change-is-confirmed', $comment) }}"><i class="fas fa-times-circle"></i> عدم تایید</a>
+                                @else
+                                    <a class="btn btn-warning btn-sm d-block mb-1" href="{{ route('seller.comment.change-is-confirmed', $comment) }}"><i class="fas fa-check-circle"></i> تایید</a>
+                                @endif
+                                <a class="btn btn-success btn-sm d-block mb-1" href="{{ route('seller.comment.edit', $comment) }}"><i class="fas fa-edit"></i> پاسخ</a>
+                                <a class="btn btn-danger btn-sm d-block mb-1 @if($comment->commentDeleteRequest)disabled-link disabled @endif" href="{{ route('seller.comment-delete-request.create', $comment) }}"><i class="fas fa-trash"></i> حذف</a>
                             </td>
                         </tr>
 

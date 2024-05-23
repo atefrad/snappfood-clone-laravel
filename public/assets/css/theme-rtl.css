@@ -18639,4 +18639,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .ltr {
     direction: ltr !important;
 }
+
+.disabled-link {
+    pointer-events: none;
+}
 /*# sourceMappingURL=theme-rtl.css.map */
