@@ -66,6 +66,18 @@ class Order extends Model
         return Attribute::make(
             get: fn()=> $totalFoodPrice
         );
+    }
 
+    public function totalDiscountAmount(): Attribute
+    {
+        $totalDiscountAmount = 0;
+
+        foreach($this->orderItems as $orderItem)
+        {
+            $totalDiscountAmount += $orderItem->finalTotalDiscount;
+        }
+         return Attribute::make(
+             get: fn()=> $totalDiscountAmount
+         );
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Seller\CommentDeleteRequestController;
 use App\Http\Controllers\Seller\FoodController;
 use App\Http\Controllers\Seller\FoodPartyController;
 use App\Http\Controllers\Seller\OrderController;
+use App\Http\Controllers\Seller\ReportController;
 use App\Http\Controllers\Seller\RestaurantController;
 use App\Http\Middleware\Custom\CheckActiveFoodParty;
 use App\Http\Middleware\Custom\CheckIsActive;
@@ -102,6 +103,9 @@ Route::prefix('seller')->name('seller.')->group(function () {
                         Route::get('/create/{comment}', 'create')->name('create');
                         Route::post('/{comment}', 'store')->name('store');
                     });
+
+                //report
+                Route::get('/report', [ReportController::class, 'index'])->name('report.index');
             });
 
     });

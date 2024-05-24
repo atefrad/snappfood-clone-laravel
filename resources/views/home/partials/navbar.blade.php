@@ -13,17 +13,20 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
             <div class="collapse navbar-collapse border-top border-lg-0 my-2 mt-lg-0" id="navbarSupportedContent">
 
-                <div class="d-md-flex mt-4 mt-lg-0 ms-lg-auto ms-xl-0">
-                    <div class="ms-xl-8 mb-3 mb-md-0">
-                        <div class="input-group-icon pe-2"><i class="fas fa-search input-box-icon text-primary"></i>
-                            <input class="form-control border-0 input-box bg-100" type="search" placeholder="جستجوی غذا" aria-label="Search" />
-                        </div>
-                    </div>
+                <div class="d-md-flex mt-4 mt-lg-0 ms-lg-auto">
+{{--                    <div class="ms-xl-8 mb-3 mb-md-0">--}}
+{{--                        <div class="input-group-icon pe-2"><i class="fas fa-search input-box-icon text-primary"></i>--}}
+{{--                            <input class="form-control border-0 input-box bg-100" type="search" placeholder="جستجوی غذا" aria-label="Search" />--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div>
                         @auth('seller')
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('seller.order.index') }}">سفارشات</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('seller.report.index') }}">گزارشات</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('seller.food.index') }}">غذاها</a>
