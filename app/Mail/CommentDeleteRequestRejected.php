@@ -9,16 +9,21 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OrderSubmitted extends Mailable implements ShouldQueue
+class CommentDeleteRequestRejected extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
+
+    private string $sellerName;
+    private string $deleteRequestReason;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(string $sellerName, string $deleteRequestReason)
     {
-        //
+        $this->sellerName = $sellerName;
+
+        $this->deleteRequestReason = $deleteRequestReason;
     }
 
     /**
@@ -27,7 +32,7 @@ class OrderSubmitted extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Submitted',
+            subject: 'Comment Delete Request Rejected',
         );
     }
 
@@ -37,9 +42,11 @@ class OrderSubmitted extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.order.submitted',
+            markdown: 'mail.comment.delete-request.rejected',
             with: [
-                'url' => route('home')
+                'sellerName' => $this->sellerName,
+                'deleteRequestReason' => $this->deleteRequestReason,
+                'url' => route('seller.comment.index')
             ]
         );
     }

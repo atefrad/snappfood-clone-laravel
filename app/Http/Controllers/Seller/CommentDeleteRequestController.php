@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Seller\Comment\StoreCommentDeleteRequest;
 use App\Models\Comment;
 use App\Models\CommentDeleteRequest;
+use App\Models\DeleteRequestStatus;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,7 +39,7 @@ class CommentDeleteRequestController extends Controller
             ->create([
                 'comment_id' => $validated['comment_id'],
                 'seller_id' => $sellerId,
-                'delete_request_status_id' => CommentDeleteRequest::PENDING,
+                'delete_request_status_id' => DeleteRequestStatus::PENDING,
                 'body' => $validated['body']
             ]);
 

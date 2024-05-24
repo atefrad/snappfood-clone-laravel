@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\CommentDeleteRequestController as AdminCommentDeleteRequestController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\FoodCategoryController;
 use App\Http\Controllers\Admin\FoodPartyController as AdminFoodPartyController;
@@ -65,6 +66,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
         //banner
         Route::resource('banner', BannerController::class)
             ->except(['edit', 'update', 'show']);
+
+        //comment delete request
+        Route::prefix('comment-delete-request')
+            ->controller(AdminCommentDeleteRequestController::class)
+            ->name('comment-delete-request.')
+            ->group(function () {
+
+                Route::get('/', 'index')->name('index');
+                Route::get('/{commentDeleteRequest}', 'show')->name('show');
+                Route::get('/reject/{commentDeleteRequest}', 'reject')->name('reject');
+                Route::delete('/confirm/{commentDeleteRequest}', 'confirm')->name('confirm');
+            });
     });
     //endregion
 });

@@ -39,7 +39,7 @@ class OrderStatusChanged extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.orders.status-changed',
+            markdown: 'mail.order.status-changed',
             with: [
                 'url' => route('home'),
                 'orderStatusName' => $this->orderStatusName

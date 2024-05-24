@@ -37,7 +37,7 @@ class OrderDeleted extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.orders.deleted',
+            markdown: 'mail.order.deleted',
             with: [
                 'url' => route('home')
             ]

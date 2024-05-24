@@ -14,9 +14,9 @@ class DeleteRequestStatusSeeder extends Seeder
     public function run(): void
     {
         $statusNames = [
-            'pending',
-            'confirmed',
-            'rejected'
+            'در انتظار بررسی',
+            'تایید شده',
+            'رد شده'
         ];
 
         foreach ($statusNames as $statusName)

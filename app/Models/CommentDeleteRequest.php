@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property mixed $seller
+ * @property mixed $body
+ */
 class CommentDeleteRequest extends Model
 {
     use HasFactory, SoftDeletes;
@@ -18,14 +22,20 @@ class CommentDeleteRequest extends Model
         'body'
     ];
 
-    const PENDING = 1;
-    const CONFIRMED = 2;
-    const REJECTED = 3;
-
     //region relation
     public function deleteRequestStatus(): BelongsTo
     {
         return $this->belongsTo(DeleteRequestStatus::class);
+    }
+
+    public function comment(): BelongsTo
+    {
+        return $this->belongsTo(Comment::class);
+    }
+
+    public function seller(): BelongsTo
+    {
+        return $this->belongsTo(Seller::class);
     }
     //endregion
 }

@@ -13,4 +13,8 @@ class DeleteRequestStatus extends Model
     protected $fillable = [
         'name'
     ];
+
+    const PENDING = 1;
+    const CONFIRMED = 2;
+    const REJECTED = 3;
 }

@@ -16,7 +16,7 @@ class SellerSeeder extends Seeder
 //        Seller::factory(10)->create();
 
         Seller::factory()->create([
-            'name' => 'seller',
+            'name' => 'فروشنده',
             'email' => 'seller@example.com'
         ]);
     }
