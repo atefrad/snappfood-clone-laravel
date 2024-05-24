@@ -18613,6 +18613,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding-top: 4rem !important;
 }
 
+.width-9-rem {
+    width: 9rem !important;
+}
+
 .width-16-rem {
     width: 16rem !important;
 }

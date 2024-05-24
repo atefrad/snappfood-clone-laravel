@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\CommentDeleteRequestConfirmed;
 use App\Mail\CommentDeleteRequestRejected;
+use App\Models\Comment;
 use App\Models\CommentDeleteRequest;
 use App\Models\DeleteRequestStatus;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class CommentDeleteRequestController extends Controller
@@ -43,9 +46,36 @@ class CommentDeleteRequestController extends Controller
             ->with('toast-success', __('response.commentDeleteRequest_reject_success'));
     }
 
-    public function confirm(CommentDeleteRequest $commentDeleteRequest)
+    public function confirm(CommentDeleteRequest $commentDeleteRequest): RedirectResponse
     {
-        dd('confirm');
+        try {
+            DB::beginTransaction();
 
+            $commentDeleteRequest->update([
+                'delete_request_status_id' => DeleteRequestStatus::CONFIRMED
+            ]);
+
+            $comment = Comment::query()
+                ->where('id', $commentDeleteRequest->comment_id)
+                ->delete();
+
+            DB::commit();
+        }
+        catch (\Throwable $exception)
+        {
+            DB::rollBack();
+
+            return redirect()->route('admin.comment-delete-request.index')
+                ->with('toast-error', __('response.commentDeleteRequest_transaction_error'));
+        }
+
+        Mail::to($commentDeleteRequest->seller->email)
+            ->send(new CommentDeleteRequestConfirmed(
+                $commentDeleteRequest->seller->name,
+                $commentDeleteRequest->body
+            ));
+
+        return redirect()->route('admin.comment-delete-request.index')
+            ->with('toast-success', __('response.commentDeleteRequest_confirm_success'));
     }
 }

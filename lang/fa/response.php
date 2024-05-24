@@ -56,5 +56,6 @@ return [
     'commentDeleteRequest_store_success' => 'درخواست حذف نظر با موفقیت ثبت شد.',
     'commentDeleteRequest_reject_success' => 'درخواست حذف نظر با موفقیت رد شد.',
     'commentDeleteRequest_confirm_success' => 'درخواست حذف نظر با موفقیت تایید شد.',
+    'commentDeleteRequest_transaction_error' => '.هنگام انجام عملیات مشکلی پیش آمده است',
 
 ];

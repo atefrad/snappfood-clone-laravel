@@ -35,7 +35,7 @@
                             <form class="d-inline" action="{{ route('admin.comment-delete-request.confirm', $commentDeleteRequest) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger btn-sm delete" onclick="return confirm('آیا از تایید درخواست و حذف کردن این نظر مطمئن هستید؟')" type="submit"><i class="ti ti-trash"></i> تایید درخواست</button>
+                                <button class="btn btn-danger btn-sm delete" onclick="return confirm('آیا از تایید درخواست و حذف کردن نظر مطمئن هستید؟')" type="submit"><i class="ti ti-trash"></i> تایید درخواست</button>
                             </form>
                         </section>
                     </section>

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property mixed $seller
  * @property mixed $body
+ * @property mixed $comment_id
  */
 class CommentDeleteRequest extends Model
 {

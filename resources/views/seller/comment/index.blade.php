@@ -52,7 +52,7 @@
                                     @endforeach
                                 </table>
                             </td>
-                            <td class="text-center max-width-20-rem">{{ $comment->content }}</td>
+                            <td class="text-center max-width-16-rem">{{ $comment->content }}</td>
                             <td class="text-center">{{ $comment->score }}</td>
                             <td class="text-center">{{ Jalalian::forge($comment->created_at)->format("H:i Y-m-d") }}</td>
                             <td class="text-center">
@@ -66,7 +66,7 @@
                                     درخواست حذف <i class="fas fa-arrow-left text-danger"></i> {{ $comment->commentDeleteRequest->deleteRequestStatus->name }}
                                 @endif
                             </td>
-                            <td class="text-end">
+                            <td class="text-end width-9-rem">
                                 @if($comment->is_confirmed)
                                     <a class="btn btn-warning btn-sm d-block mb-1" href="{{ route('seller.comment.change-is-confirmed', $comment) }}"><i class="fas fa-times-circle"></i> عدم تایید</a>
                                 @else
