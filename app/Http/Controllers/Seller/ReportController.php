@@ -20,8 +20,6 @@ class ReportController extends Controller
         $orders = Order::query()
             ->where('restaurant_id', $restaurantId)
             ->filterDate()
-            ->filterLastMonth()
-            ->filterLastWeek()
             ->orderBy('created_at', 'desc')
             ->paginate(Controller::DEFAULT_PAGINATE);
 
