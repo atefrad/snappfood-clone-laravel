@@ -19,9 +19,24 @@ class ReportController extends Controller
 
         $orders = Order::query()
             ->where('restaurant_id', $restaurantId)
+            ->filterDate()
+            ->filterLastMonth()
+            ->filterLastWeek()
             ->orderBy('created_at', 'desc')
             ->paginate(Controller::DEFAULT_PAGINATE);
 
-        return view('seller.report.index', compact('orders',));
+        $totalOrders = Order::query()
+            ->where('restaurant_id', $restaurantId)
+            ->get();
+
+        $orderCount = $totalOrders->count();
+
+        $totalIncome = 0;
+
+        foreach ($totalOrders as $order) {
+            $totalIncome += $order->totalFoodPrice;
+        }
+
+        return view('seller.report.index', compact('orders', 'orderCount', 'totalIncome'));
     }
 }

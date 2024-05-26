@@ -9325,6 +9325,11 @@ fieldset:disabled .btn {
   font-size: 0.69444rem !important;
 }
 
+.fs--1-5 {
+    font-size: 0.84444rem !important;
+}
+
+
 .fs--1 {
   font-size: 0.83333rem !important;
 }

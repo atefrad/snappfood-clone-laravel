@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Services\RealTimestamp;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Morilog\Jalali\Jalalian;
 
 /**
  * @property mixed $id
@@ -54,6 +57,7 @@ class Order extends Model
     }
     //endregion
 
+    //region accessor
     public function totalFoodPrice(): Attribute
     {
         $totalFoodPrice = 0;
@@ -80,4 +84,56 @@ class Order extends Model
              get: fn()=> $totalDiscountAmount
          );
     }
+    //endregion
+
+    //region local scope
+    public function scopeFilterDate(Builder $query): void
+    {
+        $startDate = RealTimestamp::getRealTimestamp(request('start_date'), '00:00:00');
+        $endDate = request()->filled('end_date') ? RealTimestamp::getRealTimestamp(request('end_date'), '23:59:59'): now();
+
+        $query->when(request()->filled('start_date'), function (Builder $query) use ($startDate, $endDate) {
+            $query->whereDate('created_at', '>', $startDate)
+                ->where('created_at', '<', $endDate);
+        });
+    }
+
+    public function scopeFilterLastMonth(Builder $query): void
+    {
+        $year = Jalalian::forge(now())->getYear();
+        $month = Jalalian::forge(now())->getMonth();
+        $day = Jalalian::forge(now())->getDay();
+
+        $date = new Jalalian($year, $month, $day);
+
+        $lastMonth = $date->getLastMonth();
+
+        $lastMonthFirstDay = $lastMonth->getFirstDayOfMonth()->toCarbon()->toDateTimeString();
+        $lastMonthLastDay = $lastMonth->getEndDayOfMonth()->toCarbon()->toDateString() . " 23:59:59";
+
+        $query->when(request()->filled('date') && request('date') === 'last_month', function (Builder $query) use ($lastMonthLastDay, $lastMonthFirstDay) {
+            $query->whereDate('created_at', '>', $lastMonthFirstDay)
+                ->where('created_at', '<', $lastMonthLastDay);
+        });
+    }
+
+    public function scopeFilterLastWeek(Builder $query): void
+    {
+        $year = Jalalian::forge(now())->getYear();
+        $month = Jalalian::forge(now())->getMonth();
+        $day = Jalalian::forge(now())->getDay();
+
+        $date = new Jalalian($year, $month, $day);
+
+        $lastWeek = $date->getLastWeek();
+
+        $lastWeekFirstDay = $lastWeek->getFirstDayOfWeek()->toCarbon()->toDateTimeString();
+        $lastWeekLastDay = $lastWeek->getEndDayOfWeek()->toCarbon()->toDateString() . " 23:59:59";
+
+        $query->when(request()->filled('date') && request('date') === 'last_week', function (Builder $query) use ($lastWeekLastDay, $lastWeekFirstDay) {
+            $query->whereDate('created_at', '>', $lastWeekFirstDay)
+                ->where('created_at', '<', $lastWeekLastDay);
+        });
+    }
+    //endregion
 }

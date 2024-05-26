@@ -83,19 +83,20 @@
 @section('script')
     <script src="{{ asset('admin-assets/libs/jalalidatepicker/persian-date.min.js') }}"></script>
     <script src="{{ asset('admin-assets/libs/jalalidatepicker/persian-datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/js/start_end_date_datepicker.js') }}"></script>
 
-    <script>
-        $('#start_date_view').persianDatepicker({
-            observer: true,
-            format: 'YYYY/MM/DD',
-            altField: '#start_date'
-        });
+{{--    <script>--}}
+{{--        $('#start_date_view').persianDatepicker({--}}
+{{--            observer: true,--}}
+{{--            format: 'YYYY/MM/DD',--}}
+{{--            altField: '#start_date'--}}
+{{--        });--}}
 
-        $('#end_date_view').persianDatepicker({
-            observer: true,
-            format: 'YYYY/MM/DD',
-            altField: '#end_date'
-        });
-    </script>
+{{--        $('#end_date_view').persianDatepicker({--}}
+{{--            observer: true,--}}
+{{--            format: 'YYYY/MM/DD',--}}
+{{--            altField: '#end_date'--}}
+{{--        });--}}
+{{--    </script>--}}
 @endsection
 

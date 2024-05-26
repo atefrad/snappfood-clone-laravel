@@ -2,6 +2,7 @@
 @extends('home.layouts.main')
 
 @section('head-tag')
+    <link rel="stylesheet" href="{{ asset('admin-assets/libs/jalalidatepicker/persian-datepicker.min.css') }}">
     <title>گزارشات</title>
 @endsection
 
@@ -12,18 +13,53 @@
                 <h5 class="fw-bold fs-s fs-lg-5 lh-sm text-center">گزارشات</h5>
             </div>
             <section class="d-flex justify-content-between align-items-center pb-2 border-bottom section-padding">
-                <a class="btn btn-secondary btn-sm text-white" href="#">نمایش نمودار ها</a>
-                <div>
+{{--                <a class="btn btn-secondary btn-sm text-white" href="#">نمایش نمودار ها</a>--}}
+{{--                <div class="d-lg-flex justify-content-lg-between">--}}
+                    <div class="dropdown me-3">
+                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            فیلتر ها
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <form action="{{ route('seller.report.index') }}">
+                                    <input type="hidden" name="date" value="last_week">
+                                    <input class="dropdown-item" type="submit" value="گزارش هفته گذشته">
+                                </form>
+                            </li>
+                            <li>
+                                <form action="{{ route('seller.report.index') }}">
+                                    <input type="hidden" name="date" value="last_month">
+                                    <input class="dropdown-item" type="submit" value="گزارش ماه گذشته">
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                     <form action="{{ route('seller.report.index') }}" class="d-flex">
+                        <label class="col-form-label" for="start_date_view"> تاریخ شروع </label>
+                        <input class="form-control form-control-sm form-text mx-1 max-width-10-rem d-none" type="text"
+                               name="start_date" placeholder="تاریخ شروع" id="start_date">
+                        <input class="form-control form-control-sm form-text mx-1 max-width-10-rem me-3" type="text"
+                               placeholder="تاریخ شروع" id="start_date_view">
+                        <label class="col-form-label" for="start_date_view"> تاریخ پایان </label>
+                        <input class="form-control form-control-sm form-text mx-1 max-width-10-rem d-none" type="text"
+                               name="end_date" placeholder="تاریخ پایان" id="end_date">
                         <input class="form-control form-control-sm form-text mx-1 max-width-10-rem" type="text"
-                               name="name" placeholder="نام غذا">
-                        <select class="form-control form-control-sm form-text mx-1 max-width-10-rem"
-                                name="food_category">
-                            <option value="" selected disabled>دسته بندی</option>
-                        </select>
-                        <input class="btn btn-primary" type="submit" value="جستجو">
+                               placeholder="تاریخ پایان" id="end_date_view">
+                        <input class="btn btn-primary" type="submit" value="اعمال فیلتر">
                     </form>
-                </div>
+{{--                </div>--}}
+            </section>
+
+            <section class="d-flex justify-content-between pb-0 pt-4">
+                <p class="p-3 bg-twitter rounded text-white fw-bold fs--1-5">
+                    تعداد کل سفارشات :
+                    {{ $orderCount }}
+                </p>
+                <p class="p-3 bg-twitter rounded text-white fw-bold fs--1-5">
+                    درآمد کل :
+                    {{ $totalIncome }}
+                    تومان
+                </p>
             </section>
 
             <section class="table-responsive table-padding">
@@ -37,7 +73,6 @@
                         <th class="text-center">تاریخ ثبت</th>
                         <th class="text-center">میزان کل تخفیف</th>
                         <th class="text-center">قیمت کل غذاها بعد از تخفیف</th>
-{{--                        <th class="max-width-16-rem text-center"><i class="fa-solid fa-gears"></i> تنظیمات</th>--}}
                     </tr>
                     </thead>
 
@@ -62,24 +97,6 @@
                             <td class="text-center">{{ Jalalian::forge($order->created_at)->format('H:i Y-m-d') }}</td>
                             <td class="text-center">{{ $order->totalDiscountAmount }}</td>
                             <td class="text-center">{{ $order->totalFoodPrice }}</td>
-{{--                            <td class="width-22-rem text-end">--}}
-{{--                                @if(!$order->activeFoodParty)--}}
-{{--                                    <a class="btn btn-warning btn-sm"--}}
-{{--                                       href="{{ route('seller.food-party.create', $order) }}"><i--}}
-{{--                                            class="fas fa-edit"></i> فودپارتی</a>--}}
-{{--                                @endif--}}
-{{--                                <a class="btn btn-success btn-sm" href="{{ route('seller.food.edit', $order) }}"><i--}}
-{{--                                        class="fas fa-edit"></i> ویرایش</a>--}}
-{{--                                <form class="d-inline" action="{{ route('seller.food.destroy', $order) }}"--}}
-{{--                                      method="POST">--}}
-{{--                                    @csrf--}}
-{{--                                    @method('DELETE')--}}
-{{--                                    <button class="btn btn-danger btn-sm delete" type="submit"--}}
-{{--                                            onclick="return confirm('آیا از حذف داده مطمئن هستید؟')"><i--}}
-{{--                                            class="fas fa-trash"></i> حذف--}}
-{{--                                    </button>--}}
-{{--                                </form>--}}
-{{--                            </td>--}}
                         </tr>
 
                     @empty
@@ -96,4 +113,10 @@
             </section>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script src="{{ asset('admin-assets/libs/jalalidatepicker/persian-date.min.js') }}"></script>
+    <script src="{{ asset('admin-assets/libs/jalalidatepicker/persian-datepicker.min.js') }}"></script>
+    <script src="{{ asset('assets/js/start_end_date_datepicker.js') }}"></script>
 @endsection
