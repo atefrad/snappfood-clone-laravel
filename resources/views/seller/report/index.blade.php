@@ -50,11 +50,14 @@
 {{--                </div>--}}
             </section>
 
-            <section class="d-flex justify-content-between pb-0 pt-4">
+            <section class="d-flex justify-content-between align-items-center pb-0 pt-4">
                 <p class="p-3 bg-twitter rounded text-white fw-bold fs--1-5">
                     تعداد کل سفارشات :
                     {{ $orderCount }}
                 </p>
+                <div>
+                    <a class="btn btn-success btn-sm text-white" href="{{ route('seller.report.export', ['start_date' => request('start_date'), 'date'=> request('date')]) }}">دریافت فایل اکسل</a>
+                </div>
                 <p class="p-3 bg-twitter rounded text-white fw-bold fs--1-5">
                     درآمد کل :
                     {{ $totalIncome }}

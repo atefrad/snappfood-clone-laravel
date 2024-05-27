@@ -20,6 +20,9 @@ use Morilog\Jalali\Jalalian;
  * @property mixed $orderStatus
  * @property mixed $customer_id
  * @property mixed $customer
+ * @property mixed $totalDiscountAmount
+ * @property mixed $totalFoodPrice
+ * @property mixed $created_at
  */
 class Order extends Model
 {

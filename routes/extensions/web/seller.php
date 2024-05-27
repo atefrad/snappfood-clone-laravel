@@ -106,6 +106,7 @@ Route::prefix('seller')->name('seller.')->group(function () {
 
                 //report
                 Route::get('/report', [ReportController::class, 'index'])->name('report.index');
+                Route::get('/report/export', [ReportController::class, 'export'])->name('report.export');
             });
 
     });

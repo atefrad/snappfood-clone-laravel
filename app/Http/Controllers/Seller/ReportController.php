@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Seller;
 
+use App\Exports\OrderExport;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Seller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
 {
@@ -36,5 +38,10 @@ class ReportController extends Controller
         }
 
         return view('seller.report.index', compact('orders', 'orderCount', 'totalIncome'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new OrderExport, 'orders.xlsx');
     }
 }
