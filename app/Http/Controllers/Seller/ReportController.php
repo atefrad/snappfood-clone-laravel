@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Seller;
 
+use App\Charts\IncomeChart;
+use App\Charts\OrderCountChart;
 use App\Exports\OrderExport;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
@@ -14,19 +16,14 @@ class ReportController extends Controller
 {
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        /** @var Seller $seller */
-        $seller = Auth::guard('seller')->user();
-
-        $restaurantId = $seller->restaurant->id;
-
         $orders = Order::query()
-            ->where('restaurant_id', $restaurantId)
+            ->filterRestaurant()
             ->filterDate()
             ->orderBy('created_at', 'desc')
             ->paginate(Controller::DEFAULT_PAGINATE);
 
         $totalOrders = Order::query()
-            ->where('restaurant_id', $restaurantId)
+            ->filterRestaurant()
             ->get();
 
         $orderCount = $totalOrders->count();
@@ -40,8 +37,17 @@ class ReportController extends Controller
         return view('seller.report.index', compact('orders', 'orderCount', 'totalIncome'));
     }
 
-    public function export()
+    public function export(): \Symfony\Component\HttpFoundation\BinaryFileResponse
     {
         return Excel::download(new OrderExport, 'orders.xlsx');
+    }
+
+    public function chart(OrderCountChart $chart, IncomeChart $chart2): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        $chart = $chart->build();
+
+        $chart2 = $chart2->build();
+
+        return view('seller.report.chart', compact('chart', 'chart2'));
     }
 }

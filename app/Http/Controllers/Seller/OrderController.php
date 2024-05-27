@@ -5,25 +5,17 @@ namespace App\Http\Controllers\Seller;
 use App\Http\Controllers\Controller;
 use App\Mail\OrderDeleted;
 use App\Mail\OrderStatusChanged;
-use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderStatus;
-use App\Models\Seller;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        /** @var Seller $seller */
-        $seller = Auth::guard('seller')->user();
-
-        $restaurantId = $seller->restaurant->id;
-
         $newOrders = Order::query()
-            ->where('restaurant_id', $restaurantId)
+            ->filterRestaurant()
             ->whereNot('order_status_id', OrderStatus::DELIVERED)
             ->paginate(Controller::DEFAULT_PAGINATE);
 

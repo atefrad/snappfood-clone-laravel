@@ -55,8 +55,13 @@
                     تعداد کل سفارشات :
                     {{ $orderCount }}
                 </p>
-                <div>
-                    <a class="btn btn-success btn-sm text-white" href="{{ route('seller.report.export', ['start_date' => request('start_date'), 'date'=> request('date')]) }}">دریافت فایل اکسل</a>
+                <div class="d-md-flex">
+                    <div class="mb-2 mx-1">
+                        <a class="btn btn-success btn-sm text-white" href="{{ route('seller.report.export', ['start_date' => request('start_date'), 'date'=> request('date')]) }}">دریافت فایل اکسل</a>
+                    </div>
+                    <div class="mx-1">
+                        <a class="btn btn-success btn-sm text-white" href="{{ route('seller.report.chart') }}">نمایش نمودار</a>
+                    </div>
                 </div>
                 <p class="p-3 bg-twitter rounded text-white fw-bold fs--1-5">
                     درآمد کل :

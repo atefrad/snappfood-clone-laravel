@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Morilog\Jalali\Jalalian;
 
 /**
@@ -90,7 +91,16 @@ class Order extends Model
     //endregion
 
     //region local scope
-    public function scopeFilterDate(Builder $query): void
+    public function scopeFilterRestaurant(Builder $query): void
+    {
+        /** @var Seller $seller */
+        $seller = Auth::guard('seller')->user();
+
+        $restaurantId = $seller->restaurant->id;
+
+        $query->where('restaurant_id', $restaurantId);
+    }
+    public function scopeFilterDate(Builder $query, $start = null, $end = null): void
     {
         $year = Jalalian::forge(now())->getYear();
         $month = Jalalian::forge(now())->getMonth();
@@ -117,15 +127,24 @@ class Order extends Model
             $startDate = $lastWeek->getFirstDayOfWeek()->toCarbon()->toDateTimeString();
             $endDate = $lastWeek->getEndDayOfWeek()->toCarbon()->toDateString() . " 23:59:59";
         }
+        elseif (!is_null($start) && !is_null($end))
+        {
+            $startDate = $start;
+            $endDate = $end;
+        }
         else
         {
             $startDate = null;
             $endDate = null;
         }
 
-        $query->when(request()->filled('start_date') || request()->filled('date'), function (Builder $query) use ($startDate, $endDate) {
-            $query->whereDate('created_at', '>', $startDate)
-                ->where('created_at', '<', $endDate);
+        $query->when(
+            request()->filled('start_date')
+            || request()->filled('date')
+            || (!is_null($start) && !is_null($end)),
+            function (Builder $query) use ($startDate, $endDate) {
+            $query->where('created_at', '>=', $startDate)
+                ->where('created_at', '<=', $endDate);
         });
     }
     //endregion
