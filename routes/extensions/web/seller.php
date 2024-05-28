@@ -109,7 +109,6 @@ Route::prefix('seller')->name('seller.')->group(function () {
                 Route::get('/report/export', [ReportController::class, 'export'])->name('report.export');
                 Route::get('/report/chart', [ReportController::class, 'chart'])->name('report.chart');
             });
-
     });
 
     //endregion

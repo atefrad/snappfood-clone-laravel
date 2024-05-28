@@ -18,7 +18,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->foreignId('order_id')
-                ->constrained('order')
+                ->constrained('orders')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->text('content');

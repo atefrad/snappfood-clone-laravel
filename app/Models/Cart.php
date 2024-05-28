@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
  * @property mixed $cartItems
  * @property mixed $finished_at
  * @property mixed $customer_id
+ * @property mixed $customer
  */
 class Cart extends Model
 {
@@ -36,6 +37,11 @@ class Cart extends Model
     public function restaurant(): BelongsTo
     {
         return $this->belongsTo(Restaurant::class);
+    }
+
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class);
     }
 
     public function foods(): BelongsToMany

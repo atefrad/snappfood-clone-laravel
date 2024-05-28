@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Factories\AddressFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -25,6 +26,11 @@ class DatabaseSeeder extends Seeder
              FoodPartySeeder::class,
              OrderStatusSeeder::class,
              DeleteRequestStatusSeeder::class,
+             CustomerSeeder::class,
+             AddressSeeder::class,
+             OrderSeeder::class,
+             CartItemSeeder::class,
+             OrderItemSeeder::class,
          ]);
     }
 }
