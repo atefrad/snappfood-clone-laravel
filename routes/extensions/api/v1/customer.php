@@ -49,6 +49,8 @@ Route::prefix('v1/customer')->name('customer.')->group(function () {
         //food
         Route::get('restaurant/{restaurant}/food', [CustomerFoodController::class, 'index'])
             ->name('food.index');
+        Route::get('/food/search', [CustomerFoodController::class, 'search'])
+            ->name('food.search');
 
         //cart
         Route::resource('cart', CartController::class)
