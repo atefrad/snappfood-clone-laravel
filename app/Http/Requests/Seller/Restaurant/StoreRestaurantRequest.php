@@ -38,11 +38,6 @@ class StoreRestaurantRequest extends FormRequest
         return array_merge(
             parent::validated($key, $default),
             ['seller_id' => Auth::guard('seller')->id()],
-            ['address' => [
-                'address' => request('address'),
-                'latitude' => request('latitude'),
-                'longitude' => request('longitude')
-            ]]
         );
     }
 }

@@ -38,7 +38,7 @@
                     @empty
 
                         <tr>
-                            <td colspan="8" class="text-center">نظری برای نمایش وجود ندارد.</td>
+                            <td colspan="8" class="text-center">درخواست حذفی برای نمایش وجود ندارد.</td>
                         </tr>
 
                     @endforelse

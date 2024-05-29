@@ -40,15 +40,15 @@
                     </tr>
                     <tr>
                         <th class="text-center">عرض جغرافیایی</th>
-                        <td class="text-center ltr">{{ $restaurant->address['latitude'] }}</td>
+                        <td class="text-center ltr">{{ $restaurant->latitude }}</td>
                     </tr>
                     <tr>
                         <th class="text-center">طول جغرافیایی</th>
-                        <td class="text-center ltr">{{ $restaurant->address['longitude'] }}</td>
+                        <td class="text-center ltr">{{ $restaurant->longitude }}</td>
                     </tr>
                     <tr>
                         <th class="text-center">آدرس</th>
-                        <td class="text-center">{{ $restaurant->address['address'] }}</td>
+                        <td class="text-center">{{ $restaurant->address }}</td>
                     </tr>
                     <tr>
                         <th class="text-center">شماره حساب</th>

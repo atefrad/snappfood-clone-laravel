@@ -89,7 +89,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-3 col-form-label" for="address">آدرس</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control input-box form-foodwagon-control" name="address" id="address" type="text" placeholder="آدرس" value="{{ old('address', $restaurant->address['address']) }}"/>
+                                        <input class="form-control input-box form-foodwagon-control" name="address" id="address" type="text" placeholder="آدرس" value="{{ old('address', $restaurant->address ) }}"/>
                                         @error('address')
                                         <span class="text-red ms-2 fs--1">
                                         {{ $message }}
@@ -102,7 +102,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-3 col-form-label" for="latitude">عرض جغرافیایی</label>
                                     <div class="col-sm-9">
-                                    <input class="form-control input-box form-foodwagon-control ltr" name="latitude" id="latitude" type="text" placeholder="عرض جغرافیایی" value="{{ old('latitude', $restaurant->address['latitude']) }}"/>
+                                    <input class="form-control input-box form-foodwagon-control ltr" name="latitude" id="latitude" type="text" placeholder="عرض جغرافیایی" value="{{ old('latitude', $restaurant->latitude ) }}"/>
                                     @error('latitude')
                                     <span class="text-red ms-2 fs--1">
                                     {{ $message }}
@@ -115,7 +115,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-3 col-form-label" for="longitude">طول جغرافیایی</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control input-box form-foodwagon-control ltr" name="longitude" id="longitude" type="text" placeholder="طول جغرافیایی" value="{{ old('longitude', $restaurant->address['longitude']) }}"/>
+                                        <input class="form-control input-box form-foodwagon-control ltr" name="longitude" id="longitude" type="text" placeholder="طول جغرافیایی" value="{{ old('longitude', $restaurant->longitude) }}"/>
                                         @error('longitude')
                                         <span class="text-red ms-2 fs--1">
                                         {{ $message }}

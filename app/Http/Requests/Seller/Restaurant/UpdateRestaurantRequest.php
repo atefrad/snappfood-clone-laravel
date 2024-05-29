@@ -40,16 +40,4 @@ class UpdateRestaurantRequest extends FormRequest
             'closing_time' => ['required', 'regex:/^([01][0-9]|2[0-3]):([0-5][0-9])(:[0-5][0-9])?$/u'],
         ];
     }
-
-    public function validated($key = null, $default = null)
-    {
-        return array_merge(
-            parent::validated($key, $default),
-            ['address' => [
-                'address' => request('address'),
-                'latitude' => request('latitude'),
-                'longitude' => request('longitude')
-            ]]
-        );
-    }
 }

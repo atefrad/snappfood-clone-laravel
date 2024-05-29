@@ -28,16 +28,14 @@ class Restaurant extends Model
         'seller_id',
         'name',
         'address',
+        'latitude',
+        'longitude',
         'phone',
         'bank_account_number',
         'image',
         'is_open',
         'delivery_price',
         ];
-
-    protected $casts = [
-        'address' => 'array',
-    ];
 
     //region relation
     public function restaurantCategory(): BelongsTo

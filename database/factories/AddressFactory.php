@@ -19,8 +19,8 @@ class AddressFactory extends Factory
         return [
             'title' => ' خانه ' . rand(1,3),
             'address' => fake()->address(),
-            'latitude' => fake()->latitude(),
-            'longitude' => fake()->longitude()
+            'latitude' => fake()->latitude(25, 40),
+            'longitude' => fake()->longitude(43, 62),
         ];
     }
 }

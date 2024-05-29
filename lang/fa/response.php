@@ -2,7 +2,7 @@
 
 return [
     'login_error' => 'ایمیل یا رمز عبور اشتباه است.',
-    'register_success' => '.ثبت نام شما با موفقیت انجام شد',
+    'register_success' => 'ثبت نام شما با موفقیت انجام شد',
 
     'category_store_success' => 'دسته بندی جدید با موفقیت ثبت شد.',
     'category_update_success' => 'دسته بندی با موفقیت ویرایش شد.',

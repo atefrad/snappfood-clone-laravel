@@ -21,7 +21,7 @@
                         <th class="text-center">نام رستوران</th>
                         <th class="text-center">صاحب رستوران</th>
                         <th class="text-center">دسته بندی رستوران</th>
-                        <th class="text-center">استان</th>
+                        <th class="text-center">آدرس</th>
                         <th class="text-center">شماره تماس</th>
                         <th class="text-center">هزینه ارسال</th>
                     </tr>
@@ -36,7 +36,7 @@
                             <td class="text-center">{{ $restaurant->name }}</td>
                             <td class="text-center">{{ $restaurant->seller->name }}</td>
                             <td class="text-center">{{ $restaurant->restaurantCategory->name }}</td>
-                            <td class="text-center">{{ $restaurant->address['address'] }}</td>
+                            <td class="text-center">{{ $restaurant->address }}</td>
                             <td class="text-center">{{ $restaurant->phone }}</td>
                             <td class="text-center">{{ $restaurant->delivery_price }}</td>
                         </tr>

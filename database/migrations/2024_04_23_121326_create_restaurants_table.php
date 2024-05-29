@@ -22,7 +22,9 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->string('name');
-            $table->json('address');
+            $table->string('address');
+            $table->decimal('latitude', 9, 6);
+            $table->decimal('longitude', 9, 6);
             $table->string('phone');
             $table->string('bank_account_number');
             $table->text('image')->nullable();
