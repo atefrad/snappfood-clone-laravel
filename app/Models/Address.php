@@ -8,13 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Malhal\Geographical\Geographical;
 
 /**
  * @property mixed $id
  */
 class Address extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Geographical;
+
+    protected static $kilometers = true;
 
     protected $fillable = [
         'title',

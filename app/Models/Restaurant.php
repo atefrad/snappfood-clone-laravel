@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Malhal\Geographical\Geographical;
 
 /**
  * @property mixed $image
@@ -21,7 +23,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Restaurant extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Geographical;
+    protected static $kilometers = true;
 
     protected $fillable = [
         'restaurant_category_id',
@@ -56,6 +59,11 @@ class Restaurant extends Model
     public function seller(): BelongsTo
     {
         return $this->belongsTo(Seller::class);
+    }
+
+    public function foods(): HasMany
+    {
+        return $this->hasMany(Food::class);
     }
     //endregion
 

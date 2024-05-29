@@ -20,11 +20,9 @@ class RestaurantCollectionResource extends JsonResource
             'id' => $restaurant->id,
             'name' => $restaurant->name,
             'type' => $restaurant->restaurantCategory->name,
-            'address' => [
-                'address' => $restaurant->address['address'],
-                'latitude' => $restaurant->address['latitude'],
-                'longitude' => $restaurant->address['longitude'],
-            ],
+            'address' => $restaurant->address,
+            'latitude' => $restaurant->latitude,
+            'longitude' => $restaurant->longitude,
             'is_open' => (bool)$restaurant->realIsOpen,
             'image' => $restaurant->image ? asset($restaurant->image): null
         ];

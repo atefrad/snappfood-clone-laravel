@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property mixed $image
@@ -63,6 +64,7 @@ class Food extends Model
     }
     //endregion
 
+    //region scope
     public function scopeFilterName(Builder $query): void
     {
         $query->when(request()->filled('name'), function (Builder $query) {
@@ -80,6 +82,23 @@ class Food extends Model
         });
     }
 
+    public function scopeFilterFoodInNearbyRestaurants(Builder $query, int $radius = 10): void
+    {
+        /** @var Customer $customer */
+        $customer = Auth::guard('customer')->user();
+        $currentAddress = $customer->currentAddress;
+        $latitude = $currentAddress->latitude;
+        $longitude = $currentAddress->longitude;
+
+        $query->when(request()->filled('food_name'), function (Builder $query) use ($radius, $longitude, $latitude) {
+            $query->whereHas('restaurant',
+                fn(Builder $query) => $query->geofence($latitude, $longitude, 0, $radius) )
+                ->where('name', 'like', '%' . request('food_name') . '%');
+        });
+    }
+    //endregion
+
+    //region accessor
     public function activeDiscount(): Attribute
     {
         return Attribute::make(
@@ -108,4 +127,5 @@ class Food extends Model
             get: fn() => ((100 - ($discountPercentage + $foodPartyPercentage)) * (int)$this->price) / 100
         );
     }
+    //endregion
 }

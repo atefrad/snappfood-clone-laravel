@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Api\V1\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\Customer\FoodCategoryResource;
-use App\Http\Resources\V1\Customer\FoodResource;
+use App\Http\Resources\V1\Customer\FoodSearchResource;
 use App\Models\Customer;
+use App\Models\Food;
 use App\Models\Restaurant;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -31,30 +33,14 @@ class FoodController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function search()
+    public function search(): AnonymousResourceCollection
     {
-        /** @var Customer $customer */
-        $customer = Auth::guard('customer')->user();
-        $currentAddress = $customer->currentAddress;
-        $latitude = $currentAddress->latitude;
-        $longitude = $currentAddress->longitude;
         $radius = 10; //kilometers
 
-        $restaurants = Restaurant::query()
-            ->selectRaw("* ,
-            ( 6371 * acos( cos( radians(?) ) *
-            cos( radians( latitude ) )
-            * cos( radians( longitude ) - radians(?)
-            ) + sin(radians(?) ) *
-            sin( radians( latitude ) ) )
-            ) AS distance", [$latitude, $longitude, $latitude])
-//            ->where('active' , 1)
-            ->having("distance", "<", $radius)
-            ->orderBy("distance", 'asc')
-            ->offset(0)
-            ->limit(20)
-            ->get();
+        $foods = Food::query()
+            ->filterFoodInNearbyRestaurants($radius)
+            ->paginate(1);
 
-        dd($restaurants);
+        return FoodSearchResource::collection($foods);
     }
 }
