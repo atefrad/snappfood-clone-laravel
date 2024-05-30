@@ -24,7 +24,7 @@ class FoodSearchResource extends JsonResource
             'priceAfterDiscount' => $food->priceAfterDiscount,
             'ingredient' => $food->ingredient,
             'image' => $food->image ? asset($food->image) : null,
-            'restaurant' => RestaurantResource::make($food->restaurant)
+            'restaurant' => RestaurantResource::make($food->restaurant),
         ];
     }
 }

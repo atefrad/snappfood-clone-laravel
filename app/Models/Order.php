@@ -59,6 +59,11 @@ class Order extends Model
     {
         return $this->belongsToMany(Food::class, 'order_items');
     }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
     //endregion
 
     //region accessor

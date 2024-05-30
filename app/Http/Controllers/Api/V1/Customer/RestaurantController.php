@@ -15,6 +15,7 @@ class RestaurantController extends Controller
         $restaurants = Restaurant::query()
             ->filterRestaurantCategory()
             ->filterIsOpen()
+            ->filterScore()
             ->paginate(Controller::DEFAULT_PAGINATE);
 
         return RestaurantCollectionResource::collection($restaurants);
