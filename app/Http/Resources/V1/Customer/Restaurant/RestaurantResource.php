@@ -28,6 +28,7 @@ class RestaurantResource extends JsonResource
             'is_open' => (bool)$restaurant->realIsOpen,
             'image' => $restaurant->image ? asset($restaurant->image): null,
             'score' => $restaurant->score,
+            'comments_count' => $restaurant->commentsCount,
             'schedule' => [
                 'saturday' => $this->checkSchedule(6),
                 'sunday' => $this->checkSchedule(0),

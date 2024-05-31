@@ -128,7 +128,7 @@ class Restaurant extends Model
            get: fn()=> $score ? (float)$score : null
         );
     }
-g
+
     /**
      * get restaurant's comments count
      *
