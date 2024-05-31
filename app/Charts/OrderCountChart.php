@@ -46,6 +46,7 @@ class OrderCountChart
 //            ->setTitle('تعداد سفارشات 3 روز گذشته')
 //            ->setSubtitle('Wins during season 2021.')
             ->addData(' تعداد سفارشات ', $ordersCounts)
-            ->setXAxis($xAxisData);
+            ->setXAxis($xAxisData)
+            ->setGrid();
     }
 }

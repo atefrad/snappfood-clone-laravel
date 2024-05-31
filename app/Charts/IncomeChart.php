@@ -49,6 +49,7 @@ class IncomeChart
 
         return $this->chart->barChart()
             ->addData('میزان درآمد', $totalIncomes)
-            ->setXAxis($xAxisData);
+            ->setXAxis($xAxisData)
+            ->setGrid();
     }
 }

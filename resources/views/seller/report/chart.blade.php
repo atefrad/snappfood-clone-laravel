@@ -14,9 +14,11 @@
             <div class="container px-4 mx-auto">
                 <div class="p-6 bg-white rounded shadow w-90 mx-auto mt-2">
                     {!! $chart->container() !!}
+                    <p class="text-center fw-bold fs-2 pt-3">نمودار تعداد سفارشات</p>
                 </div>
                 <div class="p-6 bg-white rounded shadow w-90 mx-auto mt-2">
                     {!! $chart2->container() !!}
+                    <p class="text-center fw-bold fs-2 pt-3">نمودار میزان درآمد</p>
                 </div>
             </div>
         </div>
