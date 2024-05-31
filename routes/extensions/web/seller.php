@@ -105,9 +105,15 @@ Route::prefix('seller')->name('seller.')->group(function () {
                     });
 
                 //report
-                Route::get('/report', [ReportController::class, 'index'])->name('report.index');
-                Route::get('/report/export', [ReportController::class, 'export'])->name('report.export');
-                Route::get('/report/chart', [ReportController::class, 'chart'])->name('report.chart');
+                Route::prefix('report')
+                    ->controller(ReportController::class)
+                    ->name('report.')
+                    ->group(function () {
+
+                        Route::get('/', 'index')->name('index');
+                        Route::get('/export','export')->name('export');
+                        Route::get('/chart', 'chart')->name('chart');
+                    });
             });
     });
 
