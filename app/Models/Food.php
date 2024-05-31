@@ -92,7 +92,7 @@ class Food extends Model
 
         $query->when(request()->filled('food_name'), function (Builder $query) use ($radius, $longitude, $latitude) {
             $query->whereHas('restaurant',
-                fn(Builder $query) => $query->geofence($latitude, $longitude, 0, $radius) )
+                fn(Builder $query) => $query->geofence($latitude, $longitude, 0, $radius))
                 ->where('name', 'like', '%' . request('food_name') . '%');
         });
     }

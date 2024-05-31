@@ -39,7 +39,7 @@ class FoodController extends Controller
 
         $foods = Food::query()
             ->filterFoodInNearbyRestaurants($radius)
-            ->paginate(1);
+            ->paginate(Controller::DEFAULT_PAGINATE);
 
         return FoodSearchResource::collection($foods);
     }
