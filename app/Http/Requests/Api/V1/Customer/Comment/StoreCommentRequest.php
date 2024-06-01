@@ -33,7 +33,7 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cart_id' => ['required', 'integer', 'exists:carts,id', new CheckCartBelongsTo],
+            'cart_id' => ['required', 'integer', 'exists:carts,id', new CheckCartBelongsTo, 'exists:orders,cart_id'],
             'score' => ['required', 'numeric', 'min:0', 'max:5'],
             'message' => ['required', 'string', 'min:2'],
             'customer_id' => ['required']
