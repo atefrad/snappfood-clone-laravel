@@ -22,7 +22,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->text('content');
-            $table->decimal('score', 3, 2);
+            $table->integer('score');
             $table->text('answer')->nullable();
             $table->boolean('is_confirmed')->default(false);
             $table->timestamps();

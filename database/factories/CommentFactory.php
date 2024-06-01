@@ -22,7 +22,7 @@ class CommentFactory extends Factory
             'customer_id' => Customer::query()->inRandomOrder()->take(1)->first(),
             'order_id' => Order::query()->inRandomOrder()->take(1)->first(),
             'content' => fake()->realText(),
-            'score' => fake()->randomFloat(2, 0, 5)
+            'score' => rand(0,5)
         ];
     }
 }

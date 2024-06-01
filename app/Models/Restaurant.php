@@ -184,8 +184,7 @@ class Restaurant extends Model
         $query->when(request()->filled('score_gt'), function (Builder $query) {
             $query->whereHas('comments',
                 fn (Builder $query) => $query
-                    ->groupBy('comments.id')
-                    ->havingRaw("AVG(score) > " . request('score_gt'))
+                    ->havingRaw("AVG(score) > ?", [request('score_gt')])
             );
         });
     }
