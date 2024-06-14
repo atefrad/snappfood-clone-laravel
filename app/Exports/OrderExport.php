@@ -24,7 +24,8 @@ class OrderExport implements FromQuery, WithMapping, WithHeadings
         return Order::query()
             ->where('restaurant_id', $restaurantId)
             ->filterDate()
-            ->orderBy('created_at', 'desc');
+            ->orderBy('created_at', 'desc')
+            ->with(['customer', 'orderStatus']);
     }
 
     /**

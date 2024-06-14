@@ -17,6 +17,7 @@ class OrderController extends Controller
         $newOrders = Order::query()
             ->filterRestaurant()
             ->whereNot('order_status_id', OrderStatus::DELIVERED)
+            ->with('customer')
             ->paginate(Controller::DEFAULT_PAGINATE);
 
         $orderStatuses = OrderStatus::all();

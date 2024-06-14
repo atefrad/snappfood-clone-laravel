@@ -7,9 +7,6 @@ use App\Charts\OrderCountChart;
 use App\Exports\OrderExport;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use App\Models\Seller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
@@ -20,10 +17,12 @@ class ReportController extends Controller
             ->filterRestaurant()
             ->filterDate()
             ->orderBy('created_at', 'desc')
+            ->with(['customer', 'orderStatus'])
             ->paginate(Controller::DEFAULT_PAGINATE);
 
         $totalOrders = Order::query()
             ->filterRestaurant()
+            ->with(['orderItems'])
             ->get();
 
         $orderCount = $totalOrders->count();

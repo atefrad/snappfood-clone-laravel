@@ -43,7 +43,6 @@
                                 </table>
                             </td>
                             <td class="text-center">
-                                {{--                                {{ $newOrder->orderStatus->name }}--}}
                                 <select name="order_status" id="status-{{ $newOrder->id }}" class="form-control"
                                         onchange="changeStatus({{ $newOrder->id }})" data-url="{{ route('seller.order.change-status', $newOrder) }}">
                                     @foreach($orderStatuses as $orderStatus)
@@ -57,10 +56,6 @@
                             <td class="text-center">{{ Jalalian::forge($newOrder->created_at)->format('H:i Y-m-d') }}</td>
                             <td class="text-center">{{ $newOrder->totalFoodPrice }}</td>
                             <td class="text-center">
-                                {{--                                @if(!$newOrder->activeFoodParty)--}}
-                                {{--                                    <a class="btn btn-warning btn-sm" href="{{ route('seller.food-party.create', $newOrder) }}"><i class="fas fa-edit"></i> فودپارتی</a>--}}
-                                {{--                                @endif--}}
-                                {{--                                <a class="btn btn-success btn-sm" href="{{ route('seller.order.edit', $newOrder) }}"><i class="fas fa-edit"></i> ویرایش</a>--}}
                                 <form class="d-inline" action="{{ route('seller.order.destroy', $newOrder) }}"
                                       method="POST">
                                     @csrf

@@ -30,6 +30,10 @@ class OrderItem extends Model
         'final_total_price',
     ];
 
+    protected $with = [
+        'food'
+    ];
+
     //region relation
     public function food(): BelongsTo
     {

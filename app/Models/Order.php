@@ -39,6 +39,10 @@ class Order extends Model
         'delivery_date'
     ];
 
+    protected $with = [
+        'orderItems',
+    ];
+
     //region relation
     public function orderItems(): HasMany
     {

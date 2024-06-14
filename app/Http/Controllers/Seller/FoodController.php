@@ -29,6 +29,7 @@ class FoodController extends Controller
             ->where('restaurant_id', $seller->restaurant->id)
             ->filterName()
             ->filterCategory()
+            ->with('foodCategories')
             ->paginate(Controller::DEFAULT_PAGINATE);
 
 //        $foodCategories = FoodCategory::all();

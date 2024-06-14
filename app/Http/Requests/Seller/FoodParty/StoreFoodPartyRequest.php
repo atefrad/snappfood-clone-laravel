@@ -47,4 +47,10 @@ class StoreFoodPartyRequest extends FormRequest
             ]
         );
     }
+    public function messages(): array
+    {
+        return [
+          'end_date.gt' => __('validation.messages.end_date_gt')
+        ];
+    }
 }

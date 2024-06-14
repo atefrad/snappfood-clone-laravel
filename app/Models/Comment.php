@@ -27,6 +27,12 @@ class Comment extends Model
         'is_confirmed'
     ];
 
+    protected $with = [
+        'customer',
+        'order',
+        'commentDeleteRequest'
+    ];
+
     //region relation
     public function customer(): BelongsTo
     {

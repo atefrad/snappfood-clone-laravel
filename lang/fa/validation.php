@@ -82,7 +82,6 @@ return [
         'numeric' => ':attribute باید بیش از :value باشد.',
         'string' => ':attribute باید بیش از :value کاراکتر باشد.',
     ],
-//    'valid_restaurant' => '.غذای انتخابی از رستوران متفاوتی نسبت به غذاهای سبد خرید انتخاب شده است',
     "check_address_belongs_to" => ".آدرس وارد شده معتبر نیست",
     "check_address_is_current" => ".آدرس وارد شده، آدرس فعلی شما می باشد",
     "check_restaurant_is_open" => ".متاسفانه رستوران در حال حاضر باز نمی باشد",
@@ -190,5 +189,9 @@ return [
         "message"                   => "پیام نظر",
         "answer"                    => "پاسخ",
         "comment_id"                => "نظر",
+    ],
+
+    'messages' => [
+        'end_date_gt' => 'تاریخ پایان باید بعد از تاریخ شروع باشد.',
     ],
 ];
