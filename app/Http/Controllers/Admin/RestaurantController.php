@@ -11,6 +11,7 @@ class RestaurantController extends Controller
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $restaurants = Restaurant::query()
+            ->with(['restaurantCategory', 'seller'])
             ->paginate(Controller::DEFAULT_PAGINATE);
 
         return view('admin.restaurant.index', compact('restaurants'));

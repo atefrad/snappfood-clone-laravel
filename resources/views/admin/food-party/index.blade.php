@@ -9,11 +9,6 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title fw-semibold mb-4">فودپارتی</h5>
-{{--            <div class="d-flex justify-content-between align-items-center mt-4 mb-3 pb-2 border-bottom">--}}
-{{--                <a class="btn btn-info btn-sm text-white" href="{{ route('admin.food-party.create') }}">ایجاد تخفیف--}}
-{{--                    جدید</a>--}}
-{{--            </div>--}}
-
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
                     <thead>

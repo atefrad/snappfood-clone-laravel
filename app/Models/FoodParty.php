@@ -19,16 +19,29 @@ class FoodParty extends Model
       'end_date'
     ];
 
-    public function scopeActive(Builder $query): void
-    {
-        $query->where('end_date', '>', now())
-            ->where('start_date', '<', now());
-    }
-
     //region relation
     public function Food(): BelongsTo
     {
         return $this->belongsTo(Food::class);
     }
     //endregion
+
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('end_date', '>', now())
+            ->where('start_date', '<', now());
+    }
+
+    /**
+     *
+     * scope to check that foods exist
+     *
+     * @param Builder $query
+     * @return void
+     */
+    public function scopeFoodExists(Builder $query): void
+    {
+        $query->whereHas('food',
+            fn(Builder $query) => $query->whereNull('deleted_at'));
+    }
 }

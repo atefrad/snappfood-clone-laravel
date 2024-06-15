@@ -20,6 +20,7 @@ class CommentDeleteRequestController extends Controller
         $commentDeleteRequests = CommentDeleteRequest::query()
             ->where('delete_request_status_id', DeleteRequestStatus::PENDING)
             ->orderBy('created_at', 'desc')
+            ->with('comment')
             ->paginate(Controller::DEFAULT_PAGINATE);
 
         return view('admin.comment.delete-request.index', compact('commentDeleteRequests'));

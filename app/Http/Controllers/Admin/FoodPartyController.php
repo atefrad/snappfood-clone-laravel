@@ -13,6 +13,8 @@ class FoodPartyController extends Controller
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $foodParties = FoodParty::query()
+            ->foodExists()
+            ->with('food')
             ->paginate(Controller::DEFAULT_PAGINATE);
 
         return view('admin.food-party.index', compact('foodParties'));

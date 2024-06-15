@@ -168,7 +168,6 @@ class Restaurant extends Model
                             ->orWhere('closing_time', '<', $time));
             });
         }
-
     }
 
     public function scopeFilterRestaurantCategory(Builder $query): void

@@ -22,7 +22,7 @@
                         </div>
                         <div class="input-group-icon mb-2">
                             <label class="visually-hidden" for="password">Password</label>
-                            <input class="form-control input-box form-foodwagon-control" name="password" id="password" type="password" placeholder="رمز عبور" />
+                            <input class="form-control input-box form-foodwagon-control" name="password" id="password" type="password" placeholder="رمز عبور"/>
                             @error('password')
                             <span class="text-red ms-2 fs--1">
                                 {{ $message }}
