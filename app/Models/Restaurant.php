@@ -42,6 +42,11 @@ class Restaurant extends Model
         'delivery_price',
         ];
 
+    protected $with = [
+        'restaurantCategory',
+        'restaurantWorkingTime'
+    ];
+
     //region relation
     public function restaurantCategory(): BelongsTo
     {

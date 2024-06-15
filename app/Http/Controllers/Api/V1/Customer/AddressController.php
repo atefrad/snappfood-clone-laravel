@@ -18,7 +18,9 @@ class AddressController extends Controller
 {
     public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        $addresses = Address::query()->filterCustomer()->paginate(Controller::DEFAULT_PAGINATE);
+        $addresses = Address::query()
+            ->filterCustomer()
+            ->paginate(Controller::DEFAULT_PAGINATE);
 
         return AddressResource::collection($addresses);
     }

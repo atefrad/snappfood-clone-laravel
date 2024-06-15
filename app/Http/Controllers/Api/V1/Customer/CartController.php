@@ -12,6 +12,7 @@ use App\Models\CartItem;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class CartController extends Controller
@@ -22,6 +23,7 @@ class CartController extends Controller
 
         $carts = Cart::query()
             ->where('customer_id', $customerId)
+            ->with('restaurant')
             ->paginate(1);
 
         return CartCollectionResource::collection($carts);
@@ -102,6 +104,10 @@ class CartController extends Controller
 
     public function show(Cart $cart): CartResource
     {
+        if(!Gate::allows('view-cart', $cart))
+        {
+            abort(Response::HTTP_FORBIDDEN);
+        }
         return CartResource::make($cart);
     }
 }

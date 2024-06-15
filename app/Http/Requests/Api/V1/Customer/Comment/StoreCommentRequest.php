@@ -34,7 +34,7 @@ class StoreCommentRequest extends FormRequest
     {
         return [
             'cart_id' => ['required', 'integer', 'exists:carts,id', new CheckCartBelongsTo, 'exists:orders,cart_id'],
-            'score' => ['required', 'numeric', 'min:0', 'max:5'],
+            'score' => ['required', 'integer', 'min:0', 'max:5'],
             'message' => ['required', 'string', 'min:2'],
             'customer_id' => ['required']
         ];

@@ -37,10 +37,6 @@ class Food extends Model
         'image'
     ];
 
-//    protected $with = [
-//        'foodCategories',
-//    ];
-
     //region relation
     public function foodCategories(): MorphToMany
     {
