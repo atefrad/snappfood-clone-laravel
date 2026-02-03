@@ -26,3 +26,13 @@ The UI and seeded data are in Persian (RTL), as the original target audience was
 - PHP 8+
 - MySQL
 - Laravel Sanctum
+
+## Known Limitations
+- Admin panel URL is not linked from the public landing page
+- UI and seeded data are primarily in Persian (RTL)
+- Project setup instructions are not yet documented
+
+## Routes Overview
+- `/admin/login` - Admin authentication
+- `/seller/login` - Seller authentication
+- `/api/v1/customer/*` - Customer-facing API (Sanctum protected)
