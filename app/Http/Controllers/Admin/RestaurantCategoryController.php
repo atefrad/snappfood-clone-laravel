@@ -33,12 +33,14 @@ class RestaurantCategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a new restaurant category with optional image upload.
+     * Image is stored on the public disk and its path is saved in the database.
      */
     public function store(StoreRestaurantCategoryRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
+        // Handle optional restaurant category image upload
         if ($request->hasFile('image'))
         {
             $imagePath = $request
