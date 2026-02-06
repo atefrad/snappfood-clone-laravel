@@ -11,6 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
 {
+    /**
+     * Authenticate customer and issue a device-specific Sanctum access token.
+     *
+     * A customer may be logged in on multiple device types (e.g. mobile and desktop),
+     * but only one active token is allowed per device.
+     */
     public function store(LoginRequest $request): JsonResponse
     {
         /** @var Customer $customer */

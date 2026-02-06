@@ -26,6 +26,10 @@ class Customer extends Authenticatable
         'password',
     ];
 
+    /**
+     * Generate a Sanctum token scoped to the customer's device type.
+     * Replaces any existing token for the same device.
+     */
     public function generateToken(): string
     {
         $agent = new Agent();
