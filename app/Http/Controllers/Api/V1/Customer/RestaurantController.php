@@ -10,6 +10,12 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class RestaurantController extends Controller
 {
+    /**
+     * Return a paginated list of restaurants for customers.
+     *
+     * Results can be filtered by category, open status (based on working time),
+     * and minimum average score. Response is optimized for listing views.
+     */
     public function index(): AnonymousResourceCollection
     {
         $restaurants = Restaurant::query()
