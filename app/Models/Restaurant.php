@@ -146,6 +146,12 @@ class Restaurant extends Model
         );
     }
 
+    /**
+     * Filter restaurants by open/closed status based on current time and working days.
+     *
+     * Uses request parameter `is_open` and considers both manual open status
+     * and defined working hours.
+     */
     public function scopeFilterIsOpen(Builder $query): void
     {
         $isOpen = request('is_open') == 'true';
