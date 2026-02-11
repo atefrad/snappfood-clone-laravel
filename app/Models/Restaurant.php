@@ -101,6 +101,10 @@ class Restaurant extends Model
         );
     }
 
+    /**
+     * Returns true if the restaurant is open, considering both the manual
+     * `is_open` flag and the restaurant's working hours.
+     */
     public function realIsOpen(): Attribute
     {
         return Attribute::make(
