@@ -15,7 +15,9 @@ class StoreRestaurantCategoryRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Handle Validation for storing a new restaurant category.
+     *
+     * Ensures required fields are present and validates optional image upload.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
