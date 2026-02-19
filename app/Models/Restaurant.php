@@ -150,6 +150,15 @@ class Restaurant extends Model
         );
     }
 
+    public function formattedScore(): Attribute
+    {
+        return Attribute::make(
+            get: fn()=> $this->score !== null
+                ? round($this->score, 2)
+                : null,
+        );
+    }
+
     /**
      * Filter restaurants by open/closed status based on current time and working days.
      *
