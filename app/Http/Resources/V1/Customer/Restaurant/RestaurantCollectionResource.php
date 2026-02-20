@@ -34,7 +34,7 @@ class RestaurantCollectionResource extends JsonResource
             // Derived open status considering working time.
             'is_open' => (bool)$restaurant->realIsOpen,
             'image' => $restaurant->image ? asset($restaurant->image): null,
-            'score' => $restaurant->formattedScore,
+            'score' => $restaurant->score,
         ];
     }
 }

@@ -113,28 +113,17 @@ class Restaurant extends Model
     }
 
     /**
-     * get restaurant's average score based on the customer's comment's score
+     * Average restaurant score formatted for API output.
+     * Returns null when no ratings exist.
      *
      * @return Attribute
      */
     public function score(): Attribute
     {
-//        $count = 0;
-//        $totalScore = 0;
-//
-//        foreach ($this->comments as $comment)
-//        {
-//            $totalScore += $comment->score;
-//
-//            $count++;
-//
-//        }
-
-        $score = $this->comments()->avg('score');
-
         return Attribute::make(
-//            get: fn()=> $count !== 0 ? $totalScore/$count : null
-           get: fn()=> $score ? (float)$score : null
+            get: fn()=> ($avg = $this->comments()->avg('score'))
+                ? round((float)$avg, 2)
+                : null
         );
     }
 
@@ -147,15 +136,6 @@ class Restaurant extends Model
     {
         return Attribute::make(
             get: fn()=> $this->comments()->count()
-        );
-    }
-
-    public function formattedScore(): Attribute
-    {
-        return Attribute::make(
-            get: fn()=> $this->score !== null
-                ? round($this->score, 2)
-                : null,
         );
     }
 
