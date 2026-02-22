@@ -8,12 +8,8 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 class CheckRestaurantIsOpen implements ValidationRule
 {
-    protected Food $food;
+    protected ?Food $food;
 
-    public function __construct(Food $food)
-    {
-        $this->food = $food;
-    }
     /**
      * Run the validation rule.
      *
@@ -21,7 +17,9 @@ class CheckRestaurantIsOpen implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if(!$this->food->restaurant->realIsOpen)
+        $this->food = Food::query()->find($value);
+
+        if(!$this->food || !$this->food->restaurant->realIsOpen)
         {
             $fail('validation.check_restaurant_is_open')->translate();
         }

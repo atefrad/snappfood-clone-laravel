@@ -12,18 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class StoreCartRequest extends FormRequest
 {
-    protected Food $food;
-
-    public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
-    {
-        /** @var Food $food */
-        $food = Food::query()->find(request('food_id'));
-
-        $this->food = $food;
-
-        parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
-    }
-
+    protected ?Food $food = null;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -40,19 +29,20 @@ class StoreCartRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'food_id' => ['required', 'integer', 'exists:foods,id', new CheckRestaurantIsOpen($this->food)],
+            'food_id' => ['required', 'integer', 'exists:foods,id', new CheckRestaurantIsOpen()],
             'count' => ['required', 'integer', 'min:1'],
         ];
     }
 
     public function validated($key = null, $default = null)
     {
-        return array_merge(
-            [
+        $data = parent::validated($key, $default);
+
+        $this->food = Food::query()->find($data['food_id']);
+
+        return array_merge($data,[
                 'restaurant_id' => $this->food->restaurant_id,
                 'customer_id' => Auth::guard('customer')->id()
-            ],
-            parent::validated($key, $default)
-        );
+            ]);
     }
 }
